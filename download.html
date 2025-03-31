@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Download Markiva</title>
-
   <!-- Bootstrap CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -24,103 +23,26 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-dark text-light">
-  <!-- FIXED-TOP NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
-        <img
-          src="assets/MarkivaLogo.png"
-          alt="Markiva Logo"
-          width="40"
-          height="40"
-          class="me-2"
-          style="object-fit: cover;"
-        />
-        Markiva
-      </a>
-      <button
-        class="navbar-toggler border-0"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navMenu"
-        aria-controls="navMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        style="outline: none;"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link px-3" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="index.html#features">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="index.html#faq">FAQ</a>
-          </li>
-          <!-- Mark the current page as active -->
-          <li class="nav-item">
-            <a class="nav-link px-3 active" href="download.html" aria-current="page">Download</a>
-          </li>
-          <!-- GitHub & YouTube icons -->
-          <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              href="https://github.com/skillerious/markiva"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-github fs-5"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link px-3"
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-youtube fs-5"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!-- Navbar Container: Loaded dynamically via includePartials.js -->
+  <div id="navbarContainer"></div>
 
   <!-- READING PROGRESS BAR -->
   <div
     id="readingProgressBar"
     class="bg-success"
-    style="
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      width: 0%;
-      z-index: 9999;
-      transition: width 0.2s;
-    "
+    style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; z-index: 9999; transition: width 0.2s;"
   ></div>
 
-  <!-- HERO BANNER with Vanta Waves -->
+  <!-- HERO SECTION with Vanta Waves -->
   <header
     id="downloadHero"
     class="py-5 d-flex align-items-center justify-content-center position-relative overflow-hidden"
     style="min-height: 50vh;"
   >
-    <!-- Vanta Waves container -->
     <div
       id="vantaWavesDownload"
       style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
     ></div>
-    <!-- Optional dark overlay -->
     <div
       class="overlay position-absolute top-0 start-0 w-100 h-100"
       style="background: rgba(0, 0, 0, 0.4);"
@@ -147,13 +69,12 @@
             class="text-success"
             target="_blank"
             rel="noopener noreferrer"
-            ><strong>GitHub</strong></a
-          >.
+          ><strong>GitHub</strong></a>.
         </p>
       </div>
 
       <div class="row g-4">
-        <!-- Windows Card: now with id="winCard" on the card itself -->
+        <!-- Windows Card -->
         <div class="col-md-6 col-lg-4">
           <div class="card bg-dark h-100" id="winCard">
             <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -169,7 +90,7 @@
                   <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
                 </ul>
 
-                <!-- OPTIONAL: Star Rating + OS Detection -->
+                <!-- Star Rating + OS Detection -->
                 <div class="star-rating mb-3">
                   <span class="rating-label text-secondary small">Your Rating:</span>
                   <span class="stars" data-os="windows">
@@ -183,8 +104,7 @@
               </div>
 
               <div class="d-flex flex-column gap-2 align-items-center">
-                <a href="#" class="btn btn-success" onclick="simulateInstall('win');return false;">Download .exe</a>
-                <!-- How to Install Collapse -->
+                <a href="#" class="btn btn-success" onclick="simulateInstall('win'); return false;">Download .exe</a>
                 <button
                   class="btn btn-sm btn-outline-success"
                   type="button"
@@ -202,7 +122,7 @@
                   2. After installation, launch Markiva from the Start menu.<br />
                   <button
                     class="btn btn-sm btn-outline-info mt-2"
-                    onclick="copyCommand('start Markiva');return false;"
+                    onclick="copyCommand('start Markiva'); return false;"
                   >
                     Copy Command
                   </button>
@@ -212,7 +132,7 @@
           </div>
         </div>
 
-        <!-- macOS Card (unchanged) -->
+        <!-- macOS Card -->
         <div class="col-md-6 col-lg-4" id="macCard">
           <div class="card bg-dark h-100">
             <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -220,7 +140,7 @@
                 <i class="bi bi-apple fs-1 text-success mb-3"></i>
                 <h4 class="card-title text-light mb-3">macOS</h4>
                 <p class="card-text text-light">
-                  Download the latest Markiva DMG for macOS (Intel & Apple Silicon).
+                  Download the latest Markiva DMG for macOS (Intel &amp; Apple Silicon).
                 </p>
                 <ul class="list-unstyled text-secondary small mb-4">
                   <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
@@ -242,7 +162,7 @@
               </div>
 
               <div class="d-flex flex-column gap-2 align-items-center">
-                <a href="#" class="btn btn-success" onclick="simulateInstall('mac');return false;">Download .dmg</a>
+                <a href="#" class="btn btn-success" onclick="simulateInstall('mac'); return false;">Download .dmg</a>
                 <button
                   class="btn btn-sm btn-outline-success"
                   type="button"
@@ -261,7 +181,7 @@
                   3. Launch Markiva from Applications.<br />
                   <button
                     class="btn btn-sm btn-outline-info mt-2"
-                    onclick="copyCommand('open Markiva');return false;"
+                    onclick="copyCommand('open Markiva'); return false;"
                   >
                     Copy Command
                   </button>
@@ -271,7 +191,7 @@
           </div>
         </div>
 
-        <!-- Linux Card (unchanged) -->
+        <!-- Linux Card -->
         <div class="col-md-6 col-lg-4" id="linuxCard">
           <div class="card bg-dark h-100">
             <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -302,8 +222,8 @@
 
               <div class="d-flex flex-column gap-2 align-items-center">
                 <div class="d-grid gap-2 d-md-block">
-                  <a href="#" class="btn btn-success" onclick="simulateInstall('linux');return false;">Download AppImage</a>
-                  <a href="#" class="btn btn-outline-success" onclick="simulateInstall('linux');return false;">Download .deb</a>
+                  <a href="#" class="btn btn-success" onclick="simulateInstall('linux'); return false;">Download AppImage</a>
+                  <a href="#" class="btn btn-outline-success" onclick="simulateInstall('linux'); return false;">Download .deb</a>
                 </div>
                 <button
                   class="btn btn-sm btn-outline-success mt-2"
@@ -326,7 +246,7 @@
                   2. Launch Markiva from your app menu.<br />
                   <button
                     class="btn btn-sm btn-outline-info mt-2"
-                    onclick="copyCommand('sudo dpkg -i markiva.deb');return false;"
+                    onclick="copyCommand('sudo dpkg -i markiva.deb'); return false;"
                   >
                     Copy Command
                   </button>
@@ -413,9 +333,9 @@
           </p>
           <ul class="text-secondary small">
             <li><i class="bi bi-check-lg text-success"></i> Initial stable release with core features</li>
-            <li><i class="bi bi-check-lg text-success"></i> Dark theme & robust plugin architecture</li>
-            <li><i class="bi bi-check-lg text-success"></i> Multiple platform binaries & CLI support</li>
-            <li><i class="bi bi-check-lg text-success"></i> Beta & alpha channels for future pre-releases</li>
+            <li><i class="bi bi-check-lg text-success"></i> Dark theme &amp; robust plugin architecture</li>
+            <li><i class="bi bi-check-lg text-success"></i> Multiple platform binaries &amp; CLI support</li>
+            <li><i class="bi bi-check-lg text-success"></i> Beta &amp; alpha channels for future pre-releases</li>
           </ul>
           <a href="#" class="btn btn-sm btn-outline-success mt-3">View Full Changelog</a>
         </div>
@@ -428,17 +348,11 @@
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-md-6">
-          <h3 class="mb-3 fw-bold text-light">Installation & Getting Started</h3>
+          <h3 class="mb-3 fw-bold text-light">Installation &amp; Getting Started</h3>
           <p class="text-light">
             Once downloaded, follow the on-screen instructions to install Markiva on your system.
-            Check out our
-            <a href="index.html#faq" class="text-success fw-bold">FAQ</a> or
-            <a
-              href="https://github.com/skillerious/markiva"
-              target="_blank"
-              class="text-success fw-bold"
-              >GitHub</a
-            >
+            Check out our <a href="index.html#faq" class="text-success fw-bold">FAQ</a> or
+            <a href="https://github.com/skillerious/markiva" target="_blank" class="text-success fw-bold">GitHub</a>
             page for additional help.
           </p>
           <p class="text-secondary small">
@@ -466,135 +380,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary">
-    <div class="container">
-      <div class="row g-4">
-        <!-- Brand / About -->
-        <div class="col-md-4">
-          <h5 class="fw-bold mb-3 d-flex align-items-center">
-            <img
-              src="assets/MarkivaLogo.png"
-              alt="Markiva Logo"
-              width="30"
-              height="30"
-              class="me-2"
-              style="object-fit: cover;"
-            />
-            Markiva
-          </h5>
-          <p class="small text-secondary">
-            A powerful, open-source Markdown application designed for lightning-fast previews,
-            a sleek dark UI, and robust plugin support.
-          </p>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="col-md-3 col-6">
-          <h6 class="fw-bold mb-3 text-uppercase">Quick Links</h6>
-          <ul class="list-unstyled">
-            <li><a href="index.html#hero" class="text-secondary text-decoration-none">Home</a></li>
-            <li><a href="index.html#features" class="text-secondary text-decoration-none">Features</a></li>
-            <li><a href="index.html#showcase" class="text-secondary text-decoration-none">Showcase</a></li>
-            <li><a href="index.html#faq" class="text-secondary text-decoration-none">FAQ</a></li>
-            <li><a href="download.html" class="text-secondary text-decoration-none">Download</a></li>
-          </ul>
-        </div>
-
-        <!-- Resources -->
-        <div class="col-md-3 col-6">
-          <h6 class="fw-bold mb-3 text-uppercase">Resources</h6>
-          <ul class="list-unstyled">
-            <li>
-              <a
-                href="https://github.com/skillerious/markiva"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-secondary text-decoration-none"
-                >GitHub Repo</a
-              >
-            </li>
-            <li>
-              <a
-                href="index.html#about"
-                class="text-secondary text-decoration-none"
-                >About Markiva</a
-              >
-            </li>
-            <li>
-              <a
-                href="#downloadOptions"
-                class="text-secondary text-decoration-none"
-                >Platforms</a
-              >
-            </li>
-            <li>
-              <a
-                href="index.html#faq"
-                class="text-secondary text-decoration-none"
-                >Documentation</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Social & Info -->
-        <div class="col-md-2">
-          <h6 class="fw-bold mb-3 text-uppercase">Stay Connected</h6>
-          <div class="d-flex gap-3 mb-3">
-            <a
-              href="https://twitter.com/"
-              class="text-white"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-twitter fs-5"></i>
-            </a>
-            <a
-              href="https://facebook.com/"
-              class="text-white"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-facebook fs-5"></i>
-            </a>
-            <a
-              href="https://github.com/skillerious/markiva"
-              class="text-white"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-github fs-5"></i>
-            </a>
-            <a
-              href="https://youtube.com/"
-              class="text-white"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="bi bi-youtube fs-5"></i>
-            </a>
-          </div>
-          <p class="small text-secondary">
-            &copy; <span id="footerYear"></span> Markiva. Built with
-            <i class="bi bi-heart-fill text-danger"></i> by
-            <a
-              href="https://github.com/skillerious"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-decoration-none text-white fw-bold"
-              >@skillerious</a
-            >.
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Footer Container: Loaded dynamically via includePartials.js -->
+  <div id="footerContainer"></div>
 
   <!-- Bootstrap JS (with Popper) -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Three.js + Vanta Waves -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
@@ -603,10 +393,13 @@
   <!-- Main Scripts (advanced features) -->
   <script src="js/scripts.js"></script>
   <script>
-    // Insert current year
-    document.getElementById("footerYear").textContent = new Date().getFullYear();
+    // Insert current year into footer (if the dynamic footer doesn't handle it)
+    const footerYearEl = document.getElementById("footerYear");
+    if (footerYearEl) {
+      footerYearEl.textContent = new Date().getFullYear();
+    }
 
-    // Vanta Waves on the download hero
+    // Initialize Vanta Waves on the download hero
     let wavesEffectDownload = null;
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof VANTA !== "undefined" && VANTA.WAVES) {
@@ -628,12 +421,13 @@
         });
       }
     });
-
     window.addEventListener("unload", () => {
       if (wavesEffectDownload && wavesEffectDownload.destroy) {
         wavesEffectDownload.destroy();
       }
     });
   </script>
+  <!-- Dynamic Partials Loader -->
+  <script src="js/includePartials.js"></script>
 </body>
 </html>
