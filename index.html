@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Markiva - Waves Hero & Alternating Sections</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <!-- Animate.css (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+  />
+  <!-- Custom CSS (dark theme, green accents, etc.) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-dark text-light">
+  <!-- FIXED-TOP NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
+        <img
+          src="assets/MarkivaLogo.png"
+          alt="Markiva Logo"
+          width="40"
+          height="40"
+          class="me-2"
+          style="object-fit: cover;"
+        />
+        Markiva
+      </a>
+      <button
+        class="navbar-toggler border-0"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+        aria-controls="navMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        style="outline: none;"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <!-- data-page attribute is optional for advanced highlight logic in scripts.js -->
+          <li class="nav-item">
+            <a class="nav-link px-3 active" href="index.html" data-page="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#features" data-page="features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#showcase" data-page="showcase">Showcase</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="#faq" data-page="faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="download.html" data-page="download">Download</a>
+          </li>
+          <!-- GitHub & YouTube icons -->
+          <li class="nav-item">
+            <a
+              class="nav-link px-3"
+              href="https://github.com/skillerious/markiva"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-github fs-5"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link px-3"
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-youtube fs-5"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- READING PROGRESS BAR -->
+  <div id="readingProgressBar" class="bg-success" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.2s;
+  "></div>
+
+  <!-- HERO SECTION with VANTA WAVES -->
+  <section
+    id="hero"
+    class="hero-section d-flex align-items-center justify-content-center position-relative overflow-hidden"
+    style="min-height: 100vh;"
+  >
+    <!-- Vanta Waves container -->
+    <div
+      id="vantaWavesHero"
+      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+    ></div>
+    <!-- Slight dark overlay to improve text contrast -->
+    <div class="overlay position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.3);"></div>
+
+    <div class="container position-relative text-center animate__animated animate__fadeInDown animate__slower py-5">
+      <!-- Typewriter text inserted by scripts.js (#heroTitle) -->
+      <h1 class="display-3 fw-bold text-white mb-3" id="heroTitle"></h1>
+      <p class="lead mt-3 mb-4 text-white-50" id="heroSubtitle">
+        Create, Preview, and Share Markdown with a Sleek Dark Theme
+      </p>
+      <a
+        href="https://github.com/skillerious/markiva"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-success btn-lg me-2"
+      >
+        Explore on GitHub
+      </a>
+      <a href="#features" class="btn btn-outline-success btn-lg">Learn More</a>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION (bg-alt-1 => #212529) -->
+  <section id="features" class="py-5 bg-alt-1">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5 text-light">Features</h2>
+        <p class="text-secondary">Why You'll Love Markiva</p>
+      </div>
+      <div class="row g-4">
+        <!-- Example feature card 1 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 feature-card bg-dark border border-secondary">
+            <div class="card-body text-center">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-speedometer2 fs-1 text-success"></i>
+              </div>
+              <h4 class="card-title mb-3 text-light">Lightning Fast</h4>
+              <p class="card-text text-light">
+                Experience instant previews and zero-lag markdown rendering.
+              </p>
+            </div>
+            <div class="card-footer bg-dark border-0 text-center">
+              <button class="btn btn-sm btn-outline-success like-btn">
+                Like <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Example feature card 2 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 feature-card bg-dark border border-secondary">
+            <div class="card-body text-center">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-moon-stars fs-1 text-success"></i>
+              </div>
+              <h4 class="card-title mb-3 text-light">Dark & Sleek</h4>
+              <p class="card-text text-light">
+                A carefully designed dark interface to reduce eye strain and enhance focus.
+              </p>
+            </div>
+            <div class="card-footer bg-dark border-0 text-center">
+              <button class="btn btn-sm btn-outline-success like-btn">
+                Like <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Example feature card 3 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 feature-card bg-dark border border-secondary">
+            <div class="card-body text-center">
+              <div class="feature-icon mb-3">
+                <i class="bi bi-braces-asterisk fs-1 text-success"></i>
+              </div>
+              <h4 class="card-title mb-3 text-light">Open Source</h4>
+              <p class="card-text text-light">
+                Fully customizable, community-driven, and free to use on
+                <strong>GitHub</strong>.
+              </p>
+            </div>
+            <div class="card-footer bg-dark border-0 text-center">
+              <button class="btn btn-sm btn-outline-success like-btn">
+                Like <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE SECTION (bg-alt-2 => #141414) -->
+  <section id="showcase" class="py-5 bg-alt-2 text-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5">Showcase</h2>
+        <p>Explore Markiva in Action</p>
+      </div>
+      <div id="showcaseCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#showcaseCarousel"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#showcaseCarousel"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#showcaseCarousel"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner border border-secondary rounded">
+          <div class="carousel-item active">
+            <img
+              data-src="https://via.placeholder.com/1200x500/222/ddd?text=Live+Markdown+Preview"
+              class="d-block w-100 lazy-image"
+              alt="Live Preview"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Live Markdown Preview</h5>
+              <p>See your formatted text in real-time.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              data-src="https://via.placeholder.com/1200x500/111/ccc?text=Custom+Themes"
+              class="d-block w-100 lazy-image"
+              alt="Custom Themes"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Custom Themes</h5>
+              <p>Tailor Markiva to match your style or brand.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              data-src="https://via.placeholder.com/1200x500/333/bbb?text=Collaboration"
+              class="d-block w-100 lazy-image"
+              alt="Collaboration"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Collaboration</h5>
+              <p>Work together on markdown docs seamlessly.</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#showcaseCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#showcaseCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION (bg-alt-1 => #212529) -->
+  <section id="faq" class="py-5 bg-alt-1">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5 text-light">Frequently Asked Questions</h2>
+        <p class="text-secondary">Everything You Need to Know</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            <!-- Example item -->
+            <div class="accordion-item bg-dark border border-secondary">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed bg-dark text-light"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  How do I install Markiva?
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#faqAccordion"
+              >
+                <div class="accordion-body text-light">
+                  Simply clone the repo from GitHub, install the dependencies, and run the build...
+                </div>
+              </div>
+            </div>
+            <!-- Additional items omitted for brevity -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION (bg-alt-2 => #141414) -->
+  <section id="about" class="py-5 bg-alt-2 text-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5">About Markiva</h2>
+        <p>A short example “About” or “Pricing” section.</p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+          <p class="mb-4">
+            Markiva is a free, open-source markdown application providing lightning-fast previews,
+            a sleek dark UI, advanced features, and robust plugin support...
+          </p>
+          <p class="mb-4">
+            Manage your documentation, blogs, or notes entirely in markdown, ensuring portability,
+            simplicity, and universal readability.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION (bg-alt-1 => #212529) -->
+  <section class="py-5 text-center bg-alt-1">
+    <div class="container">
+      <h2 class="fw-bold display-6 mb-4 text-light">
+        Ready to Elevate Your Markdown Workflow?
+      </h2>
+      <p class="lead mb-4 text-secondary">
+        Join countless developers and writers embracing the power of Markiva.
+      </p>
+      <a
+        href="https://github.com/skillerious/markiva"
+        class="btn btn-lg btn-success"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Join Our Community
+      </a>
+    </div>
+  </section>
+
+  <!-- IMPROVED MULTI-COLUMN FOOTER -->
+  <footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Brand / About -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3 d-flex align-items-center">
+            <img
+              src="assets/MarkivaLogo.png"
+              alt="Markiva Logo"
+              width="30"
+              height="30"
+              class="me-2"
+              style="object-fit: cover;"
+            />
+            Markiva
+          </h5>
+          <p class="small text-secondary">
+            A powerful, open-source Markdown application designed for lightning-fast previews, 
+            a sleek dark UI, and robust plugin support.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-3 col-6">
+          <h6 class="fw-bold mb-3 text-uppercase">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="#hero" class="text-secondary text-decoration-none">Home</a></li>
+            <li><a href="#features" class="text-secondary text-decoration-none">Features</a></li>
+            <li><a href="#showcase" class="text-secondary text-decoration-none">Showcase</a></li>
+            <li><a href="#faq" class="text-secondary text-decoration-none">FAQ</a></li>
+            <li><a href="download.html" class="text-secondary text-decoration-none">Download</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="col-md-3 col-6">
+          <h6 class="fw-bold mb-3 text-uppercase">Resources</h6>
+          <ul class="list-unstyled">
+            <li>
+              <a
+                href="https://github.com/skillerious/markiva"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary text-decoration-none"
+                >GitHub Repo</a
+              >
+            </li>
+            <li>
+              <a
+                href="#about"
+                class="text-secondary text-decoration-none"
+                >About Markiva</a
+              >
+            </li>
+            <li>
+              <a
+                href="download.html#downloadOptions"
+                class="text-secondary text-decoration-none"
+                >Platforms</a
+              >
+            </li>
+            <li>
+              <a
+                href="#faq"
+                class="text-secondary text-decoration-none"
+                >Documentation</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social & Info -->
+        <div class="col-md-2">
+          <h6 class="fw-bold mb-3 text-uppercase">Stay Connected</h6>
+          <div class="d-flex gap-3 mb-3">
+            <a
+              href="https://twitter.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-twitter fs-5"></i>
+            </a>
+            <a
+              href="https://facebook.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-facebook fs-5"></i>
+            </a>
+            <a
+              href="https://github.com/skillerious/markiva"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-github fs-5"></i>
+            </a>
+            <a
+              href="https://youtube.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-youtube fs-5"></i>
+            </a>
+          </div>
+          <p class="small text-secondary mb-0">
+            &copy; <span id="footerYear"></span> Markiva. Built with
+            <i class="bi bi-heart-fill text-danger"></i> by
+            <a
+              href="https://github.com/skillerious"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-decoration-none text-white fw-bold"
+              >@skillerious</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (with Popper) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <!-- Three.js + Vanta Waves -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
+  <!-- Canvas Confetti (for Easter Egg confetti) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Main Scripts -->
+  <script src="js/scripts.js"></script>
+  <script>
+    // Insert current year in the footer
+    document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+    // VANTA WAVES
+    let wavesEffect = null;
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof VANTA !== "undefined" && VANTA.WAVES) {
+        wavesEffect = VANTA.WAVES({
+          el: "#vantaWavesHero",
+          backgroundAlpha: 1,
+          color: 0x34816,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          mouseControls: false,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          shininess: 59,
+          touchControls: false,
+          waveHeight: 15,
+          waveSpeed: 1,
+          zoom: 1
+        });
+      }
+    });
+    window.addEventListener("unload", () => {
+      if (wavesEffect && wavesEffect.destroy) wavesEffect.destroy();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Download Markiva</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <!-- Animate.css (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+  />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-dark text-light">
+  <!-- FIXED-TOP NAVBAR (always visible) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
+        <img
+          src="assets/MarkivaLogo.png"
+          alt="Markiva Logo"
+          width="40"
+          height="40"
+          class="me-2"
+          style="object-fit: cover;"
+        />
+        Markiva
+      </a>
+      <button
+        class="navbar-toggler border-0"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navMenu"
+        aria-controls="navMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        style="outline: none;"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link px-3" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="index.html#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="index.html#faq">FAQ</a>
+          </li>
+          <!-- Mark the current page as active if desired -->
+          <li class="nav-item">
+            <a class="nav-link px-3 active" href="download.html" aria-current="page">Download</a>
+          </li>
+          <!-- GitHub & YouTube icons -->
+          <li class="nav-item">
+            <a
+              class="nav-link px-3"
+              href="https://github.com/skillerious/markiva"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-github fs-5"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link px-3"
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-youtube fs-5"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- READING PROGRESS BAR -->
+  <div id="readingProgressBar" class="bg-success" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.2s;
+  "></div>
+
+  <!-- HERO BANNER -->
+  <header
+    class="py-5 d-flex align-items-center justify-content-center position-relative overflow-hidden"
+    style="
+      background: url('assets/MarkivaDownloadBG.jpg')
+        no-repeat center center/cover;
+      min-height: 50vh;
+    "
+  >
+    <!-- Optional overlay if image is too bright/dim -->
+    <div
+      class="overlay position-absolute top-0 start-0 w-100 h-100"
+      style="background: rgba(0, 0, 0, 0.4);"
+    ></div>
+    <div class="container position-relative text-center animate__animated animate__fadeInDown animate__slower">
+      <h1 class="display-4 fw-bold text-white">Download Markiva</h1>
+      <p class="lead text-white-50 mb-4">
+        Get the latest version of Markiva for your platform
+      </p>
+      <a href="#downloadOptions" class="btn btn-success btn-lg">Jump to Downloads</a>
+    </div>
+  </header>
+
+  <!-- MAIN DOWNLOAD SECTION -->
+  <section id="downloadOptions" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5 text-light">Choose Your Platform</h2>
+        <p class="text-secondary">
+          Markiva is available for Windows, macOS, and Linux.<br />
+          Or download the source from
+          <a
+            href="https://github.com/skillerious/markiva"
+            class="text-success"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><strong>GitHub</strong></a
+          >.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Windows Card -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card bg-dark border border-secondary h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-windows fs-1 text-success mb-3"></i>
+              <h4 class="card-title text-light mb-3">Windows</h4>
+              <p class="card-text text-light">
+                Download the latest Markiva build for Windows (64-bit).
+              </p>
+              <ul class="list-unstyled text-secondary small mb-3">
+                <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
+                <li><i class="bi bi-check-lg text-success"></i> Size: 50MB</li>
+                <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
+              </ul>
+              <!-- Replace "#" with your actual link -->
+              <a href="#" class="btn btn-success">Download .exe</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- macOS Card -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card bg-dark border border-secondary h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-apple fs-1 text-success mb-3"></i>
+              <h4 class="card-title text-light mb-3">macOS</h4>
+              <p class="card-text text-light">
+                Download the latest Markiva DMG for macOS (Intel & Apple Silicon).
+              </p>
+              <ul class="list-unstyled text-secondary small mb-3">
+                <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
+                <li><i class="bi bi-check-lg text-success"></i> Size: 55MB</li>
+                <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
+              </ul>
+              <a href="#" class="btn btn-success">Download .dmg</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linux Card -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card bg-dark border border-secondary h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-linux fs-1 text-success mb-3"></i>
+              <h4 class="card-title text-light mb-3">Linux</h4>
+              <p class="card-text text-light">
+                Download the AppImage or .deb package, compatible with most distributions.
+              </p>
+              <ul class="list-unstyled text-secondary small mb-3">
+                <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
+                <li><i class="bi bi-check-lg text-success"></i> Size: 60MB</li>
+                <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
+              </ul>
+              <div class="d-grid gap-2 d-md-block">
+                <a href="#" class="btn btn-success">Download AppImage</a>
+                <a href="#" class="btn btn-outline-success">Download .deb</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BETA CHANNEL & LEGACY VERSIONS -->
+  <section class="py-5 bg-alt-2 text-light">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Beta Channel -->
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-3">Beta Channel</h3>
+          <p class="mb-3">
+            For those eager to test upcoming features, join our <strong>Beta Channel</strong>. 
+            Receive early builds and help shape Markiva’s future by submitting feedback.
+          </p>
+          <ul class="list-unstyled text-secondary small mb-3">
+            <li><i class="bi bi-chevron-right text-success"></i> Latest Beta: v1.1.0-beta (April 2025)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> Possibly unstable, recommended for advanced users</li>
+          </ul>
+          <a href="#" class="btn btn-sm btn-outline-success">Download Beta Build</a>
+        </div>
+        <!-- Legacy Versions -->
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-3">Legacy Versions</h3>
+          <p class="mb-3">
+            If you need Markiva for older operating systems or older architectures,
+            you can find legacy builds in our archive.
+          </p>
+          <ul class="list-unstyled text-secondary small mb-3">
+            <li><i class="bi bi-chevron-right text-success"></i> v0.9.x for 32-bit Windows</li>
+            <li><i class="bi bi-chevron-right text-success"></i> v0.8.x for older macOS 10.12+ compatibility</li>
+          </ul>
+          <a href="#" class="btn btn-sm btn-outline-success">View Legacy Archive</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEM REQUIREMENTS & CHANGELOG -->
+  <section class="py-5 bg-alt-1 text-light">
+    <div class="container">
+      <div class="row g-4">
+        <!-- System Requirements -->
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-3">System Requirements</h3>
+          <ul class="list-unstyled text-secondary small mb-3">
+            <li><i class="bi bi-chevron-right text-success"></i> Windows 10+ (64-bit)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> macOS 10.13+ (Intel/Apple Silicon)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> Linux kernel 4.15+ (AppImage / .deb)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> 2 GB RAM, ~100 MB free disk space</li>
+            <li><i class="bi bi-chevron-right text-success"></i> Internet connection for updates</li>
+          </ul>
+          <p>
+            Markiva has minimal hardware demands but benefits from a modern CPU/GPU for advanced features.
+          </p>
+        </div>
+        <!-- Changelog -->
+        <div class="col-md-6">
+          <h3 class="fw-bold mb-3">Changelog (1.0.0)</h3>
+          <p class="small text-secondary mb-2">
+            <i class="bi bi-clock-history text-success"></i> Released: Apr 2025
+          </p>
+          <ul class="text-secondary small">
+            <li><i class="bi bi-check-lg text-success"></i> Initial stable release with core features</li>
+            <li><i class="bi bi-check-lg text-success"></i> Dark theme & robust plugin architecture</li>
+            <li><i class="bi bi-check-lg text-success"></i> Multiple platform binaries & CLI support</li>
+            <li><i class="bi bi-check-lg text-success"></i> Beta channel for future pre-releases</li>
+          </ul>
+          <a href="#" class="btn btn-sm btn-outline-success mt-3">View Full Changelog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION STEPS -->
+  <section class="py-5 bg-dark">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <h3 class="mb-3 fw-bold text-light">Installation & Getting Started</h3>
+          <p class="text-light">
+            Once downloaded, follow the on-screen instructions to install Markiva on your system.
+            Check out our 
+            <a href="index.html#faq" class="text-success fw-bold">FAQ</a> or
+            <a href="https://github.com/skillerious/markiva" target="_blank" class="text-success fw-bold"
+              >GitHub</a
+            >
+            page for additional help.
+          </p>
+          <p class="text-secondary small">
+            Markiva is open-source and completely free. For detailed instructions or to build from
+            source, visit our <strong>GitHub repository</strong>.
+          </p>
+        </div>
+        <div class="col-md-6 text-center">
+          <img
+            src="assets/MarkivaScreenshot.jpg"
+            alt="Markiva UI"
+            class="img-fluid border border-secondary rounded"
+            style="max-width: 100%;"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MULTI-COLUMN FOOTER -->
+  <footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Brand / About -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3 d-flex align-items-center">
+            <img
+              src="assets/MarkivaLogo.png"
+              alt="Markiva Logo"
+              width="30"
+              height="30"
+              class="me-2"
+              style="object-fit: cover;"
+            />
+            Markiva
+          </h5>
+          <p class="small text-secondary">
+            A powerful, open-source Markdown application designed for lightning-fast previews,
+            a sleek dark UI, and robust plugin support.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-3 col-6">
+          <h6 class="fw-bold mb-3 text-uppercase">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="index.html#hero" class="text-secondary text-decoration-none">Home</a></li>
+            <li><a href="index.html#features" class="text-secondary text-decoration-none">Features</a></li>
+            <li><a href="index.html#showcase" class="text-secondary text-decoration-none">Showcase</a></li>
+            <li><a href="index.html#faq" class="text-secondary text-decoration-none">FAQ</a></li>
+            <li><a href="download.html" class="text-secondary text-decoration-none">Download</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="col-md-3 col-6">
+          <h6 class="fw-bold mb-3 text-uppercase">Resources</h6>
+          <ul class="list-unstyled">
+            <li>
+              <a
+                href="https://github.com/skillerious/markiva"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary text-decoration-none"
+                >GitHub Repo</a
+              >
+            </li>
+            <li>
+              <a
+                href="index.html#about"
+                class="text-secondary text-decoration-none"
+                >About Markiva</a
+              >
+            </li>
+            <li>
+              <a
+                href="download.html#downloadOptions"
+                class="text-secondary text-decoration-none"
+                >Platforms</a
+              >
+            </li>
+            <li>
+              <a
+                href="index.html#faq"
+                class="text-secondary text-decoration-none"
+                >Documentation</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social & Info -->
+        <div class="col-md-2">
+          <h6 class="fw-bold mb-3 text-uppercase">Stay Connected</h6>
+          <div class="d-flex gap-3 mb-3">
+            <a
+              href="https://twitter.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-twitter fs-5"></i>
+            </a>
+            <a
+              href="https://facebook.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-facebook fs-5"></i>
+            </a>
+            <a
+              href="https://github.com/skillerious/markiva"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-github fs-5"></i>
+            </a>
+            <a
+              href="https://youtube.com/"
+              class="text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-youtube fs-5"></i>
+            </a>
+          </div>
+          <p class="small text-secondary">
+            &copy; <span id="footerYear"></span> Markiva. Built with
+            <i class="bi bi-heart-fill text-danger"></i> by
+            <a
+              href="https://github.com/skillerious"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-decoration-none text-white fw-bold"
+              >@skillerious</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (with Popper) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <!-- Canvas Confetti (for Easter Egg confetti) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Main Scripts -->
+  <script src="js/scripts.js"></script>
+  <script>
+    // Insert current year into footer
+    document.getElementById("footerYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
