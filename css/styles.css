@@ -1,81 +1,83 @@
 /*
-  styles.css - Dark theme with green accents for Markiva
-  with an offset for the fixed-top navbar and improved
-  multi-column footer support.
+  styles.css - Single glowing border for OS detection
+  plus your dark theme, offsets, star rating, etc.
 */
 
-/* Offset for fixed-top navbar */
+/* Basic offset for fixed-top navbar */
 body {
-    padding-top: 60px;
-  }
-  
-  /* Optionally define alt backgrounds if you'd like to alternate sections */
-  .bg-alt-1 {
-    background-color: #212529; 
-    color: #f1f1f1; 
-  }
-  .bg-alt-2 {
-    background-color: #141414;
-    color: #f1f1f1;
-  }
-  
-  /* Example hero overlay classes if you want them in your HTML inline style 
-  .hero-section .overlay {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  */
-  
-  /* Navbar link hover with green accent */
-  .navbar-dark .navbar-nav .nav-link:hover {
-    color: #28a745 !important;
-  }
-  
-  /* Active link highlight if desired */
-  .navbar-dark .navbar-nav .nav-link.active {
-    border-bottom: 2px solid #28a745;
-  }
-  
-  /* Feature card hover effect */
-  .feature-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 255, 0, 0.1);
-  }
-  
-  /* Carousel images slight scale on hover */
-  .carousel-item img:hover {
-    transition: transform 0.5s ease;
-    transform: scale(1.02);
-  }
-  
-  /* Scroll-to-top button (created in scripts.js) */
-  .scroll-to-top-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 999;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Optional custom scrollbar for a cohesive dark theme */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #222;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #555;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #777;
-  }
-  
+  padding-top: 60px;
+}
+
+/* Basic default border for .card so it has one subtle border */
+.card {
+  border: 1px solid #444;
+  border-radius: 0.25rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 255, 0, 0.1);
+}
+
+/* .bg-alt-1 / .bg-alt-2 for alternating sections */
+.bg-alt-1 {
+  background-color: #212529;
+  color: #f1f1f1;
+}
+.bg-alt-2 {
+  background-color: #141414;
+  color: #f1f1f1;
+}
+
+/* Navbar link hover */
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #28a745 !important;
+}
+/* Active link highlight */
+.navbar-dark .navbar-nav .nav-link.active {
+  border-bottom: 2px solid #28a745;
+}
+
+/* Scroll-to-top button (in scripts.js) */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  z-index: 999;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #222;
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Subtle OS highlight that replaces the default .card border with a green glow */
+.os-highlight {
+  border: 2px solid #28a745 !important; /* override the default 1px #444 */
+  box-shadow: 0 0 8px 3px rgba(40, 167, 69, 0.3) !important;
+}
+
+/* Star rating icons */
+.star {
+  cursor: pointer;
+  color: #6c757d; /* text-secondary */
+}
+.star.text-warning {
+  color: #ffc107 !important;
+}
