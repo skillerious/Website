@@ -33,9 +33,15 @@ body {
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #28a745 !important;
 }
+
 /* Active link highlight */
 .navbar-dark .navbar-nav .nav-link.active {
   border-bottom: 2px solid #28a745;
+}
+
+/* Add a drop shadow to the navbar */
+.navbar-dark.bg-dark {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Scroll-to-top button (in scripts.js) */
