@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 8) Lazy loading images (if used in index / showcase)
   setupLazyLoadingImages();
 
-  // 9) Optional: Nav highlight on scroll (intersection observer)
+  // 9) Auto nav highlight while scrolling on index.html
   setupSectionHighlight();
 
   // 10) If on download.html, OS detection highlight, star ratings, etc.
@@ -57,11 +57,13 @@ function typeHeroTitle() {
 
 /** 2) Smooth Scroll for Nav Links */
 function setupSmoothScroll() {
+  // If you click a link like index.html#features or just #faq, we smooth-scroll
   const links = document.querySelectorAll('a[href^="#"], a[href^="index.html#"]');
   links.forEach(link => {
     link.addEventListener("click", function(e) {
       const href = link.getAttribute("href");
       if (!href.includes("#")) return;
+
       const anchor = href.split("#")[1];
       const targetElem = document.getElementById(anchor);
       if (targetElem) {
@@ -83,7 +85,7 @@ function setupScrollToTop() {
   document.body.appendChild(btn);
 
   window.addEventListener("scroll", () => {
-    btn.style.display = window.pageYOffset > 300 ? "flex" : "none";
+    btn.style.display = (window.pageYOffset > 300) ? "flex" : "none";
   });
 
   btn.addEventListener("click", () => {
@@ -178,7 +180,6 @@ function setupReadingProgressBar() {
     const docHeight = document.body.scrollHeight - window.innerHeight;
     const fraction = docHeight ? scrollTop / docHeight : 0;
     const percentScrolled = Math.floor(fraction * 100);
-
     progressBar.style.width = `${percentScrolled}%`;
   });
 }
@@ -212,9 +213,13 @@ function setupLazyLoadingImages() {
   lazyImages.forEach(img => observer.observe(img));
 }
 
-/** 9) Auto Nav Highlight on Scroll (Intersection Observer) */
+/**
+ * 9) Intersection Observer for dynamic nav highlighting on index.html
+ *    (while scrolling through #features, #faq, #showcase, etc.)
+ *    Lower threshold to 0.3 if sections are large.
+ */
 function setupSectionHighlight() {
-  const sections = document.querySelectorAll("section[id], footer[id]");
+  const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll('.navbar-nav a[href^="#"], .navbar-nav a[href^="index.html#"]');
   if (!sections.length || !navLinks.length) return;
 
@@ -222,22 +227,33 @@ function setupSectionHighlight() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.getAttribute("id");
+        // First remove 'active' from all nav links
+        navLinks.forEach(link => link.classList.remove("active"));
+
+        // Then highlight the one that matches this section
         navLinks.forEach(link => {
-          link.classList.remove("active");
-          const anchorPart = link.getAttribute("href").split("#")[1];
-          if (anchorPart === sectionId) {
-            link.classList.add("active");
+          const href = link.getAttribute("href");
+          // href might be "index.html#features" or just "#features"
+          if (href.includes("#")) {
+            const anchorPart = href.split("#")[1];
+            if (anchorPart === sectionId) {
+              link.classList.add("active");
+            }
           }
         });
       }
     });
   };
 
-  const observer = new IntersectionObserver(observerCallback, { threshold: 0.5 });
+  const observerOptions = {
+    threshold: 0.3 // triggers highlight when ~30% of the section is visible
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
   sections.forEach(sec => observer.observe(sec));
 }
 
-/** 10) Additional Download Page Features (OS detection, star ratings, install counters, etc.) */
+/** 10) Additional Download Page Features (OS detection, star ratings, counters) */
 function detectOSAndHighlight() {
   const ua = navigator.userAgent.toLowerCase();
   if (ua.includes("win")) {
@@ -313,7 +329,6 @@ function simulateInstall(os) {
 }
 
 function updateInstallDisplay(os, count) {
-  // If you place "winInstalls", "macInstalls", "linuxInstalls" somewhere, this updates them
   const idMap = {
     win: "winInstalls",
     mac: "macInstalls",
@@ -352,4 +367,63 @@ function animateCounter(elementId, start, end, duration) {
     }
   }
   requestAnimationFrame(update);
+}
+
+/**
+ * highlightCurrentPageNav is called from includePartials.js
+ * after the navbar is loaded. This ensures "download.html" or
+ * "contact.html" is highlighted if we’re on those pages, or
+ * correct anchor if we’re on index.html.
+ */
+function highlightCurrentPageNav() {
+  const pathParts = window.location.pathname.split("/");
+  let currentFile = pathParts.pop().toLowerCase() || "index.html";
+  if (currentFile === "") currentFile = "index.html";
+
+  const currentHash = window.location.hash;  // e.g. "#features"
+
+  // If on "index.html":
+  if (currentFile === "index.html") {
+    // If there's a hash like #features, highlight that link on load
+    if (currentHash) {
+      highlightLinkForHash(currentHash);
+    } else {
+      // If no hash, highlight "Home" by default
+      highlightLinkExact("index.html#hero");
+    }
+    // Then the Intersection Observer will manage updates as we scroll
+    return;
+  }
+
+  // If on "download.html", "contact.html", etc., highlight that page link
+  highlightLinkExact(currentFile);
+}
+
+function highlightLinkExact(hrefToMatch) {
+  const navLinks = document.querySelectorAll(".navbar-nav a");
+  navLinks.forEach(link => link.classList.remove("active"));
+
+  // e.g. if hrefToMatch = "download.html"
+  navLinks.forEach(link => {
+    let linkHref = link.getAttribute("href") || "";
+    // Compare just the last part
+    linkHref = linkHref.split("/").pop().toLowerCase();
+
+    if (linkHref === hrefToMatch.toLowerCase()) {
+      link.classList.add("active");
+    }
+  });
+}
+
+function highlightLinkForHash(hash) {
+  // e.g. #features or #hero
+  const navLinks = document.querySelectorAll(".navbar-nav a");
+  navLinks.forEach(link => link.classList.remove("active"));
+
+  navLinks.forEach(link => {
+    const href = link.getAttribute("href") || "";
+    if (href.endsWith(hash)) {
+      link.classList.add("active");
+    }
+  });
 }
