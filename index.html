@@ -24,8 +24,85 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-dark text-light">
-  <!-- Navbar Container: Loaded dynamically -->
-  <div id="navbarContainer"></div>
+  <!-- NAVBAR (UPDATED WITH TOOLS LINK) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
+      <img
+        src="assets/MarkivaLogo.png"
+        alt="Markiva Logo"
+        width="40"
+        height="40"
+        class="me-2"
+        style="object-fit: cover;"
+      />
+      Markiva
+    </a>
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+      aria-controls="navMenu"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      style="outline: none;"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <!-- Home link => anchor #hero so it highlights properly when that section is in view -->
+        <li class="nav-item">
+          <a class="nav-link px-3" href="index.html#hero">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="index.html#features">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="index.html#faq">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="download.html">Download</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="contact.html">Contact</a>
+        </li>
+        <!-- NEW Tools link (markdown.html) -->
+        <li class="nav-item">
+          <a class="nav-link px-3" href="markdown.html">
+            <i class="bi bi-tools fs-5 me-1"></i>
+          </a>
+        </li>
+        <!-- GitHub & YouTube icons -->
+        <li class="nav-item">
+          <a
+            class="nav-link px-3"
+            href="https://github.com/skillerious/markiva"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="bi bi-github fs-5"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link px-3"
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="bi bi-youtube fs-5"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
   <!-- READING PROGRESS BAR -->
   <div
@@ -494,7 +571,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
   <!-- Canvas Confetti (for Easter Egg confetti) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <!-- Dynamic Partials Loader -->
+  <!-- (Optional) Dynamic Partials Loader for the Footer -->
   <script src="js/includePartials.js"></script>
   <!-- Main Scripts -->
   <script src="js/scripts.js"></script>
