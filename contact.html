@@ -33,7 +33,7 @@
     style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; z-index: 9999; transition: width 0.2s;"
   ></div>
 
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION with Vanta Waves -->
   <header
     id="contactHero"
     class="py-5 d-flex align-items-center justify-content-center position-relative overflow-hidden"
@@ -55,41 +55,71 @@
     </div>
   </header>
 
-  <!-- CONTACT FORM SECTION -->
+  <!-- CONTACT SECTION -->
   <section class="py-5">
     <div class="container">
       <div class="row g-5">
-        <!-- LEFT COLUMN: Contact Info -->
+        <!-- LEFT COLUMN: Expanded Contact Info -->
         <div class="col-md-5">
+          <!-- Email and Hours -->
           <div class="mb-4">
-            <h2 class="fw-bold text-light">Our Office</h2>
-            <p class="text-secondary">
-              123 Markiva HQ, Dev Street<br />
-              Coding City, GS 12345
-            </p>
+            <h4 class="text-light mb-1">
+              <i class="bi bi-envelope-fill me-2"></i> Email
+            </h4>
+            <p class="text-secondary small">support@markiva.co.uk</p>
           </div>
           <div class="mb-4">
-            <h4 class="text-light mb-1"><i class="bi bi-envelope-fill me-2"></i> Email</h4>
-            <p class="text-secondary small">support@markiva.io</p>
-          </div>
-          <div class="mb-4">
-            <h4 class="text-light mb-1"><i class="bi bi-telephone-fill me-2"></i> Phone</h4>
-            <p class="text-secondary small">(+1) 555-123-4567</p>
-          </div>
-          <div class="mb-4">
-            <h4 class="text-light mb-1"><i class="bi bi-clock-fill me-2"></i> Hours</h4>
+            <h4 class="text-light mb-1">
+              <i class="bi bi-clock-fill me-2"></i> Hours
+            </h4>
             <p class="text-secondary small">Mon-Fri: 9am - 6pm (EST)</p>
           </div>
-          <p class="text-secondary small">
-            You can also chat with us on our <a href="https://github.com/skillerious/markiva/discussions" class="text-success">GitHub Discussions</a>.
+
+          <!-- Social Card -->
+          <div class="card bg-dark border-secondary text-center mt-4">
+            <div class="card-body">
+              <h4 class="card-title text-light">Connect with Us</h4>
+              <div class="d-flex justify-content-center gap-3">
+                <a href="https://github.com/skillerious/markiva" class="text-success fs-3" target="_blank">
+                  <i class="bi bi-github"></i>
+                </a>
+                <a href="https://twitter.com/markiva" class="text-success fs-3" target="_blank">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://facebook.com/markiva" class="text-success fs-3" target="_blank">
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Support Details -->
+          <div class="mt-4">
+            <h4 class="text-light">Support Details</h4>
+            <p class="text-secondary small">
+              We strive to respond to your messages within 24 hours. If your matter is urgent, please include "Urgent" in the subject line. For common questions, check our <a href="faq.html" class="text-success">FAQ page</a>.
+            </p>
+          </div>
+
+          <!-- Additional Inquiries -->
+          <div class="mt-4">
+            <h4 class="text-light">Additional Inquiries</h4>
+            <p class="text-secondary small">
+              For technical issues, please contact our support team at support@markiva.co.uk. For media inquiries, reach out at media@markiva.co.uk. For sales or partnership opportunities, email us at sales@markiva.co.uk. We’re here to help with any questions or collaboration ideas you have.
+            </p>
+          </div>
+
+          <p class="text-secondary small mt-3">
+            You can also join our community on <a href="https://github.com/skillerious/markiva/discussions" class="text-success">GitHub Discussions</a>.
           </p>
         </div>
+
         <!-- RIGHT COLUMN: Contact Form -->
         <div class="col-md-7">
           <div class="mb-4 text-center">
             <h2 class="fw-bold display-6 text-light">Send Us a Message</h2>
             <p class="text-secondary">
-              Fill out the form, and we’ll get back to you soon.
+              Fill out the form below, and we’ll get back to you as soon as possible.
             </p>
           </div>
           <form class="bg-dark p-4 p-md-5 rounded">
@@ -157,7 +187,7 @@
   <!-- Main Scripts -->
   <script src="js/scripts.js"></script>
   <script>
-    // Initialize Vanta Waves for contact hero if needed
+    // Initialize Vanta Waves for the hero section
     let wavesEffectContact = null;
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof VANTA !== "undefined" && VANTA.WAVES) {
