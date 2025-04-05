@@ -257,7 +257,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Simply clone the repo from GitHub, install the dependencies, and run the build. Check our <strong>README</strong> for more details.
+                  Simply clone the repo from GitHub, install the dependencies, and run the build.
+                  Check our <strong>README</strong> for more details.
                 </div>
               </div>
             </div>
@@ -282,7 +283,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Absolutely! Feel free to fork the repository, submit pull requests, and open issues or feature requests. The community is always welcome.
+                  Absolutely! Feel free to fork the repository, submit pull requests, and open issues or feature
+                  requests. The community is always welcome.
                 </div>
               </div>
             </div>
@@ -307,7 +309,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Yes! Markiva was built with extensibility in mind. Explore or create custom plugins to expand functionality.
+                  Yes! Markiva was built with extensibility in mind. Explore or create custom plugins
+                  to expand functionality.
                 </div>
               </div>
             </div>
@@ -357,7 +360,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Yes! Markiva is open source and available under a permissive license, so it’s free for personal or commercial use.
+                  Yes! Markiva is open source and available under a permissive license, so it’s free for personal
+                  or commercial use.
                 </div>
               </div>
             </div>
@@ -382,7 +386,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Absolutely. Markiva provides a CLI that can be integrated with CI/CD workflows for automated documentation generation, linting, or preview checks.
+                  Absolutely. Markiva provides a CLI that can be integrated with CI/CD workflows for
+                  automated documentation generation, linting, or preview checks.
                 </div>
               </div>
             </div>
@@ -407,7 +412,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  You can override or extend Markiva’s default CSS, or use a custom theme plugin to apply different color schemes, layouts, or highlight styles as needed.
+                  You can override or extend Markiva’s default CSS, or use a custom theme plugin to apply
+                  different color schemes, layouts, or highlight styles as needed.
                 </div>
               </div>
             </div>
@@ -432,7 +438,8 @@
                 data-bs-parent="#faqAccordion"
               >
                 <div class="accordion-body text-light">
-                  Yes. Markiva can be used offline once installed. Any “live preview” or collaborative features requiring the internet will be disabled, but local markdown rendering still works.
+                  Yes. Markiva can be used offline once installed. Any “live preview” or collaborative features
+                  requiring the internet will be disabled, but local markdown rendering still works.
                 </div>
               </div>
             </div>
@@ -526,6 +533,15 @@
       if (wavesEffect && wavesEffect.destroy) {
         wavesEffect.destroy();
       }
+    });
+
+    // ------------------------------------------------------------------
+    // ADDED LINES: Call highlightCurrentPageNav() once the DOM is ready
+    // so the Intersection Observer can highlight each anchor (#hero, #features, etc.)
+    // and also handle the correct anchor if you load with a hash in the URL.
+    // ------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+      highlightCurrentPageNav();
     });
   </script>
 </body>
