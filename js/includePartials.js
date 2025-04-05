@@ -1,3 +1,4 @@
+// js/includePartials.js
 window.addEventListener('DOMContentLoaded', () => {
   // Insert the navbar
   const navbarContainer = document.getElementById('navbarContainer');
@@ -6,8 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
       .then(resp => resp.text())
       .then(html => {
         navbarContainer.innerHTML = html;
-        // Now that the navbar is in the DOM, highlight the current page or anchor
-        highlightCurrentPageNav();
+        // highlightCurrentPageNav(); // optional if you have a function that highlights the current link
       })
       .catch(err => console.error('Error loading navbar:', err));
   }
