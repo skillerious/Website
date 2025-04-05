@@ -216,24 +216,29 @@ function setupLazyLoadingImages() {
 /**
  * 9) Intersection Observer for dynamic nav highlighting on index.html
  *    (while scrolling through #features, #faq, #showcase, etc.)
- *    Lower threshold to 0.3 if sections are large.
+ *    Lower threshold => triggers highlight sooner
  */
 function setupSectionHighlight() {
   const sections = document.querySelectorAll("section[id]");
   const navLinks = document.querySelectorAll('.navbar-nav a[href^="#"], .navbar-nav a[href^="index.html#"]');
   if (!sections.length || !navLinks.length) return;
 
-  const observerCallback = entries => {
+  const observerOptions = {
+    threshold: 0.1 // highlight once 10% of the section is visible
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  sections.forEach(sec => observer.observe(sec));
+
+  function observerCallback(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const sectionId = entry.target.getAttribute("id");
-        // First remove 'active' from all nav links
+        // remove 'active' from all
         navLinks.forEach(link => link.classList.remove("active"));
-
-        // Then highlight the one that matches this section
+        // highlight the matching link
         navLinks.forEach(link => {
           const href = link.getAttribute("href");
-          // href might be "index.html#features" or just "#features"
           if (href.includes("#")) {
             const anchorPart = href.split("#")[1];
             if (anchorPart === sectionId) {
@@ -243,14 +248,7 @@ function setupSectionHighlight() {
         });
       }
     });
-  };
-
-  const observerOptions = {
-    threshold: 0.3 // triggers highlight when ~30% of the section is visible
-  };
-
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-  sections.forEach(sec => observer.observe(sec));
+  }
 }
 
 /** 10) Additional Download Page Features (OS detection, star ratings, counters) */
@@ -370,10 +368,9 @@ function animateCounter(elementId, start, end, duration) {
 }
 
 /**
- * highlightCurrentPageNav is called from includePartials.js
- * after the navbar is loaded. This ensures "download.html" or
- * "contact.html" is highlighted if we’re on those pages, or
- * correct anchor if we’re on index.html.
+ * highlightCurrentPageNav is called after the navbar is loaded
+ * This ensures "download.html" or "contact.html" is highlighted
+ * if we’re on those pages, or correct anchor if we’re on index.html.
  */
 function highlightCurrentPageNav() {
   const pathParts = window.location.pathname.split("/");
@@ -384,14 +381,14 @@ function highlightCurrentPageNav() {
 
   // If on "index.html":
   if (currentFile === "index.html") {
-    // If there's a hash like #features, highlight that link on load
+    // If there's a hash, highlight that link on load
     if (currentHash) {
       highlightLinkForHash(currentHash);
     } else {
-      // If no hash, highlight "Home" by default
+      // If no hash, highlight "Home" (#hero)
       highlightLinkExact("index.html#hero");
     }
-    // Then the Intersection Observer will manage updates as we scroll
+    // Then the Intersection Observer (setupSectionHighlight) manages further updates as we scroll
     return;
   }
 

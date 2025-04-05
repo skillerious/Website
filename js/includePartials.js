@@ -7,7 +7,8 @@ window.addEventListener('DOMContentLoaded', () => {
       .then(resp => resp.text())
       .then(html => {
         navbarContainer.innerHTML = html;
-        // highlightCurrentPageNav(); // optional if you have a function that highlights the current link
+        // Once navbar is loaded, highlight current page or anchor
+        highlightCurrentPageNav();
       })
       .catch(err => console.error('Error loading navbar:', err));
   }
