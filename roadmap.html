@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Markiva Roadmap</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <!-- Animate.css (for entrance animations) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+  />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Optional timeline or roadmap-specific styling -->
+  <style>
+    /* Timeline container */
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #28a745;
+      transform: translateX(-50%);
+    }
+
+    /* Timeline items: left/right alignment */
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 1rem 2rem;
+    }
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item.right {
+      left: 50%;
+      text-align: left;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #28a745;
+      border: 4px solid #fff;
+      z-index: 1;
+    }
+    .timeline-item.left::before {
+      right: -10px;
+    }
+    .timeline-item.right::before {
+      left: -10px;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 8%;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 4rem;
+        padding-right: 2rem;
+      }
+      .timeline-item.left, .timeline-item.right {
+        text-align: left;
+      }
+      .timeline-item.left::before, .timeline-item.right::before {
+        left: 0;
+      }
+    }
+
+    /* Progress bar label inside the bar */
+    .progress-label {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* Like button styling toggles */
+    .like-btn.liked {
+      color: #fff !important;
+      background-color: #28a745 !important;
+    }
+  </style>
+</head>
+
+<body class="bg-dark text-light">
+  <!-- 1) Navbar container (partial) -->
+  <div id="navbarContainer"></div>
+
+  <!-- 2) HERO / INTRO with Vanta Waves -->
+  <section
+    id="hero"
+    class="position-relative overflow-hidden d-flex align-items-center justify-content-center"
+    style="min-height: 50vh;"
+  >
+    <div
+      id="vantaWavesHero"
+      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
+    ></div>
+    <div
+      class="overlay position-absolute top-0 start-0 w-100 h-100"
+      style="background: rgba(0, 0, 0, 0.3);"
+    ></div>
+    <div class="container position-relative text-center py-5">
+      <h1 class="display-4 fw-bold text-white">Markiva Roadmap</h1>
+      <p class="lead text-white-50 mb-4">
+        Explore our timeline for upcoming features, improvements, and community-driven initiatives.
+      </p>
+      <a href="index.html" class="btn btn-outline-success btn-lg">
+        Back to Home
+      </a>
+    </div>
+  </section>
+
+  <!-- 3) MAIN ROADMAP TIMELINE -->
+  <section id="roadmap" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-5">Development Roadmap</h2>
+        <p class="text-secondary">
+          Discover what's already shipped, what's in progress, and what's on the horizon.
+        </p>
+      </div>
+
+      <!-- TIMELINE WRAPPER -->
+      <div class="timeline">
+        <!-- Q1 2023 ITEM -->
+        <div class="timeline-item left animate__animated animate__fadeInLeft">
+          <div class="card bg-dark border border-secondary">
+            <div class="card-body text-light">
+              <h4 class="card-title">Q1 2023 - Initial Release</h4>
+              <p class="card-text">
+                The launch of Markiva laid the foundation with a robust markdown editor,
+                live preview, and a sleek dark theme.
+              </p>
+
+              <!-- Progress Bar Example (100% complete) -->
+              <div class="progress position-relative mb-3" style="height: 24px;">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 100%;"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <span class="progress-label">100% Complete</span>
+              </div>
+
+              <!-- Row for Like + More Info + Calendar -->
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-success like-btn"
+                  data-milestone="q1"
+                >
+                  <i class="bi bi-heart me-1"></i> Like
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalQ1"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="addToCalendar('Q1 2023 - Initial Release', 'Markiva has launched! The first stable version is out.', '2023-01-01', '2023-03-31')"
+                >
+                  Add to Calendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 2023 ITEM -->
+        <div class="timeline-item right animate__animated animate__fadeInRight">
+          <div class="card bg-dark border border-secondary">
+            <div class="card-body text-light">
+              <h4 class="card-title">Q2 2023 - Plugin Ecosystem</h4>
+              <p class="card-text">
+                Introducing a flexible plugin architecture to allow community-driven extensions
+                and feature enhancements.
+              </p>
+
+              <!-- Progress Bar (let's say 100% - shipped) -->
+              <div class="progress position-relative mb-3" style="height: 24px;">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  style="width: 100%;"
+                  aria-valuenow="100"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <span class="progress-label">100% Complete</span>
+              </div>
+
+              <!-- Row for Like + More Info + Calendar -->
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-success like-btn"
+                  data-milestone="q2"
+                >
+                  <i class="bi bi-heart me-1"></i> Like
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalQ2"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="addToCalendar('Q2 2023 - Plugin Ecosystem', 'Plugin architecture introduced for Markiva.', '2023-04-01', '2023-06-30')"
+                >
+                  Add to Calendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 2023 ITEM -->
+        <div class="timeline-item left animate__animated animate__fadeInLeft mt-4">
+          <div class="card bg-dark border border-secondary">
+            <div class="card-body text-light">
+              <h4 class="card-title">Q3 2023 - Performance Enhancements</h4>
+              <p class="card-text">
+                Focusing on speed, memory usage, and overall stability for large markdown documents.
+              </p>
+
+              <!-- Example 70% complete progress -->
+              <div class="progress position-relative mb-3" style="height: 24px;">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  style="width: 70%;"
+                  aria-valuenow="70"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <span class="progress-label">70% Complete</span>
+              </div>
+
+              <!-- Row for Like + More Info + Calendar -->
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-success like-btn"
+                  data-milestone="q3"
+                >
+                  <i class="bi bi-heart me-1"></i> Like
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalQ3"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="addToCalendar('Q3 2023 - Performance Enhancements', 'Refactoring & optimizations for Markiva.', '2023-07-01', '2023-09-30')"
+                >
+                  Add to Calendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 2023 ITEM -->
+        <div class="timeline-item right animate__animated animate__fadeInRight mt-4">
+          <div class="card bg-dark border border-secondary">
+            <div class="card-body text-light">
+              <h4 class="card-title">Q4 2023 - Collaboration Tools</h4>
+              <p class="card-text">
+                Real-time multi-user editing, inline comments, and advanced version control integrations.
+              </p>
+
+              <!-- Example 30% complete progress -->
+              <div class="progress position-relative mb-3" style="height: 24px;">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  style="width: 30%;"
+                  aria-valuenow="30"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <span class="progress-label">30% Complete</span>
+              </div>
+
+              <!-- Row for Like + More Info + Calendar -->
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-success like-btn"
+                  data-milestone="q4"
+                >
+                  <i class="bi bi-heart me-1"></i> Like
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalQ4"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="addToCalendar('Q4 2023 - Collaboration Tools', 'Collaboration features for Markiva.', '2023-10-01', '2023-12-31')"
+                >
+                  Add to Calendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2024+ ITEM -->
+        <div class="timeline-item left animate__animated animate__fadeInLeft mt-4">
+          <div class="card bg-dark border border-secondary">
+            <div class="card-body text-light">
+              <h4 class="card-title">2024 &amp; Beyond</h4>
+              <p class="card-text">
+                Long-term goals: advanced CI/CD integration, mobile support, extended theming, and more.
+              </p>
+
+              <!-- Example 10% complete progress -->
+              <div class="progress position-relative mb-3" style="height: 24px;">
+                <div
+                  class="progress-bar bg-danger"
+                  role="progressbar"
+                  style="width: 10%;"
+                  aria-valuenow="10"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+                <span class="progress-label">10% Complete</span>
+              </div>
+
+              <!-- Row for Like + More Info + Calendar -->
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-outline-success like-btn"
+                  data-milestone="beyond"
+                >
+                  <i class="bi bi-heart me-1"></i> Like
+                </button>
+                <button
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalBeyond"
+                >
+                  Details
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="addToCalendar('2024 & Beyond', 'Future expansions for Markiva.', '2024-01-01', '2024-12-31')"
+                >
+                  Add to Calendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- END .timeline -->
+    </div>
+  </section>
+
+  <!-- 4) MODALS FOR TIMELINE DETAILS -->
+  <!-- Q1 2023 Modal -->
+  <div
+    class="modal fade"
+    id="modalQ1"
+    tabindex="-1"
+    aria-labelledby="modalQ1Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark border border-secondary">
+        <div class="modal-header text-light">
+          <h5 class="modal-title" id="modalQ1Label">Q1 2023 - Initial Release</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-light">
+          <p>Markiva’s first stable release set the core foundation:</p>
+          <ul>
+            <li>Live preview functionality for instant feedback</li>
+            <li>Dark-themed UI with minimal eye strain</li>
+            <li>Basic code blocks & GitHub integration</li>
+            <li>Open-source framework for community contributions</li>
+          </ul>
+          <p>
+            We celebrated our official launch with a community confetti event!
+          </p>
+          <button class="btn btn-sm btn-success" onclick="fireConfetti()">
+            Celebrate Again!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 2023 Modal -->
+  <div
+    class="modal fade"
+    id="modalQ2"
+    tabindex="-1"
+    aria-labelledby="modalQ2Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark border border-secondary">
+        <div class="modal-header text-light">
+          <h5 class="modal-title" id="modalQ2Label">Q2 2023 - Plugin Ecosystem</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-light">
+          <p>
+            This quarter, we unveiled a powerful plugin architecture:
+          </p>
+          <ul>
+            <li>Detailed API docs for plugin creators</li>
+            <li>Example plugins (theming, syntax highlighting, etc.)</li>
+            <li>Plan for a future plugin marketplace or directory</li>
+          </ul>
+          <p>
+            Community developers can now extend Markiva to fit countless new use cases.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 2023 Modal -->
+  <div
+    class="modal fade"
+    id="modalQ3"
+    tabindex="-1"
+    aria-labelledby="modalQ3Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark border border-secondary">
+        <div class="modal-header text-light">
+          <h5 class="modal-title" id="modalQ3Label">Q3 2023 - Performance Enhancements</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-light">
+          <p>Goals for Q3 performance improvements include:</p>
+          <ul>
+            <li>
+              <strong>Rendering Engine Overhaul</strong> – faster previews for large documents
+            </li>
+            <li>
+              <strong>Memory Optimization</strong> – handle massive markdown files with ease
+            </li>
+            <li>
+              <strong>Advanced Profiling</strong> – identify bottlenecks to further reduce load times
+            </li>
+          </ul>
+          <p>
+            By the end of Q3, we aim to achieve near-instant rendering for typical project documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 2023 Modal -->
+  <div
+    class="modal fade"
+    id="modalQ4"
+    tabindex="-1"
+    aria-labelledby="modalQ4Label"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark border border-secondary">
+        <div class="modal-header text-light">
+          <h5 class="modal-title" id="modalQ4Label">Q4 2023 - Collaboration Tools</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-light">
+          <p>We’re enabling real-time teamwork within Markiva:</p>
+          <ul>
+            <li>Shared cursors and presence indicators for co-editing</li>
+            <li>Built-in version control or Git integration</li>
+            <li>Inline commenting and feedback threads</li>
+            <li>Cloud syncing options (Drive, Dropbox, etc.)</li>
+          </ul>
+          <p>
+            Our mission: make collaborative markdown writing effortless.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2024 & Beyond Modal -->
+  <div
+    class="modal fade"
+    id="modalBeyond"
+    tabindex="-1"
+    aria-labelledby="modalBeyondLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark border border-secondary">
+        <div class="modal-header text-light">
+          <h5 class="modal-title" id="modalBeyondLabel">2024 &amp; Beyond</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-light">
+          <p>In 2024 and beyond, we plan to explore:</p>
+          <ul>
+            <li>
+              <strong>CI/CD Integration</strong> – automated markdown checks, deployments, and doc generation
+            </li>
+            <li>
+              <strong>Mobile &amp; Offline Support</strong> – Markiva anywhere, anytime
+            </li>
+            <li>
+              <strong>Extended Theming</strong> – advanced styling options, WYSIWYG layers, or brand kits
+            </li>
+            <li>
+              <strong>Community-Driven Roadmap</strong> – frequent polls, feedback loops, and user-suggested features
+            </li>
+          </ul>
+          <p>
+            We look forward to building a powerful, flexible, and user-focused platform together with our community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5) FOOTER (partial) -->
+  <div id="footerContainer"></div>
+
+  <!-- 6) Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Load partials -->
+  <script src="js/includePartials.js"></script>
+
+  <!-- Main Scripts -->
+  <script src="js/scripts.js"></script>
+
+  <script>
+    /*************************************************
+     * 1) Vanta Waves for the Roadmap Hero
+     *************************************************/
+    let wavesEffect = null;
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof VANTA !== "undefined" && VANTA.WAVES) {
+        wavesEffect = VANTA.WAVES({
+          el: "#vantaWavesHero",
+          backgroundAlpha: 1,
+          color: 0x34816,
+          gyroControls: false,
+          minHeight: 200,
+          minWidth: 200,
+          mouseControls: false,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          shininess: 59,
+          touchControls: false,
+          waveHeight: 15,
+          waveSpeed: 1,
+          zoom: 1,
+        });
+      }
+    });
+    window.addEventListener("unload", () => {
+      if (wavesEffect && wavesEffect.destroy) {
+        wavesEffect.destroy();
+      }
+    });
+
+    /*************************************************
+     * 2) Confetti Trigger for "Celebrate Again" button
+     *************************************************/
+    function fireConfetti() {
+      if (typeof confetti !== "undefined") {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      }
+    }
+
+    /*************************************************
+     * 3) "Like" Buttons - storing in localStorage
+     *************************************************/
+    document.addEventListener("DOMContentLoaded", () => {
+      const likeButtons = document.querySelectorAll(".like-btn");
+      likeButtons.forEach(btn => {
+        // Check stored preference
+        const milestone = btn.getAttribute("data-milestone");
+        const isLiked = localStorage.getItem(`milestone-like-${milestone}`) === "true";
+        if (isLiked) {
+          btn.classList.add("liked");
+          btn.innerHTML = '<i class="bi bi-heart-fill me-1"></i> Liked';
+        }
+
+        // On click, toggle
+        btn.addEventListener("click", () => {
+          const currentlyLiked = localStorage.getItem(`milestone-like-${milestone}`) === "true";
+          const newValue = !currentlyLiked;
+          localStorage.setItem(`milestone-like-${milestone}`, newValue.toString());
+          if (newValue) {
+            btn.classList.add("liked");
+            btn.innerHTML = '<i class="bi bi-heart-fill me-1"></i> Liked';
+            // Optional: confetti or feedback message
+            fireConfetti();
+          } else {
+            btn.classList.remove("liked");
+            btn.innerHTML = '<i class="bi bi-heart me-1"></i> Like';
+          }
+        });
+      });
+    });
+
+    /*************************************************
+     * 4) "Add to Calendar" - Simple Examples
+     * Using a link to Google Calendar or ICS download
+     *************************************************/
+    function addToCalendar(title, details, startDate, endDate) {
+      // e.g., Google Calendar link
+      // Format: https://calendar.google.com/calendar/render?action=TEMPLATE&text=TITLE&dates=YYYYMMDD/YYYMMDD&details=DETAILS
+      // For simplicity, let's generate a Google link. More advanced usage might create .ics files.
+
+      const start = startDate.replace(/-/g, ""); // e.g. "20230701"
+      const end   = endDate.replace(/-/g, "");
+
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                      `&text=${encodeURIComponent(title)}` +
+                      `&dates=${start}/${end}` +
+                      `&details=${encodeURIComponent(details)}`;
+
+      // Open in new tab
+      window.open(gcalUrl, "_blank");
+    }
+  </script>
+</body>
+</html>
