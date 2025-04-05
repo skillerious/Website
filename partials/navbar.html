@@ -1,4 +1,4 @@
-<!-- navbar.html -->
+<!-- partials/navbar.html -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
@@ -26,30 +26,53 @@
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto">
+        <!-- Home -->
         <li class="nav-item">
-          <a class="nav-link px-3" href="index.html">Home</a>
+          <a class="nav-link px-3" href="index.html#hero">Home</a>
         </li>
+        <!-- Features -->
         <li class="nav-item">
           <a class="nav-link px-3" href="index.html#features">Features</a>
         </li>
+        <!-- Showcase -->
         <li class="nav-item">
           <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-3" href="index.html#faq">FAQ</a>
+
+        <!-- FAQ Dropdown (top-level "FAQ" + 2 sub-items) -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle px-3"
+            href="#"
+            id="faqDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            FAQ
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="faqDropdown">
+            <li><a class="dropdown-item" href="index.html#faq">FAQ Page</a></li>
+            <li><a class="dropdown-item" href="roadmap.html">Roadmap</a></li>
+          </ul>
         </li>
+
+        <!-- Download -->
         <li class="nav-item">
           <a class="nav-link px-3" href="download.html">Download</a>
         </li>
+        <!-- Contact -->
         <li class="nav-item">
           <a class="nav-link px-3" href="contact.html">Contact</a>
         </li>
-        <!-- Tools (current page) -->
+
+        <!-- Tools (markdown.html) -->
         <li class="nav-item">
-          <a class="nav-link px-3 active" href="markdown.html">
+          <a class="nav-link px-3" href="markdown.html">
             <i class="bi bi-tools fs-5 me-1"></i>
           </a>
         </li>
+
         <!-- GitHub & YouTube icons -->
         <li class="nav-item">
           <a
