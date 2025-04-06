@@ -15,7 +15,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
   />
-  <!-- Animate.css (optional) -->
+  <!-- Animate.css (for entrance animations) -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
@@ -23,26 +23,62 @@
   <!-- Custom CSS (dark theme, green accents, etc.) -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- ADDED LINES: Additional styling for FAQ search bar & arrow rotations -->
+  <!-- ADDED STYLES: Enhanced FAQ visuals -->
   <style>
-    /* Additional styling for the search bar */
+    /* Enhanced FAQ search bar styling */
     .faq-search-bar {
       max-width: 500px;
       margin: 0 auto 2rem auto;
     }
-
     .faq-search-bar input {
-      background-color: #141414;
-      border: 1px solid #444;
+      background-color: #222;
+      border: 1px solid #28a745;
       color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .faq-search-bar input::placeholder {
+      color: #ccc;
     }
 
-    /* Animate arrow rotation on .accordion-button when collapsed/expanded */
-    .accordion-button::after {
-      transition: transform 0.3s;
+    /* Styling for Expand/Collapse All buttons */
+    .faq-controls {
+      max-width: 500px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
-    .accordion-button:not(.collapsed)::after {
-      transform: rotate(90deg);
+    .faq-controls .btn {
+      font-weight: 600;
+    }
+
+    /* Enhanced accordion styling */
+    .accordion-button {
+      background-color: #111111;
+      color: #fff;
+      font-weight: 500;
+      border: none;
+    }
+    .accordion-button:hover,
+    .accordion-button:focus {
+      background-color: #111111;
+      color: #28a745;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #111111;
+      color: #28a745;
+      box-shadow: none;
+    }
+    .accordion-item {
+      border: none;
+      border-bottom: 1px solid #444;
+    }
+    /* FAQ answer styling */
+    .accordion-body {
+      background-color: #222222 !important;
+      color: #f1f1f1 !important;
     }
   </style>
 </head>
@@ -85,22 +121,28 @@
   <!-- 4) MAIN FAQ SECTION -->
   <section class="py-5">
     <div class="container">
-      <!-- ADDED LINES: FAQ search bar -->
+      <!-- FAQ Search Bar -->
       <div class="faq-search-bar mb-4">
         <input
           type="text"
           id="faqSearchInput"
-          class="form-control py-2 px-3"
+          class="form-control"
           placeholder="Search questions..."
           aria-label="Search FAQ"
         />
       </div>
 
+      <!-- Expand/Collapse All Controls -->
+      <div class="faq-controls mb-4">
+        <button id="expandAllBtn" class="btn btn-success">Expand All</button>
+        <button id="collapseAllBtn" class="btn btn-outline-success">Collapse All</button>
+      </div>
+
       <div class="row justify-content-center">
         <div class="col-lg-8">
-          <div class="accordion accordion-flush border border-secondary rounded" id="faqAccordion">
+          <div class="accordion accordion-flush rounded" id="faqAccordion">
             <!-- FAQ Item 1 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingOne">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -119,16 +161,16 @@
                 aria-labelledby="headingOne"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
+                <div class="accordion-body">
                   Simply clone the repo from GitHub, install the dependencies, and run the build.
-                  Check our <strong>README</strong> for more details or use the prebuilt binaries from
-                  our <a href="download.html" class="text-success text-decoration-none">download page</a>.
+                  Check our <strong>README</strong> for more details or use the prebuilt binaries from our
+                  <a href="download.html" class="text-success text-decoration-none">download page</a>.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 2 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingTwo">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -147,15 +189,15 @@
                 aria-labelledby="headingTwo"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Absolutely! Feel free to fork the repository, submit pull requests, and open
-                  issues or feature requests. The community is always welcome.
+                <div class="accordion-body">
+                  Absolutely! Fork the repository, submit pull requests, and open issues or feature requests.
+                  We welcome community involvement.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 3 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingThree">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -174,16 +216,15 @@
                 aria-labelledby="headingThree"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Yes! Markiva was built with extensibility in mind. Explore or create custom plugins
-                  to expand functionality. You can also override or extend Markiva’s default CSS, or
-                  use a custom theme plugin to apply different color schemes.
+                <div class="accordion-body">
+                  Yes! Markiva is built for extensibility. You can create custom plugins and override the default CSS to
+                  apply your own themes and layouts.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 4 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingFour">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -202,16 +243,16 @@
                 aria-labelledby="headingFour"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Markiva is cross-platform. It runs on Windows, macOS, and Linux. If you have any
-                  platform-specific issues, check the <strong>Discussions</strong> or open an
+                <div class="accordion-body">
+                  Markiva is cross-platform. It runs on Windows, macOS, and Linux. For platform-specific issues,
+                  check our <strong>Discussions</strong> or open an
                   <a href="https://github.com/skillerious/markiva/issues" target="_blank" rel="noopener noreferrer" class="text-success text-decoration-none">issue</a>.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 5 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingFive">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -230,15 +271,14 @@
                 aria-labelledby="headingFive"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Yes! Markiva is open source and available under a permissive license,
-                  so it’s free for personal or commercial use.
+                <div class="accordion-body">
+                  Yes! Markiva is open source and available under the MIT License, so it’s free for personal and commercial use.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 6 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingSix">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -257,16 +297,15 @@
                 aria-labelledby="headingSix"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Markiva provides a CLI that can be integrated with CI/CD workflows
-                  for automated documentation generation, linting, or preview checks.
-                  Check our <strong>GitHub Actions</strong> examples in the repository.
+                <div class="accordion-body">
+                  Markiva comes with a CLI that can be integrated with CI/CD workflows for tasks like documentation
+                  generation, linting, and live preview checks. Refer to our GitHub Actions examples for more details.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 7 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingSeven">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -276,7 +315,7 @@
                   aria-expanded="false"
                   aria-controls="collapseSeven"
                 >
-                  Any recommended keyboard shortcuts?
+                  What keyboard shortcuts does Markiva offer?
                 </button>
               </h2>
               <div
@@ -285,17 +324,15 @@
                 aria-labelledby="headingSeven"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  We have built-in shortcuts for saving files (<strong>Ctrl+S</strong>),
-                  toggling layout modes (<strong>Ctrl+1 / Ctrl+2 / Ctrl+3</strong>),
-                  and find/replace (<strong>Ctrl+F</strong>). You can customize these
-                  in <em>Settings</em>.
+                <div class="accordion-body">
+                  Markiva includes shortcuts for saving files (Ctrl+S), find/replace (Ctrl+F), creating new files (Ctrl+N),
+                  and toggling layouts (Ctrl+1/2/3). Customize these in the settings.
                 </div>
               </div>
             </div>
 
             <!-- FAQ Item 8 -->
-            <div class="accordion-item bg-dark border-secondary animate__animated animate__fadeInUp">
+            <div class="accordion-item animate__animated animate__fadeInUp">
               <h2 class="accordion-header" id="headingEight">
                 <button
                   class="accordion-button collapsed bg-dark text-light"
@@ -314,9 +351,8 @@
                 aria-labelledby="headingEight"
                 data-bs-parent="#faqAccordion"
               >
-                <div class="accordion-body text-light">
-                  Yes. Markiva can be used offline once installed. Any live or collaborative features 
-                  requiring the internet will be disabled, but local markdown rendering still works.
+                <div class="accordion-body">
+                  Yes. When offline, Markiva disables live collaborative features but still provides full local markdown rendering.
                 </div>
               </div>
             </div>
@@ -370,8 +406,7 @@
       }
     });
 
-    // ADDED LINES: FAQ Search/Filter functionality
-    // Grab the input and FAQ items, and filter in real time.
+    // FAQ Search/Filter functionality
     document.addEventListener("DOMContentLoaded", function() {
       const faqSearchInput = document.getElementById("faqSearchInput");
       const faqItems = document.querySelectorAll("#faqAccordion .accordion-item");
@@ -382,12 +417,29 @@
           faqItems.forEach(item => {
             const btn = item.querySelector(".accordion-button");
             const text = btn.textContent.toLowerCase();
-            // show item if query matches question text
-            if (text.includes(query)) {
-              item.style.display = "block";
-            } else {
-              item.style.display = "none";
-            }
+            item.style.display = text.includes(query) ? "block" : "none";
+          });
+        });
+      }
+    });
+
+    // Expand All / Collapse All functionality
+    document.addEventListener("DOMContentLoaded", function() {
+      const expandBtn = document.getElementById("expandAllBtn");
+      const collapseBtn = document.getElementById("collapseAllBtn");
+      const allItems = document.querySelectorAll("#faqAccordion .accordion-collapse");
+
+      if (expandBtn) {
+        expandBtn.addEventListener("click", () => {
+          allItems.forEach(item => {
+            new bootstrap.Collapse(item, { toggle: false }).show();
+          });
+        });
+      }
+      if (collapseBtn) {
+        collapseBtn.addEventListener("click", () => {
+          allItems.forEach(item => {
+            new bootstrap.Collapse(item, { toggle: false }).hide();
           });
         });
       }
