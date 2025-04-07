@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markiva Docs - Enhanced Markdown Styling</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <!-- Animate.css (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+  />
+  <!-- Your custom dark theme styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /************************************************************
+     * GLOBAL / LAYOUT: Starlight-like layout, collapsible sidebar, etc.
+     ************************************************************/
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Ubuntu, sans-serif;
+    }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Fixed top navbar container */
+    #navbarContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+    }
+    /* Reading progress bar */
+    #readingProgressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s;
+    }
+
+    /* 3-column layout: sidebar, center content, right TOC */
+    .docs-container {
+      margin-top: 56px; /* offset for fixed navbar */
+      display: grid;
+      grid-template-columns: 280px minmax(0,1fr) 240px; /* left, center, right widths */
+      gap: 0;
+      height: calc(100vh - 56px);
+    }
+
+    /************************************************************
+     * LEFT SIDEBAR
+     ************************************************************/
+    .docs-sidebar {
+      background-color: #161b22;
+      border-right: 1px solid #30363d;
+      padding: 1rem 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar-top {
+      /* holds all collapsible categories */
+    }
+    .sidebar-section {
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-section-title {
+      font-size: 0.85rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    /* Collapsible toggle button */
+    .toggle-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 0.4rem 1rem;
+      color: #c9d1d9;
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+    .toggle-btn:hover {
+      background-color: #21262d;
+    }
+    .toggle-btn:focus {
+      outline: none;
+    }
+    .toggle-icon {
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+    /* Links within collapsible panels */
+    .sidebar-links {
+      padding: 0 0.5rem;
+    }
+    .sidebar-link {
+      display: block;
+      padding: 0.4rem 1rem;
+      color: #c9d1d9;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-link:hover {
+      background-color: #21262d;
+      color: #f0f6fc;
+    }
+    .sidebar-link.active {
+      background-color: #21262d;
+      border-left: 3px solid #58a6ff;
+      color: #f0f6fc;
+    }
+
+    /* Search bar near bottom */
+    .sidebar-search-container {
+      padding: 0.5rem 1rem;
+      border-top: 1px solid #30363d;
+    }
+    .sidebar-search-container input {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+    .sidebar-search-container input::placeholder {
+      color: #8b949e;
+    }
+
+    /************************************************************
+     * CENTER CONTENT (Markdown rendering)
+     ************************************************************/
+    .docs-main {
+      overflow-y: auto;
+      padding: 2rem 1.5rem;
+      background-color: #0d1117;
+      position: relative;
+    }
+    /* Headings offset for sticky nav */
+    .docs-main h1, .docs-main h2, .docs-main h3, .docs-main h4 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      scroll-margin-top: 80px; /* offset from fixed navbar */
+    }
+    /* Paragraph spacing */
+    .docs-main p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    /* Code blocks */
+    .docs-main pre code {
+      display: block;
+      background-color: #161b22;
+      padding: 1rem;
+      border-radius: 6px;
+      color: #f0f6fc;
+      overflow-x: auto;
+    }
+    /* Images - no border or shadow, just center if <p align="center"> */
+    .docs-main img {
+      max-width: 100%;
+      height: auto;
+      margin: 1rem 0;
+      display: block;
+    }
+    .docs-main p[align="center"] {
+      text-align: center !important;
+    }
+    .docs-main p[align="center"] img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /************************************************************
+     * RIGHT SIDEBAR: TOC
+     ************************************************************/
+    .docs-toc {
+      background-color: #161b22;
+      border-left: 1px solid #30363d;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    .docs-toc h6 {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: #8b949e;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .toc-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .toc-list li {
+      margin-bottom: 0.5rem;
+    }
+    .toc-link {
+      color: #c9d1d9;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .toc-link:hover {
+      color: #f0f6fc;
+      text-decoration: underline;
+    }
+    /* Highlight the active heading in green */
+    .toc-link.toc-active {
+      color: #3ee55a;
+      font-weight: 600;
+    }
+
+    /************************************************************
+     * SCROLLBAR styling (optional)
+     ************************************************************/
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #444;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: #161b22;
+    }
+
+    /************************************************************
+     * RESPONSIVE: Hide sidebars on narrower screens
+     ************************************************************/
+    @media (max-width: 992px) {
+      .docs-container {
+        grid-template-columns: 1fr; /* only center content */
+      }
+      .docs-sidebar, .docs-toc {
+        display: none;
+      }
+    }
+
+    /************************************************************
+     * ENHANCED MARKDOWN STYLING
+     * (Tables, blockquotes, lists, horizontal rules, etc.)
+     ************************************************************/
+    /* Tables */
+    .docs-main table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 4px;
+    }
+    .docs-main table thead tr {
+      background-color: #21262d;
+    }
+    .docs-main table th,
+    .docs-main table td {
+      padding: 0.75rem 1rem;
+      border: 1px solid #30363d;
+      vertical-align: middle;
+    }
+    .docs-main table tbody tr:nth-child(even) {
+      background-color: #1b1f23; /* subtle alternate row color */
+    }
+    .docs-main table tbody tr:hover {
+      background-color: #24292e; /* row hover effect */
+    }
+
+    /* Blockquotes */
+    .docs-main blockquote {
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 4px solid #3ee55a; /* bright green bar */
+      background-color: #161b22;
+      color: #b1bac4; /* slightly lighter text color */
+      border-radius: 4px;
+    }
+    .docs-main blockquote p {
+      margin-bottom: 0;
+    }
+
+    /* UL / OL list spacing */
+    .docs-main ul,
+    .docs-main ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .docs-main li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Horizontal rule */
+    .docs-main hr {
+      border-color: #30363d;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- FIXED NAVBAR (loaded from partial) -->
+  <div id="navbarContainer"></div>
+
+  <!-- READING PROGRESS BAR -->
+  <div id="readingProgressBar" class="bg-success"></div>
+
+  <!-- MAIN DOCS LAYOUT -->
+  <div class="docs-container">
+    <!-- LEFT SIDEBAR with Collapsible Sections + Search -->
+    <nav class="docs-sidebar">
+      <div class="sidebar-top">
+        <!-- Category: Welcome -->
+        <div class="sidebar-section">
+          <button
+            class="toggle-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#catWelcomeLinks"
+            aria-expanded="true"
+            aria-controls="catWelcomeLinks"
+          >
+            <span class="sidebar-section-title">Welcome</span>
+            <i class="bi bi-chevron-down toggle-icon"></i>
+          </button>
+          <div class="collapse show" id="catWelcomeLinks">
+            <div class="sidebar-links">
+              <a
+                href="#"
+                class="sidebar-link doc-link"
+                data-doc="welcome.md"
+                id="welcomeLink"
+              >
+                Intro to Markiva
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 1: Start Here -->
+        <div class="sidebar-section">
+          <button
+            class="toggle-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#catOneLinks"
+            aria-expanded="true"
+            aria-controls="catOneLinks"
+          >
+            <span class="sidebar-section-title">Start Here</span>
+            <i class="bi bi-chevron-down toggle-icon"></i>
+          </button>
+          <div class="collapse show" id="catOneLinks">
+            <div class="sidebar-links">
+              <a href="#" class="sidebar-link doc-link" data-doc="getting-started.md">
+                Getting Started
+              </a>
+              <a href="#" class="sidebar-link doc-link" data-doc="manual-setup.md">
+                Manual Setup
+              </a>
+              <a href="#" class="sidebar-link doc-link" data-doc="env-impact.md">
+                Environmental Impact
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 2: Guides -->
+        <div class="sidebar-section">
+          <button
+            class="toggle-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#catTwoLinks"
+            aria-expanded="true"
+            aria-controls="catTwoLinks"
+          >
+            <span class="sidebar-section-title">Guides</span>
+            <i class="bi bi-chevron-down toggle-icon"></i>
+          </button>
+          <div class="collapse show" id="catTwoLinks">
+            <div class="sidebar-links">
+              <a href="#" class="sidebar-link doc-link" data-doc="authoring-content.md">
+                Authoring Content
+              </a>
+              <a href="#" class="sidebar-link doc-link" data-doc="css-styling.md">
+                CSS &amp; Styling
+              </a>
+              <a href="#" class="sidebar-link doc-link" data-doc="customizing.md">
+                Customizing
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3: Components -->
+        <div class="sidebar-section">
+          <button
+            class="toggle-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#catThreeLinks"
+            aria-expanded="true"
+            aria-controls="catThreeLinks"
+          >
+            <span class="sidebar-section-title">Components</span>
+            <i class="bi bi-chevron-down toggle-icon"></i>
+          </button>
+          <div class="collapse show" id="catThreeLinks">
+            <div class="sidebar-links">
+              <a href="#" class="sidebar-link doc-link" data-doc="cards.md">Cards</a>
+              <a href="#" class="sidebar-link doc-link" data-doc="code.md">Code</a>
+              <a href="#" class="sidebar-link doc-link" data-doc="file-tree.md">File Tree</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 4: Reference -->
+        <div class="sidebar-section">
+          <button
+            class="toggle-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#catFourLinks"
+            aria-expanded="true"
+            aria-controls="catFourLinks"
+          >
+            <span class="sidebar-section-title">Reference</span>
+            <i class="bi bi-chevron-down toggle-icon"></i>
+          </button>
+          <div class="collapse show" id="catFourLinks">
+            <div class="sidebar-links">
+              <a href="#" class="sidebar-link doc-link" data-doc="api-reference.md">
+                API Reference
+              </a>
+              <a href="#" class="sidebar-link doc-link" data-doc="cli.md">
+                CLI Usage
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEARCH BAR at the bottom -->
+      <div class="sidebar-search-container">
+        <input
+          type="text"
+          id="docSearch"
+          class="form-control"
+          placeholder="Search docs..."
+          oninput="filterDocLinks()"
+        />
+      </div>
+    </nav>
+
+    <!-- CENTER DOC AREA -->
+    <main class="docs-main" id="docsContent">
+      <!-- We'll auto-load welcome.md, so no default text here. -->
+    </main>
+
+    <!-- RIGHT SIDEBAR (TOC) -->
+    <aside class="docs-toc">
+      <h6>On This Page</h6>
+      <ul class="toc-list" id="tocList">
+        <li class="text-secondary" style="font-size: 0.85rem;">No headings yet.</li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- JS Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Partial loader (navbar only) -->
+  <script src="js/includePartials.js"></script>
+  <!-- Your main scripts (scroll events, confetti, etc.) -->
+  <script src="js/scripts.js"></script>
+
+  <script type="text/javascript">
+    /* DOM references */
+    var docContentEl = document.getElementById("docsContent");
+    var tocListEl    = document.getElementById("tocList");
+    var headingObserver = null;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1) Attach click handlers to all .doc-link
+      var docLinks = document.querySelectorAll(".doc-link");
+      docLinks.forEach(function(link) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          // remove active from all
+          docLinks.forEach(function(l) { l.classList.remove("active"); });
+          // highlight the clicked link
+          link.classList.add("active");
+
+          var fileName = link.getAttribute("data-doc");
+          if (fileName) loadMarkdown(fileName);
+        });
+      });
+
+      // 2) Load welcome.md by default (Intro to Markiva)
+      var welcomeLink = document.getElementById("welcomeLink");
+      if (welcomeLink) {
+        welcomeLink.classList.add("active");
+        loadMarkdown("welcome.md");
+      }
+    });
+
+    /**
+     * loadMarkdown(fileName):
+     * Fetch & parse the requested MD file -> inject into #docsContent
+     * Then rebuild the TOC & setup heading observer for highlight
+     */
+    function loadMarkdown(fileName) {
+      docContentEl.innerHTML =
+        '<div class="text-center text-secondary my-5">' +
+        '  <div class="spinner-border text-info mb-3" role="status"></div>' +
+        '  <p>Loading <strong>' + fileName + '</strong>...</p>' +
+        '</div>';
+
+      tocListEl.innerHTML = '<li class="text-secondary" style="font-size: 0.85rem;">Generating Table of Contents...</li>';
+
+      // Reset observer if it was in use
+      if (headingObserver) {
+        headingObserver.disconnect();
+        headingObserver = null;
+      }
+
+      fetch('docs/' + fileName)
+        .then(function(resp) {
+          if (!resp.ok) {
+            throw new Error('File not found: ' + fileName);
+          }
+          return resp.text();
+        })
+        .then(function(md) {
+          var html = marked.parse(md);
+          docContentEl.innerHTML = html;
+          buildTOC();
+          attachTocLinksSmoothScroll();
+          observeHeadingsForHighlight();
+        })
+        .catch(function(err) {
+          docContentEl.innerHTML =
+            '<div class="alert alert-danger">' +
+            '  <strong>Error:</strong> ' + err.message +
+            '</div>';
+          tocListEl.innerHTML = '<li class="text-secondary">No TOC</li>';
+        });
+    }
+
+    /**
+     * buildTOC():
+     * Scan for h2/h3/h4 -> add anchor links in #tocList
+     */
+    function buildTOC() {
+      var headings = docContentEl.querySelectorAll("h2, h3, h4");
+      if (!headings.length) {
+        tocListEl.innerHTML = '<li class="text-secondary">No headings found.</li>';
+        return;
+      }
+      tocListEl.innerHTML = "";
+
+      headings.forEach(function(heading) {
+        if (!heading.id) {
+          heading.id = heading.textContent
+            .toLowerCase()
+            .replace(/[^\w]+/g, "-");
+        }
+        var level = parseInt(heading.tagName.substring(1), 10);
+        var li = document.createElement("li");
+        li.style.marginLeft = ((level - 2) * 1.5) + "rem";
+        li.innerHTML =
+          '<a href="#' + heading.id + '" class="toc-link">' +
+          heading.textContent + '</a>';
+        tocListEl.appendChild(li);
+      });
+    }
+
+    /**
+     * attachTocLinksSmoothScroll():
+     * Clicking a .toc-link scrolls .docs-main to that heading
+     */
+    function attachTocLinksSmoothScroll() {
+      var tocLinks = document.querySelectorAll(".toc-link");
+      var docsMain = document.querySelector(".docs-main");
+      tocLinks.forEach(function(link) {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          var targetId = link.getAttribute("href").substring(1);
+          var targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            var offsetTop = targetEl.offsetTop;
+            docsMain.scrollTo({
+              top: offsetTop - 10,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+
+    /**
+     * observeHeadingsForHighlight():
+     * Use IntersectionObserver to find the heading with the largest
+     * intersection ratio and highlight its link in the TOC.
+     */
+    function observeHeadingsForHighlight() {
+      var docsMain = document.querySelector(".docs-main");
+      var headings = docContentEl.querySelectorAll("h2, h3, h4");
+      if (!headings.length) return;
+
+      var headingRatios = new Map();
+      headingObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          headingRatios.set(entry.target.id, entry.intersectionRatio);
+        });
+
+        // pick the heading with the largest ratio
+        var maxRatio = 0;
+        var maxId = null;
+        headingRatios.forEach(function(ratio, id) {
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            maxId = id;
+          }
+        });
+
+        // highlight link with href="#maxId"
+        var allTocLinks = document.querySelectorAll(".toc-link");
+        allTocLinks.forEach(function(link) {
+          if (link.getAttribute("href") === "#" + maxId) {
+            link.classList.add("toc-active");
+          } else {
+            link.classList.remove("toc-active");
+          }
+        });
+      }, {
+        root: docsMain,
+        // threshold array: 0 to 1 in steps of 0.01
+        threshold: Array.from({ length: 101 }, function(_, i) { return i / 100; })
+      });
+
+      headings.forEach(function(h) {
+        headingObserver.observe(h);
+      });
+    }
+
+    /**
+     * filterDocLinks():
+     * Simple search filter on .sidebar-link text
+     */
+    function filterDocLinks() {
+      var query = document.getElementById("docSearch").value.toLowerCase();
+      var allLinks = document.querySelectorAll(".sidebar-link");
+      allLinks.forEach(function(link) {
+        var text = link.textContent.toLowerCase();
+        link.style.display = (text.includes(query)) ? "" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
