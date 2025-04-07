@@ -2,7 +2,7 @@
 <footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary">
   <div class="container">
     <div class="row g-4">
-      <!-- Brand / About -->
+      <!-- 1) Brand / About -->
       <div class="col-md-4">
         <h5 class="fw-bold mb-3 d-flex align-items-center">
           <img
@@ -20,20 +20,65 @@
           a sleek dark UI, and robust plugin support.
         </p>
       </div>
-      <!-- Quick Links -->
+
+      <!-- 2) QUICK LINKS in a SINGLE column 
+           but 2 sets of links side by side via d-flex -->
       <div class="col-md-3 col-6">
         <h6 class="fw-bold mb-3 text-uppercase">Quick Links</h6>
-        <ul class="list-unstyled">
-          <li><a href="index.html#hero" class="text-secondary text-decoration-none">Home</a></li>
-          <li><a href="index.html#features" class="text-secondary text-decoration-none">Features</a></li>
-          <li><a href="index.html#showcase" class="text-secondary text-decoration-none">Showcase</a></li>
-          <li><a href="index.html#faq" class="text-secondary text-decoration-none">FAQ</a></li>
-          <li><a href="roadmap.html" class="text-secondary text-decoration-none">Roadmap</a></li>
-          <li><a href="download.html" class="text-secondary text-decoration-none">Download</a></li>
-          <li><a href="contact.html" class="text-secondary text-decoration-none">Contact</a></li>
-        </ul>
+        
+        <!-- Using d-flex for horizontal layout, with a 10px gap -->
+        <div class="d-flex" style="gap: 10px;">
+          <!-- First set of links -->
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="index.html#hero" class="text-secondary text-decoration-none">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="index.html#features" class="text-secondary text-decoration-none">
+                Features
+              </a>
+            </li>
+            <li>
+              <a href="index.html#showcase" class="text-secondary text-decoration-none">
+                Showcase
+              </a>
+            </li>
+            <li>
+              <a href="contact.html" class="text-secondary text-decoration-none">
+                Contact
+              </a>
+            </li>
+          </ul>
+
+          <!-- Second set of links -->
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="download.html" class="text-secondary text-decoration-none">
+                Downloads
+              </a>
+            </li>
+            <li>
+              <a href="roadmap.html" class="text-secondary text-decoration-none">
+                Roadmap
+              </a>
+            </li>
+            <li>
+              <a href="faq.html" class="text-secondary text-decoration-none">
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href="documentation.html" class="text-secondary text-decoration-none">
+                Documentation
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- Resources -->
+
+      <!-- 3) RESOURCES -->
       <div class="col-md-3 col-6">
         <h6 class="fw-bold mb-3 text-uppercase">Resources</h6>
         <ul class="list-unstyled">
@@ -43,20 +88,26 @@
               target="_blank"
               rel="noopener noreferrer"
               class="text-secondary text-decoration-none"
-            >GitHub Repo</a>
+            >
+              GitHub Repo
+            </a>
           </li>
           <li>
-            <a href="index.html#about" class="text-secondary text-decoration-none">About Markiva</a>
+            <a href="index.html#about" class="text-secondary text-decoration-none">
+              About Markiva
+            </a>
           </li>
           <li>
-            <a href="download.html#downloadOptions" class="text-secondary text-decoration-none">Platforms</a>
+            <a href="download.html#downloadOptions" class="text-secondary text-decoration-none">
+              Platforms
+            </a>
           </li>
-          <li>
-            <a href="index.html#faq" class="text-secondary text-decoration-none">Documentation</a>
-          </li>
+          <!-- If “Documentation” was previously here, remove it now, 
+               since it's in the Quick Links. -->
         </ul>
       </div>
-      <!-- Social & Info -->
+
+      <!-- 4) SOCIAL & INFO -->
       <div class="col-md-2">
         <h6 class="fw-bold mb-3 text-uppercase">Stay Connected</h6>
         <div class="d-flex gap-3 mb-3">
@@ -101,7 +152,9 @@
             target="_blank"
             rel="noopener noreferrer"
             class="text-decoration-none text-white fw-bold"
-          >Robin Doak</a>.
+          >
+            Robin Doak
+          </a>.
         </p>
       </div>
     </div>

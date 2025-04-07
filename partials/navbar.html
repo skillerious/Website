@@ -34,11 +34,7 @@
         On mobile, they stack or show flex direction as per your existing code logic. 
       -->
       <div class="ms-auto d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-
-        <!-- 1) Main UL: textual nav links 
-             On mobile, these stack vertically by default. 
-             On large screens, they're on the right in the same row as the icons.
-        -->
+        <!-- 1) Main UL: textual nav links -->
         <ul class="navbar-nav mb-2 mb-lg-0">
           <!-- Home -->
           <li class="nav-item">
@@ -53,7 +49,7 @@
             <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
           </li>
 
-          <!-- FAQ Dropdown (top-level "FAQ" + 2 sub-items) -->
+          <!-- FAQ Dropdown -->
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle px-3"
@@ -68,6 +64,8 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="faqDropdown">
               <li><a class="dropdown-item" href="faq.html">FAQ Page</a></li>
               <li><a class="dropdown-item" href="roadmap.html">Roadmap</a></li>
+              <!-- NEW Documentation link -->
+              <li><a class="dropdown-item" href="documentation.html">Documentation</a></li>
             </ul>
           </li>
 
@@ -81,12 +79,7 @@
           </li>
         </ul>
 
-        <!-- 
-          2) ICONS UL: Tools, GitHub, YouTube
-          Use flex-row to ensure they stay side by side on large screens 
-          AND on mobile. 
-          We'll keep the gap so there's spacing between the icons.
-        -->
+        <!-- 2) ICONS UL: Tools, GitHub, YouTube -->
         <ul class="navbar-nav flex-row align-items-center gap-2 mt-3 mt-lg-0">
           <!-- Tools -->
           <li class="nav-item">
