@@ -1,130 +1,275 @@
 # Authoring Content with Markiva
 
-Markiva makes writing and editing Markdown easy, even for beginners. This guide will walk you through the basics of Markdown syntax and how to use Markiva’s built-in tools to streamline your writing experience.
+Welcome to **Markiva** — your intelligent, minimal, and flexible Markdown authoring environment. Whether you’re writing documentation, personal notes, technical manuals, or blog posts, Markiva brings together simplicity and power to streamline your workflow.
+
+This guide will serve as a comprehensive reference to help you become a Markdown authoring expert with Markiva.
 
 ---
 
-## 1. What is Markdown?
+## 1. Why Use Markdown?
 
-**Markdown** is a lightweight markup language used to format text using plain text syntax. It’s perfect for writing notes, documentation, blogs, and more.
+Markdown is a markup language that’s designed to be readable in plain text and easily converted into rich HTML. With it, you can:
 
-In Markiva, Markdown is written in the editor pane and rendered as formatted text in the preview pane.
+- Format documents without complex editors
+- Write faster and cleaner than using WYSIWYG tools
+- Ensure portability across platforms and tools
+- Leverage version control (e.g., Git) for tracking changes
 
----
-
-## 2. Basic Markdown Syntax
-
-| Syntax        | What it Does             | Example                         |
-|---------------|--------------------------|----------------------------------|
-| `# Heading`   | Creates a heading        | `# Heading 1`                   |
-| `**bold**`    | Makes text bold          | `**Bold Text**`                 |
-| `*italic*`    | Makes text italic        | `*Italic Text*`                 |
-| ``code``      | Inline code              | `` `console.log()` ``          |
-| `> quote`     | Blockquote               | `> This is a quote`             |
-| `- item`      | Bullet list              | `- Item 1`                      |
-| `1. item`     | Numbered list            | `1. First`                      |
-| `[text](url)` | Hyperlink                | `[Google](https://google.com)` |
-| `![alt](img)` | Image                    | `![Logo](logo.png)`            |
-
-Markiva supports all common Markdown syntax and GitHub-flavored Markdown extensions.
+Markiva enhances this simplicity with advanced features and a responsive interface tailored for Markdown writing.
 
 ---
 
-## 3. Formatting with Markiva Buttons
+## 2. Writing in Markdown: Core Syntax
 
-Markiva includes quick-access formatting buttons on the left sidebar:
+Here’s a detailed breakdown of core Markdown formatting rules:
 
-- **Bold (B)** – Wraps selected text in `**`  
-- **Italic (I)** – Wraps selected text in `*`  
-- **Code (</>)** – Wraps text in backticks for inline code  
-- **Link** – Opens a dialog to insert hyperlinks  
-- **Heading** – Adds a heading `#` to selected lines  
-- **Table** – Launches the table wizard for inserting Markdown tables  
-- **Image/Media** – Wizard to add images or file paths easily
+### Headings
 
-These tools make it faster to apply formatting without typing syntax manually.
+Use the `#` symbol followed by a space to create headings:
+
+```markdown
+# Heading 1
+## Heading 2
+### Heading 3
+```
+
+### Emphasis
+
+```markdown
+*Italic text*
+**Bold text**
+***Bold and italic***
+```
+
+### Lists
+
+```markdown
+- Bullet 1
+- Bullet 2
+
+1. Number 1
+2. Number 2
+```
+
+### Code
+
+```markdown
+Inline: `const x = 10;`
+
+Block:
+```javascript
+function greet(name) {
+  return `Hello, ${name}`;
+}
+```
+```
+
+### Links & Images
+
+```markdown
+[Visit Markiva](https://github.com/skillerious/Markiva)
+![Screenshot](screenshot.png)
+```
+
+### Blockquotes & Horizontal Rules
+
+```markdown
+> This is a quote
+
+---
+```
+
+### Tables
+
+```markdown
+| Feature     | Description               |
+|-------------|---------------------------|
+| Real-time   | Live preview as you type  |
+| Exportable  | PDF and HTML support      |
+```
+
+Markiva supports GitHub Flavored Markdown (GFM), meaning tables, checkboxes, and extended syntax work seamlessly.
 
 ---
 
-## 4. Real-Time Preview
+## 3. The Editor Experience
 
-As you type Markdown in the editor, the preview pane updates instantly to show the rendered content.
+Markiva offers a distraction-free, multi-tab editor with:
 
-- **Split View** is enabled by default for side-by-side editing and previewing.
-- Use the top-right buttons to switch between:
-  - Editor Only
-  - Preview Only
-  - Split View
+- **Syntax highlighting** for Markdown
+- **Live preview** in split view
+- **Spellcheck toggle**
+- **Custom themes** (light and dark)
+- **Autosave reminders and dirty file detection**
 
----
-
-## 5. AI-Powered Writing Tools
-
-Markiva includes AI tools to enhance your writing:
-
-- **Summarize** – Provides a bullet-point summary of your document
-- **Simplify** – Strips filler words and simplifies paragraphs
-- **Suggest Headings** – Recommends headers based on content
-
-Use these tools from the status bar to quickly polish your writing.
+Navigation is intuitive and fast. Click to switch tabs, right-click for context options, and use keyboard shortcuts to maximize productivity.
 
 ---
 
-## 6. Inserting Tables
+## 4. Visual Formatting with the Sidebar
 
-Click the **Table** button to open the table dialog:
+Markiva features a sidebar packed with formatting utilities:
 
-- Choose rows, columns, and whether to include a header row
-- Markiva generates a properly formatted Markdown table
-- You can add/remove rows and columns with the **Table Editor Panel**
+- **Bold, Italic, Code, Link** — single-click formatting tools
+- **Heading levels** — instantly add `#` symbols
+- **Table and Media Insertion Wizards** — visually generate tables or insert images
+- **Live search & replace** — find and modify text instantly
 
----
-
-## 7. Working with Files
-
-- Create new `.md` files with the **New File** button
-- Open local files with **Open File**
-- Save your changes anytime with **Save**
-- Rename and refresh files directly from the sidebar
-
-Markiva also supports drag-and-drop for opening Markdown files.
+Markiva’s toolbar reduces your need to memorize syntax — but you still retain full Markdown flexibility.
 
 ---
 
-## 8. Exporting and Printing
+## 5. Advanced Authoring with AI
 
-Your work can be exported easily:
+Markiva’s built-in AI assistants help you refine content faster:
 
-- **Export to PDF** – From the status bar
-- **Print Document** – Sends the preview version to your printer
-- **Export to HTML** – Preserves formatting for web use (in development)
+### Summarize
 
----
+Summarizes long content into concise, bulleted takeaways — useful for executive summaries or documentation intros.
 
-## 9. Notes and File Browser
+### Simplify
 
-- Use the **Notes** panel for quick thoughts, todos, or snippets
-- The **Project Files** section shows all `.md` files in your working folder
-- Right-click files for options: Open, Rename, Delete
+Reduces verbose writing by removing filler and redundant words. Great for clarity and technical accuracy.
 
----
+### Suggest Headings
 
-## 10. Keyboard Shortcuts
-
-| Action         | Shortcut                  |
-|----------------|---------------------------|
-| Trigger Hint   | `Ctrl + Space` (Windows) / `Cmd + Space` (Mac) |
-| Save File      | `Ctrl + S` / `Cmd + S`    |
-| Search         | Click search icon or `Ctrl + F` / `Cmd + F` |
+Scans paragraphs to suggest useful section headers. Perfect for improving structure or creating a table of contents.
 
 ---
 
-## 11. Final Tips
+## 6. Using Cards and Layout Elements
 
-- Use **spellcheck toggle** to review your writing
-- Switch between **light/dark themes** for comfort
-- Your last file, settings, and notes are remembered between sessions
+You can visually emphasize content using **cards**:
+
+```html
+<div class="card info">
+  <h3>Note</h3>
+  <p>This is important information highlighted in a card.</p>
+</div>
+```
+
+Card types include:
+
+- `card info`
+- `card warning`
+- `card danger`
+- `card success`
+
+Combine Markdown and HTML freely for maximum control.
 
 ---
 
-Happy writing with **Markiva** — your Markdown workspace made simple.
+## 7. Document Navigation and Tabs
+
+Each file opens in a new **tab**, making multi-document workflows easy.
+
+Tabs track:
+
+- Dirty state (unsaved changes)
+- Filename
+- Context (via hover tooltips)
+
+Tabs can be closed, renamed, or reopened from the file list.
+
+---
+
+## 8. Table Editing Panel
+
+When your cursor is on a Markdown table:
+
+- Markiva activates the **Table Editor Panel**
+- Add or remove rows and columns with a click
+- Supports proper table alignment and formatting
+
+---
+
+## 9. Notes and To-Dos
+
+Use the **Notes panel** on the right for:
+
+- Tracking personal reminders or edits
+- Creating lists of references, ideas, or outline bullets
+- Pinning or checking off completed tasks
+
+Notes persist between sessions and are stored in `notes.json`.
+
+---
+
+## 10. File Management: Built-in Project Explorer
+
+The **Project Files** panel lets you:
+
+- Open, rename, or delete `.md` files
+- Drag and drop files into the workspace
+- Search for files using live filtering
+
+Files can be opened in-place or refreshed manually.
+
+---
+
+## 11. Export and Share
+
+Once your document is ready, export it for sharing:
+
+- **Export to PDF** — Creates a print-ready copy
+- **Print Document** — Uses the system’s print dialog
+- **Export to HTML** — Clean HTML output (for web use)
+
+Exports use your current theme for consistent styling.
+
+---
+
+## 12. GitHub Features
+
+Insert GitHub content with ease:
+
+- Badges for **Stars**, **Issues**, or **Releases**
+- Paste GitHub Markdown directly into the editor
+- Integrate with your README.md or documentation
+
+Use the **GitHub menu** in the status bar.
+
+---
+
+## 13. Preferences and Configuration
+
+You can access settings like:
+
+- **Default folder path**
+- **Spellcheck toggle**
+- **Theme (light/dark)**
+- **Last file restore**
+
+Settings persist automatically and are saved in `settings.json`.
+
+---
+
+## 14. Shortcuts Reference
+
+| Action                  | Shortcut (Win/Linux) | Shortcut (Mac)      |
+|-------------------------|----------------------|---------------------|
+| Save File               | Ctrl + S             | Cmd + S             |
+| Trigger Markdown Hint   | Ctrl + Space         | Cmd + Space         |
+| Search & Replace        | Ctrl + F             | Cmd + F             |
+| Toggle Spellcheck       | Alt + S              | Option + S          |
+| Export to PDF           | Alt + P              | Option + P          |
+| Switch Theme            | Alt + T              | Option + T          |
+
+---
+
+## 15. Authoring Best Practices
+
+- **Organize your documents** with headings and tables
+- **Use AI** to improve clarity and tone
+- **Preview often** to spot formatting issues
+- **Back up** or sync your Markdown files using Git
+- **Use cards** or block elements to emphasize key ideas
+- **Split content** into modular files for large documents
+
+---
+
+## Conclusion
+
+Markiva is more than just a Markdown editor. It’s your content companion — built for speed, structure, and smart authoring. Whether you’re a writer, developer, or knowledge worker, Markiva provides the tools to create professional-grade content with ease.
+
+Dive in. Write well. Publish confidently.

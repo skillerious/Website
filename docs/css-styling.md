@@ -1,91 +1,107 @@
 # CSS Styling in Markiva
 
-Markiva uses custom CSS to create a clean, modern, and functional interface for Markdown editing. This guide explains how styling works in Markiva and how you can customize it to fit your needs.
+Markiva is designed with clarity, responsiveness, and aesthetics in mind. Through thoughtful CSS architecture, it balances minimalism with powerful UI features. This guide dives into how Markiva's CSS works and how you can personalize the experience through styling.
 
 ---
 
-## 1. Default Styling
+## 1. Overview of Default Styling
 
-Markiva’s main styles are defined in the `style.css` file located in the project root. This file styles:
+Markiva’s interface is primarily styled through a single `style.css` file. It governs the overall appearance and layout of:
 
-- **Editor and Preview Areas**
-- **Sidebar Buttons**
-- **Notes and File List**
-- **Dialogs and Modals**
-- **Custom Elements** like popovers and table editors
+| Area                   | Styled Elements                                     |
+|------------------------|-----------------------------------------------------|
+| **Editor & Preview**   | Markdown input, syntax highlighting, scroll sync   |
+| **Sidebar**            | File tools, formatting buttons                     |
+| **Dialogs/Modals**     | Prompts, popovers, alerts                          |
+| **Notes & Files**      | Notes panel and file list browser                  |
+| **Custom Components**  | Table editor, context menu, status bar             |
 
----
-
-## 2. Theming: Light vs Dark
-
-Markiva supports two themes:
-- **Dark Theme (Default)**: Uses `material-darker` for CodeMirror and darker UI tones.
-- **Light Theme**: Uses CodeMirror's `default` theme and lighter backgrounds.
-
-### Switching Themes
-
-- Users can toggle themes using the **theme switch button** in the status bar.
-- The selected theme is saved in `settings.json`.
-
-You can find theme-switching logic in `main.js` and `renderer.js`.
+All styles are centralized and class/ID based, which makes customization straightforward.
 
 ---
 
-## 3. CodeMirror Styling
+## 2. Theming: Light and Dark Modes
 
-Markiva integrates **CodeMirror 5** as its Markdown editor.
+Markiva supports **two distinct themes**:
 
-### To Customize CodeMirror:
+| Theme        | Description                                        |
+|--------------|----------------------------------------------------|
+| **Dark**     | Default theme using `material-darker` for CodeMirror |
+| **Light**    | Brighter UI and `default` CodeMirror theme          |
 
-- Modify themes:
-  - Located in `node_modules/codemirror/theme/`
-  - Or override with custom rules in `style.css`
-- Example: Change font size
-  ```css
-  .CodeMirror {
-    font-size: 15px;
-  }
-  ```
+### How Themes Work
 
-### Common Customizations:
-
-- **Line height**
-- **Background color**
-- **Line number styles**
-- **Selection color**
+- Switched using the **theme toggle button** in the status bar
+- Theme preference is saved in `settings.json`
+- Logic is handled in `main.js` and `renderer.js`
 
 ---
 
-## 4. Custom Elements
+## 3. CodeMirror Customization
 
-Markiva includes custom components like:
+Markiva uses **CodeMirror 5** for the editor. To customize it:
 
-- Prompt modals
-- GitHub popover
-- Table editor panel
-- Save changes dialog
-
-These are all styled in `style.css` using class-based selectors.
-
-You can target them using IDs or classes such as:
+### Examples
 
 ```css
-#custom-prompt {
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #fff;
+/* Change font size */
+.CodeMirror {
+  font-size: 16px;
 }
-.prompt-buttons button {
-  background: #05c46b;
+
+/* Adjust line number appearance */
+.CodeMirror-gutters {
+  background-color: #1e1e1e;
+  color: #999;
 }
 ```
 
+| Customization      | What to Target                |
+|--------------------|-------------------------------|
+| Font Size/Family   | `.CodeMirror`                 |
+| Background Color   | `.CodeMirror` or `#editor-wrapper` |
+| Line Numbers       | `.CodeMirror-gutters`         |
+| Active Line        | `.CodeMirror-activeline`      |
+| Selection          | `.CodeMirror-selected`        |
+
+Themes can be swapped or created via `codemirror/theme/` or overridden in `style.css`.
+
 ---
 
-## 5. Styling the Preview
+## 4. Styling Custom Components
 
-The preview pane renders HTML from Markdown using **Marked** and **Highlight.js**.
+Markiva features various styled UI components.
 
-To style rendered Markdown output:
+| Component              | Selectors to Use                  |
+|------------------------|-----------------------------------|
+| Prompt Dialog          | `#custom-prompt`, `.prompt-buttons` |
+| Table Editor Panel     | `#table-editor-panel`             |
+| GitHub Popover         | `#github-popover`                 |
+| Save Changes Dialog    | `#save-changes-dialog`            |
+
+### Sample Styles
+
+```css
+#custom-prompt {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+.prompt-buttons button {
+  background-color: #05c46b;
+  border: none;
+  padding: 8px 12px;
+}
+```
+
+All components are responsive and follow flex/grid layouts for consistency.
+
+---
+
+## 5. Preview Pane Styling
+
+The preview area is rendered with HTML using `marked` and styled with Highlight.js.
+
+### To style Markdown-rendered content:
 
 ```css
 #preview-content h1,
@@ -95,74 +111,113 @@ To style rendered Markdown output:
 }
 
 #preview-content code {
-  background-color: #222;
-  padding: 2px 4px;
-  border-radius: 4px;
+  background: #272727;
+  padding: 2px 6px;
+  border-radius: 3px;
 }
 ```
 
-This ensures the preview looks clean and matches your theme.
+| Element Type   | Selector Example             |
+|----------------|------------------------------|
+| Headings       | `#preview-content h1, h2`    |
+| Code Blocks    | `#preview-content pre code`  |
+| Inline Code    | `#preview-content code`      |
+| Lists & Tables | `#preview-content ul, table` |
 
 ---
 
 ## 6. Responsive Layout
 
-Markiva uses **flexbox-based layouts** for:
-
-- Sidebar and main content split
-- Editor and preview panes
-- Status bar distribution
-
-You can tweak sizes, spacing, and responsiveness via:
+Markiva’s layout uses **Flexbox** to adapt to various screen sizes.
 
 ```css
 #split-pane {
   display: flex;
+  flex-direction: row;
   height: 100%;
 }
 #editor-container,
 #preview-container {
   flex: 1;
+  overflow-y: auto;
 }
 ```
+
+| Container             | Layout Strategy |
+|-----------------------|-----------------|
+| `#main-layout`        | Flex            |
+| `#split-pane`         | Row-wise flex   |
+| `#status-bar`         | Inline-flex     |
+
+Use `flex-grow`, `flex-shrink`, and media queries to adjust pane behaviors responsively.
 
 ---
 
 ## 7. Fonts and Icons
 
-- **Font**: Uses [Roboto](https://fonts.google.com/specimen/Roboto) via Google Fonts.
-- **Icons**: Uses [Font Awesome](https://fontawesome.com/) for UI icons.
+Markiva uses:
 
-You can switch fonts or icons by updating `<link>` tags in `index.html` and modifying CSS rules accordingly.
+- **Roboto Font** from Google Fonts
+- **Font Awesome** for sidebar and toolbar icons
+
+### Modify Fonts
+
+```html
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+```
+
+To override:
+
+```css
+body, .CodeMirror {
+  font-family: 'YourFontName', sans-serif;
+}
+```
+
+To change icons, edit class names like `fa fa-plus` in `index.html`.
 
 ---
 
-## 8. Adding Your Own Styles
+## 8. Adding Custom Styles
 
-To add your custom styles:
+### How to Add Your Own CSS
 
 1. Open `style.css`
-2. Add your CSS rules at the bottom or in a separate section
-3. Restart Markiva (or reload if in development mode)
+2. Scroll to the end or create a `/* Custom Styles */` section
+3. Add your custom rules
+4. Restart the app (or reload during development)
 
-Tip: Use browser dev tools (right-click → Inspect Element) during development to test CSS changes live.
+You can use browser dev tools (`Ctrl+Shift+I`) to inspect and test CSS live.
 
 ---
 
 ## 9. Creating a Custom Theme
 
-To create a new theme:
+Want a full aesthetic overhaul? Here’s how:
 
-1. Duplicate `material-darker.css` in CodeMirror’s theme directory
-2. Rename it (e.g., `mytheme.css`)
-3. Reference it in your `index.html` and apply it in `renderer.js` via `cmEditor.setOption('theme', 'mytheme')`
+| Step | Action |
+|------|--------|
+| 1    | Copy an existing CodeMirror theme (`.css`) |
+| 2    | Rename and adjust colors, fonts, etc. |
+| 3    | Reference it in `index.html` |
+| 4    | Update `cmEditor.setOption('theme', 'your-theme')` in `renderer.js` |
+| 5    | Match preview styles in `style.css` for full consistency |
 
-Don’t forget to match preview styles to your custom theme for consistency!
+Ensure visual continuity between CodeMirror and preview content.
 
 ---
 
-## 10. Conclusion
+## 10. Advanced Tips
 
-Markiva’s styling system is flexible and easy to extend. Whether you're tweaking fonts or building a custom UI experience, CSS gives you full control.
+- Use [CSS Variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for easier theme switching
+- Group selectors logically (e.g., `.editor-wrapper`, `.preview-wrapper`)
+- Add `:focus` and `:hover` styles for better accessibility
+- Maintain mobile responsiveness for future packaging
 
-Feel free to experiment and share your custom styles with the community!
+---
+
+## Conclusion
+
+Markiva’s CSS system is built to be developer-friendly and fully customizable. With a clear structure, modern practices like Flexbox, and support for theming, it’s easy to adapt Markiva to your visual style.
+
+Whether you're adjusting fonts, designing your own layout, or crafting a custom color scheme — **you have complete control**.
