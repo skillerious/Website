@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found | Markiva</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+  <!-- Animate.css (optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
+  />
+  <!-- Custom CSS (dark theme, green accents, etc.) -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* GLOBAL LAYOUT */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+      overflow: hidden;
+    }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* NAVBAR & READING PROGRESS BAR */
+    #navbarContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+    }
+    #readingProgressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s;
+    }
+    
+    /* HERO SECTION */
+    .hero-404 {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background-color: #0d1117;
+      overflow: hidden;
+    }
+    /* VANTA.NET will be applied in this container */
+    #vantaNet404 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-404 .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-404 .content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-404 h1 {
+      font-size: 5rem;
+      font-weight: bold;
+      color: #f0f6fc;
+    }
+    .hero-404 p {
+      font-size: 1.25rem;
+      color: #c9d1d9;
+    }
+    .hero-404 .btn-return {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+    }
+  </style>
+</head>
+<body class="bg-dark text-light">
+  <!-- Optional dynamic navbar -->
+  <div id="navbarContainer"></div>
+  
+  <!-- Reading progress bar -->
+  <div id="readingProgressBar" class="bg-success"></div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-404">
+    <!-- VANTA.NET container -->
+    <div id="vantaNet404"></div>
+    <!-- Overlay for contrast -->
+    <div class="overlay"></div>
+    <!-- Main content -->
+    <div class="content container">
+      <h1 class="animate__animated animate__fadeInDown">404</h1>
+      <p class="animate__animated animate__fadeInUp animate__delay-1s">
+        Oops! The page you are looking for does not exist.
+      </p>
+      <button class="btn btn-success btn-return animate__animated animate__pulse animate__infinite" onclick="returnHome()">
+        Return Home
+      </button>
+    </div>
+  </section>
+
+  <!-- JS DEPENDENCIES -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.min.js"></script>
+  <!-- Using VANTA.NET instead of VANTA.WAVES -->
+  <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Load dynamic partials if needed -->
+  <script src="js/includePartials.js"></script>
+  <!-- Main scripts (if you have any additional interactive scripts) -->
+  <script src="js/scripts.js"></script>
+
+  <script>
+    // Initialize VANTA.NET for 404 with a darker, grid-like animation
+    let vantaEffect = null;
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof VANTA !== "undefined" && VANTA.NET) {
+        vantaEffect = VANTA.NET({
+          el: "#vantaNet404",
+          color: 0x3ee55a,           // green accent
+          backgroundColor: 0x0d1117, // match dark background
+          points: 12.00,
+          maxDistance: 20.00,
+          spacing: 15.00
+        });
+      }
+    });
+    
+    // Function to trigger confetti and return home
+    function returnHome() {
+      // Launch interactive confetti animation
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      // Delay redirection to let confetti play
+      setTimeout(function() {
+        window.location.href = "index.html";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
