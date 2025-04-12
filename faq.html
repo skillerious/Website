@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Markiva - FAQ</title>
+  <title>Markiva - Frequently Asked Questions</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -15,370 +15,432 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
   />
-  <!-- Animate.css (for entrance animations) -->
+  <!-- Animate.css (for subtle animations) -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
   />
-  <!-- Custom CSS (dark theme, green accents, etc.) -->
+  <!-- Optional site-wide CSS -->
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- ADDED STYLES: Enhanced FAQ visuals -->
+  <!-- Internal styles for dark-themed FAQ with green accents -->
   <style>
-    /* Enhanced FAQ search bar styling */
-    .faq-search-bar {
-      max-width: 500px;
-      margin: 0 auto 2rem auto;
+    /* General dark theme */
+    body {
+      background-color: #121212;
+      color: #f1f1f1;
     }
-    .faq-search-bar input {
-      background-color: #222;
-      border: 1px solid #28a745;
-      color: #fff;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
+
+    /* ----- HERO SECTION ----- */
+    .faq-hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("assets/faq-hero-bg.jpg") center/cover no-repeat;
+      color: #f8f9fa;
+      padding: 5rem 0;
+      text-align: center;
+      position: relative;
+    }
+    .faq-hero h1 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .faq-hero p {
+      color: #ccc;
+      max-width: 650px;
+      margin: 0 auto;
       font-size: 1.1rem;
     }
+
+    /* ----- VANTA WAVES ----- */
+    #vantaWavesFaq {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .faq-hero .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+    .faq-hero .container {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ----- SEARCH BAR ----- */
+    .faq-search-bar {
+      margin-bottom: 3rem;
+    }
+    .faq-search-bar .input-group {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .faq-search-bar input {
+      border: 2px solid #28a745;
+      border-right: none;
+      border-radius: 0.375rem 0 0 0.375rem;
+      background-color: #222;
+      color: #fff !important; /* Force light text */
+    }
     .faq-search-bar input::placeholder {
-      color: #ccc;
+      color: #ccc; /* Light placeholder text */
     }
-
-    /* Styling for Expand/Collapse All buttons */
-    .faq-controls {
-      max-width: 500px;
-      margin: 0 auto 2rem auto;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-    .faq-controls .btn {
-      font-weight: 600;
-    }
-
-    /* Enhanced accordion styling */
-    .accordion-button {
-      background-color: #111111;
-      color: #fff;
-      font-weight: 500;
-      border: none;
-    }
-    .accordion-button:hover,
-    .accordion-button:focus {
-      background-color: #111111;
-      color: #28a745;
-    }
-    .accordion-button:not(.collapsed) {
-      background-color: #111111;
-      color: #28a745;
+    .faq-search-bar input:focus {
+      background-color: #303030 !important; /* Slightly lighter dark shade on focus */
+      color: #fff !important; /* Ensure text remains light on focus */
       box-shadow: none;
+      outline: none;
+      border-color: #28a745;
     }
-    .accordion-item {
+    .faq-search-bar button {
+      border: 2px solid #28a745;
+      border-left: none;
+      color: #fff;
+      background-color: #28a745;
+      border-radius: 0 0.375rem 0.375rem 0;
+    }
+
+    /* ----- ACCORDION STYLING ----- */
+    .accordion.accordion-flush .accordion-item {
       border: none;
       border-bottom: 1px solid #444;
     }
-    /* FAQ answer styling */
+    .accordion-button {
+      background-color: #171717; /* Question background */
+      color: #f1f1f1;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    .accordion-button:hover,
+    .accordion-button:focus {
+      background-color: #171717;
+      color: #28a745;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #171717; /* Keep same color when expanded */
+      color: #28a745;
+      box-shadow: none;
+    }
     .accordion-body {
-      background-color: #222222 !important;
+      background-color: #222 !important; /* #222222 for answer background */
       color: #f1f1f1 !important;
+    }
+
+    /* ----- ANIMATIONS & CATEGORY HEADERS ----- */
+    .faq-accordion.animate__animated {
+      animation-duration: 0.8s;
+      animation-delay: 0.1s;
+    }
+    .faq-category-header {
+      font-weight: 600;
+      color: #28a745;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* Extra top spacing below the hero section */
+    main.container.pb-5.mt-5 {
+      margin-top: 4rem !important; /* ~64px down from the top */
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 576px) {
+      .faq-hero h1 {
+        font-size: 1.75rem;
+      }
+      .faq-hero p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body class="bg-dark text-light">
-  <!-- 1) NAVBAR (dynamic partial) -->
+  <!-- Dynamic Navbar (loaded via includePartials.js) -->
   <div id="navbarContainer"></div>
 
-  <!-- 2) READING PROGRESS BAR -->
+  <!-- Reading Progress Bar -->
   <div
     id="readingProgressBar"
     class="bg-success"
     style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; z-index: 9999; transition: width 0.2s;"
   ></div>
 
-  <!-- 3) HERO SECTION with Vanta Waves -->
-  <header
-    id="faqHero"
-    class="position-relative overflow-hidden d-flex align-items-center justify-content-center"
-    style="min-height: 50vh;"
-  >
+  <!-- HERO SECTION with Vanta Waves -->
+  <header class="faq-hero">
     <!-- Vanta Waves container -->
-    <div
-      id="vantaWavesFaq"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
-    ></div>
-    <!-- Dark overlay for text contrast -->
-    <div
-      class="overlay position-absolute top-0 start-0 w-100 h-100"
-      style="background: rgba(0, 0, 0, 0.4);"
-    ></div>
-
-    <div class="container position-relative text-center py-5 animate__animated animate__fadeInDown animate__slower">
-      <h1 class="display-4 fw-bold text-white">Frequently Asked Questions</h1>
-      <p class="lead text-white-50 mb-4">
-        Everything You Need to Know
+    <div id="vantaWavesFaq"></div>
+    <!-- Overlay for contrast -->
+    <div class="overlay"></div>
+    <div class="container py-5 animate__animated animate__fadeInDown animate__slower">
+      <h1 class="display-4 fw-bold">Frequently Asked Questions</h1>
+      <p class="mb-0">
+        Find quick answers to your most common questions about Markiva. Need more
+        info?
+        <a href="contact.html" class="text-warning text-decoration-underline"
+          >Contact us</a
+        >.
       </p>
     </div>
   </header>
 
-  <!-- 4) MAIN FAQ SECTION -->
-  <section class="py-5">
-    <div class="container">
-      <!-- FAQ Search Bar -->
-      <div class="faq-search-bar mb-4">
+  <!-- MAIN FAQ SECTION (with extra top spacing) -->
+  <main class="container pb-5 mt-5">
+    <!-- Search Bar (where expand/collapse controls used to be) -->
+    <div class="faq-search-bar mb-4">
+      <div class="input-group">
         <input
           type="text"
-          id="faqSearchInput"
           class="form-control"
-          placeholder="Search questions..."
-          aria-label="Search FAQ"
+          placeholder="Search FAQs (e.g. 'markdown', 'extensions', 'plugin')"
+          aria-label="FAQ Search Input"
+          id="faqSearchInput"
         />
+        <button class="btn" type="button" id="btnFaqSearch" aria-label="Search FAQs">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- FAQ Accordion: Grouped by Categories -->
+
+    <!-- GENERAL FAQs -->
+    <h2 class="faq-category-header">General</h2>
+    <div
+      class="accordion faq-accordion animate__animated animate__fadeInUp"
+      id="faqAccordionGeneral"
+    >
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="genHeadingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#genCollapseOne"
+            aria-expanded="false"
+            aria-controls="genCollapseOne"
+          >
+            <i class="bi bi-question-circle me-2"></i>
+            What is Markiva?
+          </button>
+        </h2>
+        <div
+          id="genCollapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="genHeadingOne"
+          data-bs-parent="#faqAccordionGeneral"
+        >
+          <div class="accordion-body">
+            Markiva is a powerful, open-source Markdown application with live preview,
+            a sleek dark UI, and a wide range of plugins. It’s designed to help you
+            write beautiful, structured content effortlessly.
+          </div>
+        </div>
       </div>
 
-      <!-- Expand/Collapse All Controls -->
-      <div class="faq-controls mb-4">
-        <button id="expandAllBtn" class="btn btn-success">Expand All</button>
-        <button id="collapseAllBtn" class="btn btn-outline-success">Collapse All</button>
+      <!-- FAQ Item 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="genHeadingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#genCollapseTwo"
+            aria-expanded="false"
+            aria-controls="genCollapseTwo"
+          >
+            <i class="bi bi-question-circle me-2"></i>
+            How do I install Markiva?
+          </button>
+        </h2>
+        <div
+          id="genCollapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="genHeadingTwo"
+          data-bs-parent="#faqAccordionGeneral"
+        >
+          <div class="accordion-body">
+            Visit our
+            <a href="download.html" class="text-success text-decoration-none"
+              >download page</a
+            >,
+            where you’ll find packages for Windows, Mac, and Linux. Install by
+            running the installer or using your favorite package manager.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNICAL FAQs -->
+    <h2 class="faq-category-header">Technical</h2>
+    <div
+      class="accordion faq-accordion animate__animated animate__fadeInUp"
+      id="faqAccordionTech"
+    >
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="techHeadingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#techCollapseOne"
+            aria-expanded="false"
+            aria-controls="techCollapseOne"
+          >
+            <i class="bi bi-gear me-2"></i>
+            What kind of plugins does Markiva support?
+          </button>
+        </h2>
+        <div
+          id="techCollapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="techHeadingOne"
+          data-bs-parent="#faqAccordionTech"
+        >
+          <div class="accordion-body">
+            Markiva supports a wide range of plugins, including syntax highlighters,
+            diagram renderers (Mermaid, PlantUML), table-of-contents generators, and
+            more. You can even create your own plugins in JavaScript!
+          </div>
+        </div>
       </div>
 
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="accordion accordion-flush rounded" id="faqAccordion">
-            <!-- FAQ Item 1 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="false"
-                  aria-controls="collapseOne"
-                >
-                  How do I install Markiva?
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingOne"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Simply clone the repo from GitHub, install the dependencies, and run the build.
-                  Check our <strong>README</strong> for more details or use the prebuilt binaries from our
-                  <a href="download.html" class="text-success text-decoration-none">download page</a>.
-                </div>
-              </div>
-            </div>
+      <!-- FAQ Item 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="techHeadingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#techCollapseTwo"
+            aria-expanded="false"
+            aria-controls="techCollapseTwo"
+          >
+            <i class="bi bi-gear me-2"></i>
+            Does Markiva have a command-line interface (CLI)?
+          </button>
+        </h2>
+        <div
+          id="techCollapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="techHeadingTwo"
+          data-bs-parent="#faqAccordionTech"
+        >
+          <div class="accordion-body">
+            Yes! Markiva has an optional CLI that can convert Markdown files to
+            HTML/PDF, or even watch directories for changes. Check out our
+            <a href="documentation.html">documentation</a> to get started with the CLI.
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <!-- FAQ Item 2 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Can I contribute to Markiva?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Absolutely! Fork the repository, submit pull requests, and open issues or feature requests.
-                  We welcome community involvement.
-                </div>
-              </div>
-            </div>
+    <!-- LICENSING FAQs -->
+    <h2 class="faq-category-header">Licensing</h2>
+    <div
+      class="accordion faq-accordion animate__animated animate__fadeInUp"
+      id="faqAccordionLicensing"
+    >
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="licHeadingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#licCollapseOne"
+            aria-expanded="false"
+            aria-controls="licCollapseOne"
+          >
+            <i class="bi bi-shield-lock me-2"></i>
+            Is Markiva free and open-source?
+          </button>
+        </h2>
+        <div
+          id="licCollapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="licHeadingOne"
+          data-bs-parent="#faqAccordionLicensing"
+        >
+          <div class="accordion-body">
+            Absolutely. Markiva is released under an open-source license. You can find
+            our source code and license details on
+            <a
+              href="https://github.com/skillerious/markiva"
+              target="_blank"
+              >GitHub</a
+            >.
+          </div>
+        </div>
+      </div>
 
-            <!-- FAQ Item 3 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Does Markiva support plugins and custom themes?
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Yes! Markiva is built for extensibility. You can create custom plugins and override the default CSS to
-                  apply your own themes and layouts.
-                </div>
-              </div>
-            </div>
+      <!-- FAQ Item 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="licHeadingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#licCollapseTwo"
+            aria-expanded="false"
+            aria-controls="licCollapseTwo"
+          >
+            <i class="bi bi-shield-lock me-2"></i>
+            Can I use Markiva for commercial projects?
+          </button>
+        </h2>
+        <div
+          id="licCollapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="licHeadingTwo"
+          data-bs-parent="#faqAccordionLicensing"
+        >
+          <div class="accordion-body">
+            Yes. Commercial usage is permitted under the open-source license. For
+            specific details and disclaimers, be sure to read the license on our
+            GitHub repo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-            <!-- FAQ Item 4 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingFour">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour"
-                  aria-expanded="false"
-                  aria-controls="collapseFour"
-                >
-                  Does Markiva work on all platforms?
-                </button>
-              </h2>
-              <div
-                id="collapseFour"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingFour"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Markiva is cross-platform. It runs on Windows, macOS, and Linux. For platform-specific issues,
-                  check our <strong>Discussions</strong> or open an
-                  <a href="https://github.com/skillerious/markiva/issues" target="_blank" rel="noopener noreferrer" class="text-success text-decoration-none">issue</a>.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ Item 5 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingFive">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFive"
-                  aria-expanded="false"
-                  aria-controls="collapseFive"
-                >
-                  Is Markiva free to use?
-                </button>
-              </h2>
-              <div
-                id="collapseFive"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingFive"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Yes! Markiva is open source and available under the MIT License, so it’s free for personal and commercial use.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ Item 6 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingSix">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseSix"
-                  aria-expanded="false"
-                  aria-controls="collapseSix"
-                >
-                  How can I integrate Markiva with CI/CD pipelines?
-                </button>
-              </h2>
-              <div
-                id="collapseSix"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingSix"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Markiva comes with a CLI that can be integrated with CI/CD workflows for tasks like documentation
-                  generation, linting, and live preview checks. Refer to our GitHub Actions examples for more details.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ Item 7 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingSeven">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseSeven"
-                  aria-expanded="false"
-                  aria-controls="collapseSeven"
-                >
-                  What keyboard shortcuts does Markiva offer?
-                </button>
-              </h2>
-              <div
-                id="collapseSeven"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingSeven"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Markiva includes shortcuts for saving files (Ctrl+S), find/replace (Ctrl+F), creating new files (Ctrl+N),
-                  and toggling layouts (Ctrl+1/2/3). Customize these in the settings.
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ Item 8 -->
-            <div class="accordion-item animate__animated animate__fadeInUp">
-              <h2 class="accordion-header" id="headingEight">
-                <button
-                  class="accordion-button collapsed bg-dark text-light"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseEight"
-                  aria-expanded="false"
-                  aria-controls="collapseEight"
-                >
-                  Can I display rendered markdown offline?
-                </button>
-              </h2>
-              <div
-                id="collapseEight"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingEight"
-                data-bs-parent="#faqAccordion"
-              >
-                <div class="accordion-body">
-                  Yes. When offline, Markiva disables live collaborative features but still provides full local markdown rendering.
-                </div>
-              </div>
-            </div>
-          </div><!-- /accordion -->
-        </div><!-- /col -->
-      </div><!-- /row -->
-    </div><!-- /container -->
-  </section>
-
-  <!-- 5) FOOTER (dynamic partial) -->
+  <!-- Dynamic Footer (loaded via includePartials.js) -->
   <div id="footerContainer"></div>
 
-  <!-- Bootstrap & Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <!-- Three.js (for Vanta Waves) -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"
+  ></script>
+  <!-- Vanta Waves -->
   <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Canvas Confetti (optional) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"
+  ></script>
 
-  <!-- Include partial loader (navbar & footer) -->
+  <!-- Include Partial Loader Script (loads navbar and footer) -->
   <script src="js/includePartials.js"></script>
-
-  <!-- Main Scripts (typewriter, scroll, highlight nav, etc.) -->
+  <!-- Main Site Scripts -->
   <script src="js/scripts.js"></script>
 
   <script>
-    // Vanta Waves initialization for the FAQ hero
+    // Initialize Vanta Waves for the hero section
     let wavesEffectFaq = null;
     document.addEventListener("DOMContentLoaded", () => {
       if (typeof VANTA !== "undefined" && VANTA.WAVES) {
@@ -406,40 +468,20 @@
       }
     });
 
-    // FAQ Search/Filter functionality
-    document.addEventListener("DOMContentLoaded", function() {
+    // FAQ Search Feature
+    document.addEventListener("DOMContentLoaded", function () {
       const faqSearchInput = document.getElementById("faqSearchInput");
-      const faqItems = document.querySelectorAll("#faqAccordion .accordion-item");
+      // Get all accordion items across all categories
+      const allAccordions = document.querySelectorAll(".accordion .accordion-item");
 
       if (faqSearchInput) {
         faqSearchInput.addEventListener("input", () => {
           const query = faqSearchInput.value.toLowerCase();
-          faqItems.forEach(item => {
+          allAccordions.forEach((item) => {
             const btn = item.querySelector(".accordion-button");
-            const text = btn.textContent.toLowerCase();
+            // Combine the button text (plus the body text if desired)
+            const text = (btn.textContent || "").toLowerCase();
             item.style.display = text.includes(query) ? "block" : "none";
-          });
-        });
-      }
-    });
-
-    // Expand All / Collapse All functionality
-    document.addEventListener("DOMContentLoaded", function() {
-      const expandBtn = document.getElementById("expandAllBtn");
-      const collapseBtn = document.getElementById("collapseAllBtn");
-      const allItems = document.querySelectorAll("#faqAccordion .accordion-collapse");
-
-      if (expandBtn) {
-        expandBtn.addEventListener("click", () => {
-          allItems.forEach(item => {
-            new bootstrap.Collapse(item, { toggle: false }).show();
-          });
-        });
-      }
-      if (collapseBtn) {
-        collapseBtn.addEventListener("click", () => {
-          allItems.forEach(item => {
-            new bootstrap.Collapse(item, { toggle: false }).hide();
           });
         });
       }

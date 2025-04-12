@@ -14,7 +14,7 @@
   <!-- CodeMirror CSS (core and Dracula theme) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
-  <!-- Site-wide CSS (if you have any) -->
+  <!-- Site-wide CSS -->
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -31,8 +31,9 @@
       overflow: hidden; /* Prevent scrolling the overall page */
     }
 
-    /* Make sure the navbar is at least 70px tall (if needed) */
-    .navbar {
+    /* If you need to style the dynamically loaded navbar container, you can target #navbarContainer.
+       Here we ensure it reserves at least the same height as before (70px) */
+    #navbarContainer {
       min-height: 70px;
     }
 
@@ -41,7 +42,7 @@
      ************************************************************/
     .vertical-toolbar {
       position: fixed;
-      top: 70px;       /* Start below the fixed navbar */
+      top: 70px;       /* Start below the navbar */
       bottom: 0;       /* Stretches to the bottom */
       left: 0;
       width: 70px;
@@ -195,45 +196,9 @@
   </style>
 </head>
 <body>
-  <!-- NAVBAR (Fixed at the top) -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
-        <img src="assets/MarkivaLogo.png" alt="Markiva Logo" width="40" height="40" class="me-2" style="object-fit: cover;" />
-        Markiva
-      </a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link px-3" href="index.html#hero">Home</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="index.html#features">Features</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="index.html#showcase">Showcase</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="index.html#faq">FAQ</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="download.html">Download</a></li>
-          <li class="nav-item"><a class="nav-link px-3" href="contact.html">Contact</a></li>
-          <!-- Tools (active) -->
-          <li class="nav-item">
-            <a class="nav-link px-3 active" href="markdown.html">
-              <i class="bi bi-tools fs-5 me-1"></i>
-            </a>
-          </li>
-          <!-- GitHub & YouTube icons -->
-          <li class="nav-item">
-            <a class="nav-link px-3" href="https://github.com/skillerious/markiva" target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-github fs-5"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link px-3" href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-              <i class="bi bi-youtube fs-5"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!-- Dynamic Navbar Injection -->
+  <!-- The navbar will be loaded dynamically from partials/navbar.html by js/includePartials.js -->
+  <div id="navbarContainer"></div>
 
   <!-- FULL-HEIGHT SIDE TOOLBAR -->
   <div class="vertical-toolbar">
@@ -282,11 +247,11 @@
   <!-- MAIN CONTAINER (Editor & Preview) -->
   <div class="main-container">
     <div class="editor-preview-container">
-      <!-- Editor -->
+      <!-- Editor Section -->
       <div id="editorWrapper">
         <div id="codeMirrorEditor" class="cm-s-dracula"></div>
       </div>
-      <!-- Preview -->
+      <!-- Preview Section -->
       <div id="previewWrapper">
         <p class="text-secondary m-3">Your rendered Markdown preview will appear here.</p>
       </div>
@@ -306,9 +271,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/addon/display/placeholder.min.js"></script>
   <!-- Main Site Scripts -->
   <script src="js/scripts.js"></script>
+  <!-- Include Partials Script (loads the navbar partial) -->
+  <script src="js/includePartials.js"></script>
 
   <script>
-    // Initialize tooltips & popovers
+    // Initialize tooltips & popovers on DOMContentLoaded
     document.addEventListener("DOMContentLoaded", () => {
       const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
@@ -338,7 +305,7 @@
       previewWrapper.innerHTML = marked.parse(content);
     });
 
-    // Two-way scroll sync
+    // Two-way scroll sync between the editor and the preview
     let isSyncingEditor = false;
     let isSyncingPreview = false;
 
@@ -361,7 +328,7 @@
       isSyncingPreview = false;
     });
 
-    // Toolbar Buttons
+    // Toolbar Button Actions
     const btnNew = document.getElementById("btnNew");
     const btnOpen = document.getElementById("btnOpen");
     const openFileInput = document.getElementById("openFileInput");
@@ -470,7 +437,7 @@ console.log("Hello from Markiva Editor!");
       alert("Document saved locally.");
     });
 
-    // Load saved doc on page load
+    // Load saved document on page load
     window.addEventListener("load", () => {
       const saved = localStorage.getItem("markivaMarkdown");
       if (saved) {
