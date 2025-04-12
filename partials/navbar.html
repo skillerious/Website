@@ -1,7 +1,7 @@
 <!-- partials/navbar.html -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
   <div class="container">
-    <!-- Brand (on the left) -->
+    <!-- Brand -->
     <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="index.html">
       <img
         src="assets/MarkivaLogo.png"
@@ -13,7 +13,7 @@
       />
       Markiva
     </a>
-    <!-- Toggler (burger menu) -->
+    <!-- Toggler -->
     <button
       class="navbar-toggler border-0"
       type="button"
@@ -22,33 +22,24 @@
       aria-controls="navMenu"
       aria-expanded="false"
       aria-label="Toggle navigation"
-      style="outline: none;"
     >
       <span class="navbar-toggler-icon"></span>
+      <span class="visually-hidden">Toggle navigation</span>
     </button>
-
-    <!-- Collapsible content -->
+    <!-- Collapsible Content -->
     <div class="collapse navbar-collapse" id="navMenu">
-      <!-- 
-        A wrapper DIV that aligns everything to the right on large screens.
-        On mobile, they stack or show flex direction as per your existing code logic. 
-      -->
       <div class="ms-auto d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
-        <!-- 1) Main UL: textual nav links -->
+        <!-- Main Navigation Links -->
         <ul class="navbar-nav mb-2 mb-lg-0">
-          <!-- Home -->
           <li class="nav-item">
             <a class="nav-link px-3" href="index.html#hero">Home</a>
           </li>
-          <!-- Features -->
           <li class="nav-item">
             <a class="nav-link px-3" href="index.html#features">Features</a>
           </li>
-          <!-- Showcase -->
           <li class="nav-item">
             <a class="nav-link px-3" href="index.html#showcase">Showcase</a>
           </li>
-
           <!-- FAQ Dropdown -->
           <li class="nav-item dropdown">
             <a
@@ -57,6 +48,7 @@
               id="faqDropdown"
               role="button"
               data-bs-toggle="dropdown"
+              aria-haspopup="true"
               aria-expanded="false"
             >
               FAQ
@@ -64,31 +56,24 @@
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="faqDropdown">
               <li><a class="dropdown-item" href="faq.html">FAQ Page</a></li>
               <li><a class="dropdown-item" href="roadmap.html">Roadmap</a></li>
-              <!-- NEW Documentation link -->
               <li><a class="dropdown-item" href="documentation.html">Documentation</a></li>
             </ul>
           </li>
-
-          <!-- Download -->
           <li class="nav-item">
             <a class="nav-link px-3" href="download.html">Download</a>
           </li>
-          <!-- Contact -->
           <li class="nav-item">
             <a class="nav-link px-3" href="contact.html">Contact</a>
           </li>
         </ul>
-
-        <!-- 2) ICONS UL: Tools, GitHub, YouTube -->
+        <!-- Icon Links -->
         <ul class="navbar-nav flex-row align-items-center gap-2 mt-3 mt-lg-0">
-          <!-- Tools -->
           <li class="nav-item">
             <a class="nav-link px-3" href="markdown.html" aria-label="Tools">
               <i class="bi bi-tools fs-5 me-1"></i>
+              <span class="visually-hidden">Tools</span>
             </a>
           </li>
-
-          <!-- GitHub -->
           <li class="nav-item">
             <a
               class="nav-link px-3"
@@ -98,10 +83,9 @@
               aria-label="GitHub"
             >
               <i class="bi bi-github fs-5"></i>
+              <span class="visually-hidden">GitHub</span>
             </a>
           </li>
-
-          <!-- YouTube -->
           <li class="nav-item">
             <a
               class="nav-link px-3"
@@ -111,10 +95,11 @@
               aria-label="YouTube"
             >
               <i class="bi bi-youtube fs-5"></i>
+              <span class="visually-hidden">YouTube</span>
             </a>
           </li>
         </ul>
-      </div> <!-- /wrapper div -->
-    </div> <!-- /.collapse -->
-  </div> <!-- /.container -->
+      </div>
+    </div>
+  </div>
 </nav>

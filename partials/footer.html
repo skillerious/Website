@@ -1,6 +1,22 @@
 <!-- partials/footer.html -->
-<footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary">
+<footer class="pt-5 pb-4 text-light bg-dark border-top border-secondary" role="contentinfo">
   <div class="container">
+    <h2 class="visually-hidden">Footer</h2>
+
+    <!-- Internal styles for hover effects in the footer -->
+    <style>
+      /* Hover effect for Quick Links and Resources */
+      footer .col-md-3.col-6 ul a:hover {
+        color: #28a745 !important;
+        transition: color 0.2s ease-in-out;
+      }
+      /* Hover effect for Stay Connected icon links */
+      footer .col-md-2 .d-flex a:hover {
+        color: #28a745 !important;
+        transition: color 0.2s ease-in-out;
+      }
+    </style>
+
     <div class="row g-4">
       <!-- 1) Brand / About -->
       <div class="col-md-4">
@@ -21,15 +37,12 @@
         </p>
       </div>
 
-      <!-- 2) QUICK LINKS in a SINGLE column 
-           but 2 sets of links side by side via d-flex -->
+      <!-- 2) Quick Links -->
       <div class="col-md-3 col-6">
-        <h6 class="fw-bold mb-3 text-uppercase">Quick Links</h6>
-        
-        <!-- Using d-flex for horizontal layout, with a 10px gap -->
-        <div class="d-flex" style="gap: 10px;">
+        <h6 class="fw-bold mb-3 text-uppercase" id="footer-quick-links">Quick Links</h6>
+        <div class="d-flex gap-2">
           <!-- First set of links -->
-          <ul class="list-unstyled mb-0">
+          <ul class="list-unstyled mb-0" aria-labelledby="footer-quick-links">
             <li>
               <a href="index.html#hero" class="text-secondary text-decoration-none">
                 Home
@@ -51,9 +64,8 @@
               </a>
             </li>
           </ul>
-
           <!-- Second set of links -->
-          <ul class="list-unstyled mb-0">
+          <ul class="list-unstyled mb-0" aria-labelledby="footer-quick-links">
             <li>
               <a href="download.html" class="text-secondary text-decoration-none">
                 Downloads
@@ -78,10 +90,10 @@
         </div>
       </div>
 
-      <!-- 3) RESOURCES -->
+      <!-- 3) Resources -->
       <div class="col-md-3 col-6">
-        <h6 class="fw-bold mb-3 text-uppercase">Resources</h6>
-        <ul class="list-unstyled">
+        <h6 class="fw-bold mb-3 text-uppercase" id="footer-resources">Resources</h6>
+        <ul class="list-unstyled" aria-labelledby="footer-resources">
           <li>
             <a
               href="https://github.com/skillerious/markiva"
@@ -102,46 +114,52 @@
               Platforms
             </a>
           </li>
-          <!-- If “Documentation” was previously here, remove it now, 
-               since it's in the Quick Links. -->
         </ul>
       </div>
 
-      <!-- 4) SOCIAL & INFO -->
+      <!-- 4) Social & Info -->
       <div class="col-md-2">
-        <h6 class="fw-bold mb-3 text-uppercase">Stay Connected</h6>
-        <div class="d-flex gap-3 mb-3">
+        <h6 class="fw-bold mb-3 text-uppercase" id="footer-social">Stay Connected</h6>
+        <div class="d-flex gap-3 mb-3" aria-labelledby="footer-social">
           <a
             href="https://twitter.com/"
             class="text-white"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Twitter"
           >
             <i class="bi bi-twitter fs-5"></i>
+            <span class="visually-hidden">Twitter</span>
           </a>
           <a
             href="https://facebook.com/"
             class="text-white"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Facebook"
           >
             <i class="bi bi-facebook fs-5"></i>
+            <span class="visually-hidden">Facebook</span>
           </a>
           <a
             href="https://github.com/skillerious/markiva"
             class="text-white"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
           >
             <i class="bi bi-github fs-5"></i>
+            <span class="visually-hidden">GitHub</span>
           </a>
           <a
             href="https://youtube.com/"
             class="text-white"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="YouTube"
           >
             <i class="bi bi-youtube fs-5"></i>
+            <span class="visually-hidden">YouTube</span>
           </a>
         </div>
         <p class="small text-secondary">
