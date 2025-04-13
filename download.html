@@ -5,20 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Download Markiva</title>
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
   <!-- Animate.css (optional) -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" />
   <!-- Custom CSS (dark theme, etc.) -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -27,34 +18,16 @@
   <div id="navbarContainer"></div>
 
   <!-- READING PROGRESS BAR -->
-  <div
-    id="readingProgressBar"
-    class="bg-success"
-    style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; z-index: 9999; transition: width 0.2s;"
-  ></div>
+  <div id="readingProgressBar" class="bg-success" style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; z-index: 9999; transition: width 0.2s;"></div>
 
   <!-- HERO SECTION with Vanta Waves -->
-  <header
-    id="downloadHero"
-    class="py-5 d-flex align-items-center justify-content-center position-relative overflow-hidden"
-    style="min-height: 50vh;"
-  >
-    <div
-      id="vantaWavesDownload"
-      style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"
-    ></div>
-    <div
-      class="overlay position-absolute top-0 start-0 w-100 h-100"
-      style="background: rgba(0, 0, 0, 0.4);"
-    ></div>
+  <header id="downloadHero" class="py-5 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="min-height: 50vh;">
+    <div id="vantaWavesDownload" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+    <div class="overlay position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.4);"></div>
     <div class="container position-relative text-center animate__animated animate__fadeInDown animate__slower">
       <h1 class="display-4 fw-bold text-white">Download Markiva</h1>
-      <p class="lead text-white-50 mb-4">
-        Get the latest version of Markiva for your platform
-      </p>
-      <a href="#downloadOptions" class="btn btn-success btn-lg"
-        >Jump to Downloads</a
-      >
+      <p class="lead text-white-50 mb-4">Get the latest version of Markiva for your platform</p>
+      <a href="#downloadOptions" class="btn btn-success btn-lg">Jump to Downloads</a>
     </div>
   </header>
 
@@ -66,36 +39,24 @@
         <p class="text-secondary">
           Markiva is available for Windows, macOS, and Linux.<br />
           Or download the source from
-          <a
-            href="https://github.com/skillerious/markiva"
-            class="text-success"
-            target="_blank"
-            rel="noopener noreferrer"
-          ><strong>GitHub</strong></a>.
+          <a href="https://github.com/skillerious/markiva" class="text-success" target="_blank" rel="noopener noreferrer"><strong>GitHub</strong></a>.
         </p>
       </div>
 
       <div class="row g-4">
         <!-- Windows Card -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card bg-dark h-100" id="winCard">
+        <div class="col-md-6 col-lg-4" id="winCard">
+          <div class="card bg-dark h-100">
             <div class="card-body text-center d-flex flex-column justify-content-between">
               <div>
                 <i class="bi bi-windows fs-1 text-success mb-3"></i>
                 <h4 class="card-title text-light mb-3">Windows</h4>
-                <p class="card-text text-light">
-                  Download the latest Markiva build for Windows (64-bit).
-                </p>
+                <p class="card-text text-light">Download the latest Markiva build for Windows (64-bit).</p>
                 <ul class="list-unstyled text-secondary small mb-4">
-                  <li>
-                    <i class="bi bi-check-lg text-success"></i> Version: 1.0.0
-                  </li>
-                  <li><i class="bi bi-check-lg text-success"></i> Size: 50MB</li>
-                  <li>
-                    <i class="bi bi-check-lg text-success"></i> Updated: Apr 2025
-                  </li>
+                  <li><i class="bi bi-check-lg text-success"></i> Version: <span id="winVersion">1.0.0</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Size: <span id="winSize">50MB</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Updated: <span id="winUpdated">Apr 2025</span></li>
                 </ul>
-
                 <!-- Star Rating + OS Detection -->
                 <div class="star-rating mb-3">
                   <span class="rating-label text-secondary small">Your Rating:</span>
@@ -108,20 +69,10 @@
                   </span>
                 </div>
               </div>
-
               <div class="d-flex flex-column gap-2 align-items-center">
-                <!-- Windows build remains unchanged -->
-                <a href="#" class="btn btn-success" onclick="simulateInstall('win'); return false;">
-                  Download .exe
-                </a>
-                <button
-                  class="btn btn-sm btn-outline-success"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#winInstall"
-                  aria-expanded="false"
-                  aria-controls="winInstall"
-                >
+                <!-- simulateInstall now receives the event to prevent default navigation -->
+                <a id="winDownloadLink" href="#" class="btn btn-success" onclick="simulateInstall('win', event)">Download .exe</a>
+                <button class="btn btn-sm btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#winInstall" aria-expanded="false" aria-controls="winInstall">
                   How to Install
                 </button>
               </div>
@@ -129,9 +80,7 @@
                 <p class="small text-secondary">
                   1. Run the .exe file and follow the installer prompts.<br />
                   2. After installation, launch Markiva from the Start menu.<br />
-                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('start Markiva'); return false;">
-                    Copy Command
-                  </button>
+                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('start Markiva')">Copy Command</button>
                 </p>
               </div>
             </div>
@@ -145,15 +94,12 @@
               <div>
                 <i class="bi bi-apple fs-1 text-success mb-3"></i>
                 <h4 class="card-title text-light mb-3">macOS</h4>
-                <p class="card-text text-light">
-                  Download the latest Markiva DMG for macOS (Intel &amp; Apple Silicon).
-                </p>
+                <p class="card-text text-light">Download the latest Markiva DMG for macOS (Intel &amp; Apple Silicon).</p>
                 <ul class="list-unstyled text-secondary small mb-4">
-                  <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
-                  <li><i class="bi bi-check-lg text-success"></i> Size: 55MB</li>
-                  <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
+                  <li><i class="bi bi-check-lg text-success"></i> Version: <span id="macVersion">1.0.0</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Size: <span id="macSize">55MB</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Updated: <span id="macUpdated">Apr 2025</span></li>
                 </ul>
-
                 <!-- Star Rating for macOS -->
                 <div class="star-rating mb-3">
                   <span class="rating-label text-secondary small">Your Rating:</span>
@@ -166,20 +112,9 @@
                   </span>
                 </div>
               </div>
-
               <div class="d-flex flex-column gap-2 align-items-center">
-                <!-- macOS button now points to 404.html -->
-                <a href="404.html" class="btn btn-success" onclick="simulateInstall('mac'); return false;">
-                  Download .dmg
-                </a>
-                <button
-                  class="btn btn-sm btn-outline-success"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#macInstall"
-                  aria-expanded="false"
-                  aria-controls="macInstall"
-                >
+                <a id="macDownloadLink" href="404.html" class="btn btn-success" onclick="simulateInstall('mac', event)">Download .dmg</a>
+                <button class="btn btn-sm btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#macInstall" aria-expanded="false" aria-controls="macInstall">
                   How to Install
                 </button>
               </div>
@@ -188,9 +123,7 @@
                   1. Double-click the .dmg to mount it.<br />
                   2. Drag Markiva into the Applications folder.<br />
                   3. Launch Markiva from Applications.<br />
-                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('open Markiva'); return false;">
-                    Copy Command
-                  </button>
+                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('open Markiva')">Copy Command</button>
                 </p>
               </div>
             </div>
@@ -208,11 +141,10 @@
                   Download the AppImage or .deb package, compatible with most distributions.
                 </p>
                 <ul class="list-unstyled text-secondary small mb-4">
-                  <li><i class="bi bi-check-lg text-success"></i> Version: 1.0.0</li>
-                  <li><i class="bi bi-check-lg text-success"></i> Size: 60MB</li>
-                  <li><i class="bi bi-check-lg text-success"></i> Updated: Apr 2025</li>
+                  <li><i class="bi bi-check-lg text-success"></i> Version: <span id="linuxVersion">1.0.0</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Size: <span id="linuxSize">60MB</span></li>
+                  <li><i class="bi bi-check-lg text-success"></i> Updated: <span id="linuxUpdated">Apr 2025</span></li>
                 </ul>
-
                 <!-- Star Rating for Linux -->
                 <div class="star-rating mb-3">
                   <span class="rating-label text-secondary small">Your Rating:</span>
@@ -225,25 +157,12 @@
                   </span>
                 </div>
               </div>
-
               <div class="d-flex flex-column gap-2 align-items-center">
                 <div class="d-grid gap-2 d-md-block">
-                  <!-- Both Linux download buttons now point to 404.html -->
-                  <a href="404.html" class="btn btn-success" onclick="simulateInstall('linux'); return false;">
-                    Download AppImage
-                  </a>
-                  <a href="404.html" class="btn btn-outline-success" onclick="simulateInstall('linux'); return false;">
-                    Download .deb
-                  </a>
+                  <a id="linuxAppImageLink" href="404.html" class="btn btn-success" onclick="simulateInstall('linux', event, 'appimage')">Download AppImage</a>
+                  <a id="linuxDebLink" href="404.html" class="btn btn-outline-success" onclick="simulateInstall('linux', event, 'deb')">Download .deb</a>
                 </div>
-                <button
-                  class="btn btn-sm btn-outline-success mt-2"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#linuxInstall"
-                  aria-expanded="false"
-                  aria-controls="linuxInstall"
-                >
+                <button class="btn btn-sm btn-outline-success mt-2" type="button" data-bs-toggle="collapse" data-bs-target="#linuxInstall" aria-expanded="false" aria-controls="linuxInstall">
                   How to Install
                 </button>
               </div>
@@ -255,9 +174,7 @@
                   <strong>.deb:</strong><br />
                   1. <code>sudo dpkg -i markiva.deb</code><br />
                   2. Launch Markiva from your app menu.<br />
-                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('sudo dpkg -i markiva.deb'); return false;">
-                    Copy Command
-                  </button>
+                  <button class="btn btn-sm btn-outline-info mt-2" onclick="copyCommand('sudo dpkg -i markiva.deb')">Copy Command</button>
                 </p>
               </div>
             </div>
@@ -282,17 +199,11 @@
           <ul class="list-unstyled text-secondary small mb-3">
             <li>
               <i class="bi bi-chevron-right text-success"></i>
-              Latest Beta: v1.1.0-beta (April 2025)
+              Latest Beta: <span id="betaVersion">v1.1.0-beta</span> (<span id="betaUpdated">Apr 2025</span>)
             </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              Possibly unstable, recommended for advanced users
-            </li>
+            <li><i class="bi bi-chevron-right text-success"></i> Possibly unstable, recommended for advanced users</li>
           </ul>
-          <!-- Link now points to 404.html -->
-          <a href="404.html" class="btn btn-sm btn-outline-success">
-            Download Beta Build
-          </a>
+          <a id="betaDownloadLink" href="404.html" class="btn btn-sm btn-outline-success" onclick="simulateInstall('beta', event)">Download Beta Build</a>
         </div>
         <!-- Alpha Channel -->
         <div class="col-md-4">
@@ -304,17 +215,11 @@
           <ul class="list-unstyled text-secondary small mb-3">
             <li>
               <i class="bi bi-chevron-right text-success"></i>
-              v1.2.0-alpha (internal test, Apr 2025)
+              <span id="alphaVersion">v1.2.0-alpha</span> (internal test, <span id="alphaUpdated">Apr 2025</span>)
             </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              Potentially significant changes or breakages
-            </li>
+            <li><i class="bi bi-chevron-right text-success"></i> Potentially significant changes or breakages</li>
           </ul>
-          <!-- Link now points to 404.html -->
-          <a href="404.html" class="btn btn-sm btn-outline-danger">
-            Download Alpha Build
-          </a>
+          <a id="alphaDownloadLink" href="404.html" class="btn btn-sm btn-outline-danger" onclick="simulateInstall('alpha', event)">Download Alpha Build</a>
         </div>
         <!-- Legacy Versions -->
         <div class="col-md-4">
@@ -324,25 +229,16 @@
             you can find legacy builds in our archive.
           </p>
           <ul class="list-unstyled text-secondary small mb-3">
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              v0.9.x for 32-bit Windows
-            </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              v0.8.x for older macOS 10.12+ compatibility
-            </li>
+            <li><i class="bi bi-chevron-right text-success"></i> v0.9.x for 32-bit Windows</li>
+            <li><i class="bi bi-chevron-right text-success"></i> v0.8.x for older macOS 10.12+ compatibility</li>
           </ul>
-          <!-- Link now points to 404.html -->
-          <a href="404.html" class="btn btn-sm btn-outline-success">
-            View Legacy Archive
-          </a>
+          <a href="404.html" class="btn btn-sm btn-outline-success">View Legacy Archive</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SYSTEM REQUIREMENTS & CHANGELOG -->
+  <!-- SYSTEM REQUIREMENTS & CHAINLOG -->
   <section class="py-5 bg-alt-1 text-light">
     <div class="container">
       <div class="row g-4">
@@ -350,59 +246,28 @@
         <div class="col-md-6">
           <h3 class="fw-bold mb-3">System Requirements</h3>
           <ul class="list-unstyled text-secondary small mb-3">
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              Windows 10+ (64-bit)
-            </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              macOS 10.13+ (Intel/Apple Silicon)
-            </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              Linux kernel 4.15+ (AppImage / .deb)
-            </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              2 GB RAM, ~100 MB free disk space
-            </li>
-            <li>
-              <i class="bi bi-chevron-right text-success"></i>
-              Internet connection for updates
-            </li>
+            <li><i class="bi bi-chevron-right text-success"></i> Windows 10+ (64-bit)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> macOS 10.13+ (Intel/Apple Silicon)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> Linux kernel 4.15+ (AppImage / .deb)</li>
+            <li><i class="bi bi-chevron-right text-success"></i> 2 GB RAM, ~100 MB free disk space</li>
+            <li><i class="bi bi-chevron-right text-success"></i> Internet connection for updates</li>
           </ul>
-          <p>
-            Markiva has minimal hardware demands but benefits from a modern CPU/GPU for advanced features.
-          </p>
+          <p>Markiva has minimal hardware demands but benefits from a modern CPU/GPU for advanced features.</p>
         </div>
         <!-- Changelog -->
         <div class="col-md-6">
-          <h3 class="fw-bold mb-3">Changelog (1.0.0)</h3>
+          <h3 class="fw-bold mb-3">Changelog (<span id="changelogVersion">1.0.0</span>)</h3>
           <p class="small text-secondary mb-2">
-            <i class="bi bi-clock-history text-success"></i>
-            Released: Apr 2025
+            <i class="bi bi-clock-history text-success"></i> Released: <span id="changelogReleased">Apr 2025</span>
           </p>
-          <ul class="text-secondary small">
-            <li>
-              <i class="bi bi-check-lg text-success"></i>
-              Initial stable release with core features
-            </li>
-            <li>
-              <i class="bi bi-check-lg text-success"></i>
-              Dark theme &amp; robust plugin architecture
-            </li>
-            <li>
-              <i class="bi bi-check-lg text-success"></i>
-              Multiple platform binaries &amp; CLI support
-            </li>
-            <li>
-              <i class="bi bi-check-lg text-success"></i>
-              Beta &amp; alpha channels for future pre-releases
-            </li>
+          <ul id="changelogEntries" class="text-secondary small">
+            <!-- Changelog entries will be injected dynamically -->
+            <li><i class="bi bi-check-lg text-success"></i> Initial stable release with core features</li>
+            <li><i class="bi bi-check-lg text-success"></i> Dark theme & robust plugin architecture</li>
+            <li><i class="bi bi-check-lg text-success"></i> Multiple platform binaries & CLI support</li>
+            <li><i class="bi bi-check-lg text-success"></i> Beta & alpha channels for future pre-releases</li>
           </ul>
-          <a href="#" class="btn btn-sm btn-outline-success mt-3">
-            View Full Changelog
-          </a>
+          <a href="#" class="btn btn-sm btn-outline-success mt-3">View Full Changelog</a>
         </div>
       </div>
     </div>
@@ -423,22 +288,10 @@
           <p class="text-secondary small">
             Markiva is open-source and completely free. For detailed instructions or to build from source, visit our <strong>GitHub repository</strong>.
           </p>
-          <a
-            href="https://github.com/skillerious/markiva/issues"
-            class="btn btn-sm btn-outline-danger mt-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Report Issues
-          </a>
+          <a href="https://github.com/skillerious/markiva/issues" class="btn btn-sm btn-outline-danger mt-2" target="_blank" rel="noopener noreferrer">Report Issues</a>
         </div>
         <div class="col-md-6 text-center">
-          <img
-            src="assets/MarkivaScreenshot.jpg"
-            alt="Markiva UI"
-            class="img-fluid border border-secondary rounded"
-            style="max-width: 100%;"
-          />
+          <img src="assets/MarkivaScreenshot.jpg" alt="Markiva UI" class="img-fluid border border-secondary rounded" style="max-width: 100%;" />
         </div>
       </div>
     </div>
@@ -457,6 +310,47 @@
   <!-- Main Scripts (advanced features) -->
   <script src="js/scripts.js"></script>
   <script>
+    // simulateInstall now takes the event object and an optional type for Linux variants
+    function simulateInstall(os, e, type) {
+      if (e) {
+        e.preventDefault();
+      }
+      
+      let url = "";
+      if (os === "win") {
+        url = document.getElementById("winDownloadLink").getAttribute("href");
+      } else if (os === "mac") {
+        url = document.getElementById("macDownloadLink").getAttribute("href");
+      } else if (os === "linux") {
+        if (type === "appimage") {
+          url = document.getElementById("linuxAppImageLink").getAttribute("href");
+        } else if (type === "deb") {
+          url = document.getElementById("linuxDebLink").getAttribute("href");
+        }
+      } else if (os === "beta") {
+        url = document.getElementById("betaDownloadLink").getAttribute("href");
+      } else if (os === "alpha") {
+        url = document.getElementById("alphaDownloadLink").getAttribute("href");
+      }
+      
+      if (url && url !== "#") {
+        window.open(url, "_blank");
+      } else {
+        console.warn("No URL found or URL is a placeholder");
+      }
+    }
+
+    // copyCommand function for copying commands to the clipboard
+    function copyCommand(command) {
+      navigator.clipboard.writeText(command)
+        .then(() => {
+          alert("Command copied to clipboard!");
+        })
+        .catch(err => {
+          console.error("Failed to copy command: ", err);
+        });
+    }
+
     // Insert current year into footer (if not handled dynamically)
     const footerYearEl = document.getElementById("footerYear");
     if (footerYearEl) {
@@ -503,5 +397,7 @@
   </script>
   <!-- Dynamic Partials Loader -->
   <script src="js/includePartials.js"></script>
+  <!-- Configuration Loader Script -->
+  <script src="js/configLoader.js"></script>
 </body>
 </html>
