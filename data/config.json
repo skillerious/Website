@@ -1,1 +1,48 @@
-config.json
+{
+    "global": {
+      "version": "3.3.0",
+      "updated": "13th Apr 2025"
+    },
+    "downloads": {
+      "windows": {
+        "version": "",
+        "size": "79.4(MB)",
+        "updated": "",
+        "link": "https://github.com/skillerious/Markiva/releases/tag/MarkivaV3.3.0"
+      },
+      "mac": {
+        "version": "",
+        "size": "79(MB)",
+        "updated": "",
+        "link": "https://github.com/skillerious/Markiva/releases/tag/MarkivaV3.3.0"
+      },
+      "linux": {
+        "version": "",
+        "size": "87(MB)",
+        "updated": "",
+        "link_appimage": "downloads/Markiva.AppImage",
+        "link_deb": "https://github.com/skillerious/Markiva/releases/tag/MarkivaV3.3.0"
+      }
+    },
+    "beta": {
+      "version": "3.3.3-beta",
+      "updated": "13th Apr 2025",
+      "link": "https://github.com/skillerious/Markiva/releases/tag/MarkivaV3.3.0"
+    },
+    "alpha": {
+      "version": "3.3.1-alpha",
+      "updated": "13th Apr 2025",
+      "link": "https://github.com/skillerious/Markiva/releases/tag/MarkivaV3.3.0"
+    },
+    "changelog": {
+      "version": "3.3.0",
+      "released": "13th Apr 2025",
+      "entries": [
+        "Live preview responsiveness improvements",
+        "General bug fixes",
+        "Performance improvements",
+        "Beta & alpha channels for future pre-releases"
+      ]
+    }
+  }
+  
