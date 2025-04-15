@@ -302,6 +302,137 @@
   <!-- 8) FOOTER CONTAINER (dynamic partial) -->
   <div id="footerContainer"></div>
 
+  <!-- =============================
+       BOOTSTRAP MODALS FOR FEATURES
+       ============================= -->
+  <!-- MODAL 1: Lightning Fast -->
+  <div class="modal fade" id="modalFast" tabindex="-1" aria-labelledby="modalFastLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalFastLabel">Lightning Fast</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Markiva is engineered for performance, delivering <strong>instant previews</strong> and
+            a <strong>zero-lag</strong> editing experience. Whether you’re juggling multiple
+            markdown files or tapping into advanced features like live file exploration, we’ve
+            optimized it all to feel <em>lightning fast</em> across platforms.
+          </p>
+          <p>Key highlights from the README:</p>
+          <ul>
+            <li>⚡ <strong>Multi-tab Interface</strong> for managing multiple markdown documents at once</li>
+            <li>⚡ <strong>Instant Live Preview</strong> for real-time feedback</li>
+            <li>⚡ <strong>Smart File Explorer</strong> with rename/delete capabilities</li>
+          </ul>
+          <p>
+            Combined with a minimal memory footprint, Markiva ensures you can focus on writing—not waiting.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Dark & Sleek -->
+  <div class="modal fade" id="modalDark" tabindex="-1" aria-labelledby="modalDarkLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDarkLabel">Dark &amp; Sleek</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Markiva embraces a <strong>modern, dark-themed</strong> interface, perfect for late-night
+            coding or simply reducing eye strain. The sleek UI elements are carefully designed to
+            keep your focus on the content.
+          </p>
+          <p>From the README, here’s what to love about Markiva’s visual design:</p>
+          <ul>
+            <li>🖼️ <strong>Dark Mode + Sleek UI + Iconic Controls</strong></li>
+            <li>🖼️ <strong>Custom Themes</strong> – Easily tailor the editor to match your brand</li>
+            <li>🖼️ <strong>Text Alignment Options</strong> – Quickly switch between left, center, and right</li>
+          </ul>
+          <p>
+            Enjoy a polished experience that’s as enjoyable to look at as it is to use.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Markiva v3.1 Transformation -->
+  <div class="modal fade" id="modalTransform" tabindex="-1" aria-labelledby="modalTransformLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light border border-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTransformLabel">Markiva v3.1 Transformation</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Formerly built in Python, Markiva now leverages <strong>Electron</strong> for a truly
+            cross-platform markdown editing experience. This transformation supercharges
+            performance, stability, and the UI’s polish.
+          </p>
+          <p>Directly from the README:</p>
+          <ul>
+            <li>🚀 <strong>Major transformation</strong> from Python to Electron</li>
+            <li>🚀 <strong>Cross-platform</strong> – Windows, macOS, and Linux</li>
+            <li>🚀 <strong>Polished Markdown Editing</strong> – modern interface and advanced features</li>
+          </ul>
+          <p>
+            Markiva’s new Electron foundation makes it easier to expand features, integrate with
+            other services, and deliver a consistent look and feel across all desktop environments.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 9) SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
@@ -342,9 +473,9 @@
         wavesEffect.destroy();
       }
     });
-    
+
     // ------------------------------------------------------------------
-    // ADDED LINES: Call highlightCurrentPageNav() after navbar loads
+    // Call highlightCurrentPageNav() after navbar loads
     // ------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", () => {
       highlightCurrentPageNav();
