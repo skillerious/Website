@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Install Tampermonkey & Scripts for Torn</title>
+
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ─── Theme vars ─── */
+:root{
+  --bg-1:#0d1117; --bg-2:#161b22;
+  --fg-1:#e6edf3; --fg-2:#8b949e;
+  --accent:#62dafb; --accent-2:#e86642;
+  --border:#30363d; --radius:14px;
+  --max-w:900px; --shadow:0 14px 34px rgba(0,0,0,.55);
+  --edge:#0078d7; --firefox:#ff7139;
+}
+body.light{
+  --bg-1:#fafafa; --bg-2:#ffffff;
+  --fg-1:#1f1f1f; --fg-2:#555;
+  --accent:#1e90ff; --accent-2:#d34718;
+  --border:#ddd;   --shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+/* ─── Base & layout ─── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-1);color:var(--fg-1);font-family:'Inter',sans-serif;line-height:1.72}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{background:#1c2028;color:#c9d1d9;padding:.2rem .45rem;border-radius:4px;font-size:.9rem}body.light code{background:#f1f1f1;color:#333}
+img{max-width:100%;border-radius:var(--radius);border:1px solid var(--border);cursor:zoom-in;margin:1rem 0}
+.container{max-width:var(--max-w);margin:auto;padding:3rem 1.25rem}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--accent-2);z-index:120}
+
+/* nav */
+nav{position:sticky;top:0;z-index:110;background:rgba(13,17,23,.65);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+body.light nav{background:rgba(250,250,250,.78)}
+.nav-inner{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:center;padding:.65rem .9rem}
+nav a{font-size:.9rem;color:var(--fg-2);padding:.35rem .55rem;border-radius:8px;transition:background .2s}
+nav a:hover{background:rgba(255,255,255,.07);color:var(--accent)}
+nav a.active{background:var(--accent-2);color:#fff}
+#themeToggle{margin-left:auto;cursor:pointer;font-size:1.2rem;color:var(--accent)}
+@media(max-width:540px){#themeToggle{display:none}}
+
+/* animation */
+@keyframes fadeUp{0%{opacity:0;transform:translateY(26px)}100%{opacity:1;transform:translateY(0)}}
+.animate{animation:fadeUp .9s cubic-bezier(.25,.8,.25,1) both}
+
+/* hero */
+header{background:linear-gradient(135deg,#1f242d 0%,#0d1117 65%);border-radius:var(--radius);padding:4rem 1.6rem 3.3rem;text-align:center;box-shadow:var(--shadow);margin-bottom:3.8rem;position:relative;overflow:hidden}
+header:before{content:'';position:absolute;width:620px;height:620px;background:radial-gradient(var(--accent-2) 0%,transparent 70%);opacity:.14;top:-160px;left:-160px;transform:rotate(25deg)}
+body.light header{background:linear-gradient(135deg,#dfe9ff 0%,#fff 65%)}
+header h1{font-size:2.9rem;font-weight:700;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.25rem}
+header p{color:var(--fg-2);font-size:1.15rem}
+
+/* cards */
+section{margin-bottom:4rem}
+section h2{font-size:2rem;font-weight:600;color:var(--accent);margin-bottom:1.4rem}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .35s}
+.card:hover{transform:translateY(-6px)}
+.button{display:inline-flex;align-items:center;gap:.4rem;margin-top:.85rem;padding:.55rem 1rem;border-radius:8px;font-weight:600;font-size:.9rem;line-height:1}
+.button i{font-size:1rem}
+.btn-chrome{background:var(--accent-2);color:#fff}.btn-edge{background:var(--edge);color:#fff}.btn-ff{background:var(--firefox);color:#fff}
+.btn-chrome:hover{background:#ff784e}.btn-edge:hover{background:#1192ff}.btn-ff:hover{background:#ff854e}
+
+/* collapsible specifics */
+.card.collapsible>header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;cursor:pointer}
+.card.collapsible>header h3{display:flex;align-items:center;gap:.6rem;font-size:1.45rem}
+.card.collapsible .body{display:block;padding:1.8rem 1.9rem;border-top:1px solid var(--border)}  /* start open */
+.card.collapsible.open .body{display:block}.card.collapsible.open>header i{transform:rotate(180deg)}
+.card:not(.collapsible){padding:2.1rem 1.9rem}
+
+/* code + copy layout */
+.copy-wrap{display:flex;align-items:center;gap:.6rem;margin-top:1rem}
+.copy-btn{padding:.4rem .7rem;border:none;border-radius:6px;background:var(--bg-1);border:1px solid var(--border);cursor:pointer;color:var(--accent);transition:background .2s}
+.copy-btn:hover{background:var(--bg-2)}.copy-btn i{font-size:.9rem}
+
+/* table & filter */
+table{width:100%;border-collapse:collapse;margin-top:1.2rem}
+th,td{padding:.9rem 1rem;border:1px solid var(--border)}
+th{text-align:left;background:#21262d;color:var(--accent)}
+tr:nth-child(even){background:#161b22}tr:nth-child(odd){background:#13171d}
+body.light tr:nth-child(even){background:#fafafa}body.light tr:nth-child(odd){background:#f4f4f4}body.light th{background:#e2e7ff}
+#filterInput{width:100%;padding:.6rem 1rem;margin:.5rem 0 1rem;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;color:var(--fg-1)}body.light #filterInput{background:#fff}
+
+/* blockquote */
+blockquote{background:#21262d;border-left:4px solid var(--accent);padding:1rem 1.45rem;border-radius:var(--radius);color:var(--fg-2);margin:1.7rem 0}
+body.light blockquote{background:#eef2ff}
+
+/* accordion */
+.accordion{cursor:pointer;padding:.9rem 1rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-2);margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:center}
+.accordion i{transition:transform .25s}
+.acc-content{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 1rem}
+.acc-content p{padding:1rem 0}
+.accordion.open i{transform:rotate(90deg)}
+.accordion.open+.acc-content{max-height:250px}
+
+/* floating */
+#toTop,#joinFab{position:fixed;right:32px;z-index:90;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
+#toTop{bottom:32px;background:var(--accent);color:#0d1117;font-size:1.25rem}
+#joinFab{bottom:90px;background:var(--accent-2);color:#fff;font-size:1.4rem;animation:pulse 4s infinite}@keyframes pulse{0%,80%,100%{transform:scale(1)}40%{transform:scale(1.16)}}
+#toTop.visible,#joinFab.visible{opacity:1;pointer-events:auto}
+
+/* lightbox & toast */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:130}
+#lightbox img{max-width:95%;max-height:95%;border-radius:8px;border:4px solid #fff;cursor:zoom-out}
+#toast{position:fixed;bottom:24px;left:24px;min-width:120px;padding:.65rem 1rem;background:var(--accent-2);color:#fff;border-radius:8px;font-size:.85rem;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;z-index:140}
+
+/* footer & print */
+footer{text-align:center;color:var(--fg-2);margin-top:5rem;font-size:.9rem}
+@media print{nav,#toTop,#joinFab,#themeToggle,a.button{display:none!important}body{background:#fff!important;color:#000!important}}
+</style>
+</head>
+
+<body>
+<div id="progress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#install">Install TM</a><a href="#catalogue">Gallery</a><a href="#install-script">Install Script</a>
+    <a href="#enable">Enable</a><a href="#manage">Manage</a><a href="#starter">Starter Pack</a><a href="#pb">PB Ent.</a>
+    <span id="themeToggle" title="Toggle light/dark"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <header class="animate">
+    <h1>Install Tampermonkey &amp; Scripts for Torn</h1>
+    <p>Super‑quick Chrome walk‑through for the faction crew<br>(Edge, Brave & Firefox work the same way)</p>
+  </header>
+
+  <!-- STEP 1 -->
+  <section id="install" class="animate" style="animation-delay:.1s">
+    <h2>Step 1 — Add Tampermonkey</h2>
+    <div class="card collapsible open">
+      <header>
+        <h3><i class="fa-solid fa-plug"></i> Get the extension</h3>
+        <i class="fa-solid fa-chevron-down"></i>
+      </header>
+      <div class="body">
+        <p>Choose your browser below, then:</p>
+        <ul style="margin-left:1.3rem;margin-bottom:1rem">
+          <li>Click <strong>Add extension</strong> (Chrome/Edge) or <strong>Add to Firefox</strong>.</li>
+          <li>Wait for the “Tampermonkey has been added” confirmation.</li>
+          <li>(Optional) Pin the Tampermonkey icon via the puzzle‑piece menu so it stays visible.</li>
+        </ul>
+
+        <a class="button btn-chrome" href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank" rel="noopener"><i class="fa-brands fa-chrome"></i> Chrome</a>
+        <a class="button btn-edge" href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/damfkmgemiapkbninekfldobiaagkjan" target="_blank" rel="noopener"><i class="fa-brands fa-edge-legacy"></i> Edge</a>
+        <a class="button btn-ff" href="https://addons.mozilla.org/firefox/addon/tampermonkey/" target="_blank" rel="noopener"><i class="fa-brands fa-firefox-browser"></i> Firefox</a>
+
+        <div class="copy-wrap">
+          <code id="url1">https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo</code>
+          <button class="copy-btn" data-target="url1"><i class="fa-regular fa-copy"></i></button>
+        </div>
+
+        <img src="images/tampermonkey-chrome-webstore.png" alt="Chrome Web Store – Tampermonkey">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section id="catalogue" class="animate" style="animation-delay:.2s">
+    <h2>Step 2 — Browse Script Gallery</h2>
+    <div class="card collapsible open">
+      <header><h3><i class="fa-solid fa-compass"></i> Find your tools</h3><i class="fa-solid fa-chevron-down"></i></header>
+      <div class="body">
+        <p>Head to Greasy Fork’s Torn section and:</p>
+        <ul style="margin-left:1.3rem;margin-bottom:1rem">
+          <li>Use the search bar for keywords like “revive”, “egg”, “stats”.</li>
+          <li>Click <em>Sort › Last updated</em> to see actively maintained scripts first.</li>
+          <li>Click a script title to open its details page.</li>
+        </ul>
+
+        <a class="button btn-chrome" href="https://greasyfork.org/en/scripts/by-site/torn.com" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open GreasyFork</a>
+
+        <div class="copy-wrap">
+          <code id="url2">https://greasyfork.org/en/scripts/by-site/torn.com</code>
+          <button class="copy-btn" data-target="url2"><i class="fa-regular fa-copy"></i></button>
+        </div>
+
+        <img src="images/greasyfork-torn-list.png" alt="Greasy Fork Torn list">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section id="install-script" class="animate" style="animation-delay:.3s">
+    <h2>Step 3 — One‑Click Install</h2>
+    <div class="card collapsible open">
+      <header><h3><i class="fa-solid fa-download"></i> Install a script</h3><i class="fa-solid fa-chevron-down"></i></header>
+      <div class="body">
+        <p>On any script page:</p>
+        <ul style="margin-left:1.3rem;margin-bottom:1rem">
+          <li>Press the big green <strong>Install this script</strong>.</li>
+          <li>Tampermonkey opens a preview — glance at the code if you wish.</li>
+          <li>Click <strong>Install</strong> (top‑right) → tab closes.</li>
+        </ul>
+        <img src="images/greasyfork-install-button.png" alt="Install button">
+        <img src="images/tampermonkey-install-dialog.png" alt="Tampermonkey install confirm">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section id="enable" class="animate" style="animation-delay:.4s">
+    <h2>Step 4 — Enable &amp; Verify</h2>
+    <div class="card collapsible open">
+      <header><h3><i class="fa-solid fa-check"></i> Dashboard check</h3><i class="fa-solid fa-chevron-down"></i></header>
+      <div class="body">
+        <ul style="margin-left:1.3rem;margin-bottom:1rem">
+          <li>Click the Tampermonkey icon → <strong>Dashboard</strong>.</li>
+          <li>Ensure your new script shows a <strong>green</strong> toggle.</li>
+          <li>Reload Torn — most scripts add buttons/banners immediately.</li>
+        </ul>
+        <img src="images/tampermonkey-enabled.png" alt="Enabled script in dashboard">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5 -->
+  <section id="manage" class="animate" style="animation-delay:.5s">
+    <h2>Step 5 — Manage Like a Pro</h2>
+    <table>
+      <thead><tr><th>Action</th><th>How</th></tr></thead>
+      <tbody>
+        <tr><td>Disable temporarily</td><td>Dashboard → click green toggle</td></tr>
+        <tr><td>Force update</td><td>Dashboard → ▼ next to script → <em>Check for updates</em></td></tr>
+        <tr><td>Auto‑update frequency</td><td>Settings → <em>Updates</em> tab</td></tr>
+        <tr><td>Remove</td><td>Dashboard → 🗑 trash icon</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Starter pack -->
+  <section id="starter" class="animate" style="animation-delay:.6s">
+    <h2>Starter Pack</h2>
+    <input id="filterInput" placeholder="🔍 Type to filter scripts…">
+    <table id="scriptTable">
+      <thead><tr><th>Script</th><th>Description</th><th>Updated</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://greasyfork.org/en/scripts/523047-torn-fastrevive" target="_blank" rel="noopener"><strong>Fast Revive</strong></a></td>
+          <td>Two‑click hospital revives</td><td>3 months ago</td>
+        </tr>
+        <tr>
+          <td><a href="https://greasyfork.org/en/scripts/391922-torn-extensions-torn-attack-stats" target="_blank" rel="noopener"><strong>Torn Attack Stats</strong></a></td>
+          <td>Shows enemy stats on attack page</td><td>2025‑04‑16</td>
+        </tr>
+        <tr>
+          <td><a href="https://greasyfork.org/en/scripts/463421-egg-finder" target="_blank" rel="noopener"><strong>Egg Finder</strong></a></td>
+          <td>Highlights hidden Easter eggs</td><td>2024‑03‑29</td>
+        </tr>
+        <tr>
+          <td><a href="https://greasyfork.org/en/scripts/463484-heasley-s-egg-navigator" target="_blank" rel="noopener"><strong>Heasley’s Egg Navigator</strong></a></td>
+          <td>Maps egg locations (Easter event)</td><td>2025‑03‑25</td>
+        </tr>
+        <tr>
+          <td><a href="https://greasyfork.org/en/scripts/506966-torn-crimes-scamming-timers" target="_blank" rel="noopener"><strong>Crime Timer Plus</strong></a></td>
+          <td>Advanced crime & scam cooldown tracker</td><td>2025‑02‑11</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PB Enterprises -->
+  <section id="pb" class="animate" style="animation-delay:.7s">
+    <h2>PB Enterprises — Who we are</h2>
+    <div class="card">
+      <p><strong>PB Enterprises</strong> is a chill crew focused on levelling up together without the sweaty war grind.</p>
+      <h3 style="margin-top:1.4rem"><i class="fa-solid fa-heart"></i> Our Philosophy</h3>
+      <p>Log in once a day (or every other) and you’re golden. We run missions needing nothing more than that.</p>
+      <h3 style="margin-top:1.4rem"><i class="fa-solid fa-gift"></i> Perks at a glance</h3>
+      <ul style="margin-left:1.3rem">
+        <li>+5 Travel Capacity</li>
+        <li>Full Armoury</li>
+        <li>100‑hit Chaining</li>
+      </ul>
+      <h3 style="margin-top:1.4rem"><i class="fa-solid fa-user-group"></i> Leadership</h3>
+      <ul style="margin-left:1.3rem">
+        <li><strong>Founder:</strong> XanderPTV</li>
+        <li><strong>Faction Assembly &amp; Expansion:</strong> ForeverHydrox</li>
+        <li><strong>Leadership Frontrunner:</strong> Skillerious</li>
+      </ul>
+      <a class="button btn-chrome" href="https://www.torn.com/factions.php?step=your&type=1" id="joinLink"><i class="fa-solid fa-users"></i> Apply &amp; Join Us</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="troubleshoot" class="animate" style="animation-delay:.8s">
+    <h2>FAQ / Troubleshooting</h2>
+
+    <div class="accordion" data-id="acc1"><span>Script won’t install</span><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="acc-content"><p>Confirm the Tampermonkey extension is enabled and its icon is pinned & visible.</p></div>
+
+    <div class="accordion" data-id="acc2"><span><code>⚠ Update failed</code></span><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="acc-content"><p>GreasyFork may be down — wait a bit then try again.</p></div>
+
+    <div class="accordion" data-id="acc3"><span>No effect on Torn</span><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="acc-content"><p>Make sure you’re on <em>https://www.torn.com/</em> (not the app) and the script is enabled.</p></div>
+
+    <div class="accordion" data-id="acc4"><span>Chrome blocks installation</span><i class="fa-solid fa-chevron-right"></i></div>
+    <div class="acc-content"><p>Check extension policies in <em>chrome://extensions</em> — some workplaces lock installs.</p></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="animate" style="animation-delay:.9s">
+    © 2025 · Guide for Chrome, Edge, Firefox (and more) · Robin Doak (Skillerious)
+  </footer>
+</div>
+
+<!-- Floating buttons -->
+<div id="toTop" title="Back to top"><i class="fa-solid fa-arrow-up"></i></div>
+<a id="joinFab" href="https://www.torn.com/factions.php?step=your&type=1" title="Join PB Enterprises"><i class="fa-solid fa-users"></i></a>
+
+<!-- Light‑box & toast -->
+<div id="lightbox"><img src="" alt=""></div>
+<div id="toast"></div>
+
+<!-- JavaScript -->
+<script>
+const $=q=>document.querySelector(q),$$=q=>document.querySelectorAll(q),body=document.body;
+
+/* theme */
+if(localStorage.getItem('theme')==='light')body.classList.add('light');
+$('#themeToggle').onclick=()=>{body.classList.toggle('light');localStorage.setItem('theme',body.classList.contains('light')?'light':'dark');toast('Theme switched');};
+
+/* progress */
+const prog=$('#progress');
+addEventListener('scroll',()=>{
+  const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  prog.style.width=p+'%';
+  const show=scrollY>500;$('#toTop').classList.toggle('visible',show);$('#joinFab').classList.toggle('visible',show);
+});
+
+/* nav highlight */
+const links=$$('nav a');$$('section[id]').forEach(s=>{
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.hash==='#'+e.target.id));}),{rootMargin:"-55% 0px -40% 0px"}).observe(s);
+});
+
+/* copy */
+$$('.copy-btn').forEach(btn=>btn.onclick=()=>{
+  navigator.clipboard.writeText($('#'+btn.dataset.target).textContent.trim())
+    .then(()=>{btn.firstChild.className='fa-solid fa-check';toast('Copied!');setTimeout(()=>btn.firstChild.className='fa-regular fa-copy',1500);});
+});
+
+/* starter search */
+$('#filterInput')?.addEventListener('input',e=>{
+  const term=e.target.value.toLowerCase();
+  $$('#scriptTable tbody tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(term)?'':'none');
+});
+
+/* toTop */
+$('#toTop').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* keyboard */
+addEventListener('keydown',e=>{
+  if(e.key==='/'&&$('#filterInput')){e.preventDefault();$('#filterInput').focus();}
+  else if(e.key==='t')$('#themeToggle').click();
+});
+
+/* collapsible cards */
+$$('.card.collapsible').forEach(c=>c.querySelector('header').onclick=()=>c.classList.toggle('open'));
+
+/* accordions */
+$$('.accordion').forEach(acc=>{
+  const id=acc.dataset.id,nxt=acc.nextElementSibling;
+  if(localStorage.getItem(id)==='open'){acc.classList.add('open');nxt.style.maxHeight=nxt.scrollHeight+'px';}
+  acc.onclick=()=>{acc.classList.toggle('open');nxt.style.maxHeight=acc.classList.contains('open')?nxt.scrollHeight+'px':0;localStorage.setItem(id,acc.classList.contains('open')?'open':'');};
+});
+
+/* lightbox */
+$$('img').forEach(i=>i.onclick=()=>{$('#lightbox img').src=i.src;$('#lightbox').style.display='flex';});
+$('#lightbox').onclick=()=>$('#lightbox').style.display='none';
+addEventListener('keyup',e=>e.key==='Escape'&&($('#lightbox').style.display='none'));
+
+/* toast helper */
+function toast(m){const t=$('#toast');t.textContent=m;t.style.opacity=1;t.style.transform='translateY(0)';setTimeout(()=>{t.style.opacity=0;t.style.transform='translateY(20px)';},2000);}
+</script>
+</body>
+</html>
