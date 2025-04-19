@@ -1,6 +1,6 @@
 /**
  * scripts.js – Markiva master enhancements
- * 2025‑04‑17  (syntax‑error fix + Konami & read‑time working)
+ * 2025‑04‑19  (mini‑game in Konami overlay)
  */
 (() => {
   /* ────────────────────────────────────────────────────────────────
@@ -15,8 +15,8 @@
     setupScrollToTop();
     showRandomMarkivaTip();
     setupFeatureLikes();
-    setupMarkivaShortcut();     // “markiva” + confetti
-    setupKonamiEasterEgg();     // ↑↑↓↓←→←→BA
+    setupMarkivaShortcut();     // “markiva”
+    setupKonamiEasterEgg();     // ↑↑↓↓←→←→BA + mini‑game
     setupReadingProgressBar();
     setupLazyLoadingImages();
     setupSectionHighlight();
@@ -124,7 +124,7 @@
   };
 
   /* ────────────────────────────────────────────────────────────────
-     7) KONAMI CODE
+     7) KONAMI CODE – now with mini‑game
   ───────────────────────────────────────────────────────────────── */
   const setupKonamiEasterEgg = () => {
     const canonical = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown",
@@ -139,7 +139,7 @@
     });
   };
 
-  /* ------ Konami overlay helpers ------ */
+  /* ------ Konami overlay & mini‑game ------ */
   const launchKonamiOverlay = () => {
     inject8bitCSS();
     play8bitBeep();
@@ -151,13 +151,16 @@
                        "color:#fff;text-shadow:2px 2px #000;z-index:1200;padding:2rem;text-align:center;";
     ov.innerHTML = `
       <h1 style="font-size:2rem;">🚀 DEV PORTAL UNLOCKED 🚀</h1>
-      <p style="margin:1rem 0 2rem;font-size:0.85rem;">Greetings, code ninja!</p>
+      <p style="margin:1rem 0 1.5rem;font-size:0.85rem;">Greetings, code ninja!</p>
       <div class="d-flex flex-wrap gap-3 justify-content-center">
         <button id="konFireworks" class="btn btn-warning btn-lg mb-2">
           Fireworks <i class="bi bi-stars"></i>
         </button>
         <button id="konRoadmap" class="btn btn-success btn-lg mb-2">
           Open Roadmap <i class="bi bi-github"></i>
+        </button>
+        <button id="konGame" class="btn btn-info btn-lg mb-2">
+          Play Mini‑Game 🎮
         </button>
       </div>
       <p style="margin-top:2rem;font-size:0.7rem;">(Click anywhere or press ESC to close)</p>`;
@@ -166,13 +169,84 @@
     const close = () => ov.remove();
     ov.addEventListener("click", close);
     document.addEventListener("keydown", e => { if (e.key === "Escape") close(); }, { once: true });
-    setTimeout(close, 10000);
+    setTimeout(close, 15000);
 
+    /* button actions */
     ov.querySelector("#konFireworks").addEventListener("click", burstConfetti);
     ov.querySelector("#konRoadmap").addEventListener("click",
       () => window.open("https://github.com/skillerious/markiva#roadmap", "_blank"));
+    ov.querySelector("#konGame").addEventListener("click", e => {
+      e.stopPropagation();
+      startMiniGame(ov);   // convert overlay into game mode
+    });
   };
 
+  /* mini‑game implementation */
+  const startMiniGame = overlay => {
+    overlay.innerHTML = `
+      <canvas id="gameCanvas" width="300" height="200"
+              style="background:#000;border:3px solid #fff;border-radius:6px;"></canvas>
+      <p id="scoreText" style="margin:0.5rem 0 1rem;font-size:0.8rem;">Score: 0</p>
+      <button id="exitGame" class="btn btn-outline-light btn-sm">Exit Game</button>`;
+    const cvs    = overlay.querySelector("#gameCanvas");
+    const ctx    = cvs.getContext("2d");
+    const scoreT = overlay.querySelector("#scoreText");
+    const exitB  = overlay.querySelector("#exitGame");
+
+    /* game state */
+    const paddle = { w: 60, h: 8, x: 120, y: 180, speed: 4 };
+    const ball   = { r: 5, x: 150, y: 100, dx: 2, dy: -2 };
+    let score = 0, playing = true, keys = {};
+
+    /* input */
+    const keydown = e => keys[e.key.toLowerCase()] = true;
+    const keyup   = e => keys[e.key.toLowerCase()] = false;
+    document.addEventListener("keydown", keydown);
+    document.addEventListener("keyup",   keyup);
+
+    exitB.onclick = () => { playing = false; document.removeEventListener("keydown", keydown); document.removeEventListener("keyup", keyup); launchKonamiOverlay(); };
+
+    /* game loop */
+    const loop = () => {
+      if (!playing) return;
+      /* move paddle */
+      if (keys["arrowleft"] || keys["a"]) paddle.x -= paddle.speed;
+      if (keys["arrowright"] || keys["d"]) paddle.x += paddle.speed;
+      paddle.x = Math.max(0, Math.min(cvs.width - paddle.w, paddle.x));
+
+      /* move ball */
+      ball.x += ball.dx; ball.y += ball.dy;
+      /* wall bounce */
+      if (ball.x < ball.r || ball.x > cvs.width - ball.r) ball.dx *= -1;
+      if (ball.y < ball.r) ball.dy *= -1;
+
+      /* paddle collision */
+      if (ball.y + ball.r >= paddle.y &&
+          ball.x > paddle.x && ball.x < paddle.x + paddle.w) {
+        ball.dy *= -1;
+        ball.y = paddle.y - ball.r;
+        score++; scoreT.textContent = `Score: ${score}`;
+      }
+      /* miss => game over */
+      if (ball.y - ball.r > cvs.height) {
+        playing = false;
+        scoreT.textContent = `Game Over – Final Score: ${score}`;
+        exitB.classList.add("btn-danger");
+        return;
+      }
+
+      /* draw */
+      ctx.fillStyle = "#000"; ctx.fillRect(0,0,cvs.width,cvs.height);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(paddle.x, paddle.y, paddle.w, paddle.h);
+      ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
+
+      requestAnimationFrame(loop);
+    };
+    loop();
+  };
+
+  /* helpers used by overlay */
   const inject8bitCSS = () => {
     if (document.getElementById("konami-style")) return;
     const s = document.createElement("style");
@@ -187,7 +261,6 @@
     }`;
     document.head.appendChild(s);
   };
-
   const play8bitBeep = () => {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -198,7 +271,6 @@
       osc.start(); osc.stop(ctx.currentTime + 0.18);
     } catch (_) { /* no sound */ }
   };
-
   const burstConfetti = () => {
     if (!window.confetti) return;
     const end = Date.now() + 2000;
@@ -352,7 +424,6 @@
     if (window.confetti) window.confetti({ particleCount: 60, spread: 55, origin: { y: 0.6 } });
   };
   const updateInstallDisplay = (os, cnt) => {
-    /* --------------  FIXED (no optional‑chaining on LHS) -------------- */
     const map = { win: "winInstalls", mac: "macInstalls", linux: "linuxInstalls" };
     const el  = document.getElementById(map[os]);
     if (el) el.textContent = cnt;
@@ -377,7 +448,7 @@
   };
 
   /* ────────────────────────────────────────────────────────────────
-     14) Navbar highlight on load  (exported)
+     14) Navbar highlight (exported)
   ───────────────────────────────────────────────────────────────── */
   const highlightCurrentPageNav = () => {
     const parts = window.location.pathname.split("/");
