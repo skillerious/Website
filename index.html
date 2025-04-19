@@ -350,11 +350,12 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/js/sw.js', { scope: '/' })
-          .catch(err => console.error('Service Worker registration failed:', err));
+        navigator.serviceWorker
+          .register('/js/sw.js')          /*  ←  no {scope:"/"}  */
+          .catch(err => console.warn('SW registration failed:', err));
       });
     }
-  </script>
+    </script>    
 
   <!-- 11) Vanta Waves init & nav highlight -->
   <script>
