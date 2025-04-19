@@ -74,15 +74,18 @@
       z-index: 3;
     }
 
-    /* ----- SEARCH BAR ----- */
+    /* ----- SEARCH BAR & EXPAND/COLLAPSE CONTROLS ----- */
     .faq-search-bar {
       margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
     }
     .faq-search-bar .input-group {
       max-width: 600px;
-      margin: 0 auto;
+      width: 100%;
     }
-
     .faq-search-bar input {
       border: 2px solid #28a745;
       border-right: none;
@@ -100,12 +103,19 @@
       outline: none;
       border-color: #28a745;
     }
-    .faq-search-bar button {
+    .faq-search-bar button.search-btn {
       border: 2px solid #28a745;
       border-left: none;
       color: #fff;
       background-color: #28a745;
       border-radius: 0 0.375rem 0.375rem 0;
+    }
+    .faq-search-bar .expand-collapse-btns button {
+      border: 2px solid #28a745;
+      color: #fff;
+      background-color: #28a745;
+      border-radius: 0.375rem;
+      margin: 0 5px;
     }
 
     /* ----- ACCORDION STYLING ----- */
@@ -135,6 +145,14 @@
       color: #f1f1f1 !important;
     }
 
+    /* Highlight search matches */
+    .highlight {
+      background-color: #1a3d1a;
+      color: #a8ffa8;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+
     /* ----- ANIMATIONS & CATEGORY HEADERS ----- */
     .faq-accordion.animate__animated {
       animation-duration: 0.8s;
@@ -143,7 +161,7 @@
     .faq-category-header {
       font-weight: 600;
       color: #28a745;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       margin-bottom: 1rem;
       text-align: center;
     }
@@ -160,6 +178,9 @@
       }
       .faq-hero p {
         font-size: 1rem;
+      }
+      .faq-search-bar .expand-collapse-btns {
+        flex-direction: column;
       }
     }
   </style>
@@ -195,7 +216,7 @@
 
   <!-- MAIN FAQ SECTION (with extra top spacing) -->
   <main class="container pb-5 mt-5">
-    <!-- Search Bar (where expand/collapse controls used to be) -->
+    <!-- Search Bar + Expand/Collapse Buttons -->
     <div class="faq-search-bar mb-4">
       <div class="input-group">
         <input
@@ -205,8 +226,22 @@
           aria-label="FAQ Search Input"
           id="faqSearchInput"
         />
-        <button class="btn" type="button" id="btnFaqSearch" aria-label="Search FAQs">
+        <button
+          class="btn search-btn"
+          type="button"
+          id="btnFaqSearch"
+          aria-label="Search FAQs"
+        >
           <i class="bi bi-search"></i>
+        </button>
+      </div>
+      <!-- Expand/Collapse All Buttons -->
+      <div class="expand-collapse-btns d-flex justify-content-center">
+        <button id="btnExpandAll" class="btn">
+          <i class="bi bi-arrows-collapse"></i> Expand All
+        </button>
+        <button id="btnCollapseAll" class="btn">
+          <i class="bi bi-arrows-expand"></i> Collapse All
         </button>
       </div>
     </div>
@@ -340,7 +375,143 @@
           <div class="accordion-body">
             Yes! Markiva has an optional CLI that can convert Markdown files to
             HTML/PDF, or even watch directories for changes. Check out our
-            <a href="documentation.html">documentation</a> to get started with the CLI.
+            <a href="documentation.html" class="text-success text-decoration-none"
+              >documentation</a
+            >
+            to get started with the CLI.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR FAQs -->
+    <h2 class="faq-category-header">Editor</h2>
+    <div
+      class="accordion faq-accordion animate__animated animate__fadeInUp"
+      id="faqAccordionEditor"
+    >
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="editorHeadingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#editorCollapseOne"
+            aria-expanded="false"
+            aria-controls="editorCollapseOne"
+          >
+            <i class="bi bi-pencil-square me-2"></i>
+            Does Markiva support split-screen editing?
+          </button>
+        </h2>
+        <div
+          id="editorCollapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="editorHeadingOne"
+          data-bs-parent="#faqAccordionEditor"
+        >
+          <div class="accordion-body">
+            Absolutely. Markiva includes a split-view option: one side for writing
+            in Markdown, and the other with a real-time rendered preview. You can
+            toggle between single-pane, side-by-side, or full preview modes.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="editorHeadingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#editorCollapseTwo"
+            aria-expanded="false"
+            aria-controls="editorCollapseTwo"
+          >
+            <i class="bi bi-pencil-square me-2"></i>
+            Can I customize the syntax highlighting theme?
+          </button>
+        </h2>
+        <div
+          id="editorCollapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="editorHeadingTwo"
+          data-bs-parent="#faqAccordionEditor"
+        >
+          <div class="accordion-body">
+            Yes. You can choose from various built-in syntax highlighting
+            themes, or import your own custom CSS for code blocks. Simply update
+            the editor settings in the Preferences menu.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TROUBLESHOOTING FAQs -->
+    <h2 class="faq-category-header">Troubleshooting</h2>
+    <div
+      class="accordion faq-accordion animate__animated animate__fadeInUp"
+      id="faqAccordionTroubleshooting"
+    >
+      <!-- FAQ Item 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="troubleHeadingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#troubleCollapseOne"
+            aria-expanded="false"
+            aria-controls="troubleCollapseOne"
+          >
+            <i class="bi bi-bug me-2"></i>
+            Why won't Markiva render my images correctly?
+          </button>
+        </h2>
+        <div
+          id="troubleCollapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="troubleHeadingOne"
+          data-bs-parent="#faqAccordionTroubleshooting"
+        >
+          <div class="accordion-body">
+            Make sure your image paths are correct and refer to existing
+            files. Also, check if you’re running in a sandboxed environment or
+            restricted folder. If the problem persists, ensure that the Markiva
+            security settings allow external media rendering.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="troubleHeadingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#troubleCollapseTwo"
+            aria-expanded="false"
+            aria-controls="troubleCollapseTwo"
+          >
+            <i class="bi bi-bug me-2"></i>
+            My preview pane is blank. How do I fix this?
+          </button>
+        </h2>
+        <div
+          id="troubleCollapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="troubleHeadingTwo"
+          data-bs-parent="#faqAccordionTroubleshooting"
+        >
+          <div class="accordion-body">
+            This usually happens if there’s an issue with the Markdown file’s
+            frontmatter or if a plugin is conflicting with the preview. Try
+            disabling all plugins, then enable them one by one to pinpoint the
+            cause. Also, confirm the Markdown file doesn’t contain syntax errors
+            that break rendering.
           </div>
         </div>
       </div>
@@ -468,21 +639,77 @@
       }
     });
 
-    // FAQ Search Feature
+    // Expand/Collapse All Functionality
+    const btnExpandAll = document.getElementById("btnExpandAll");
+    const btnCollapseAll = document.getElementById("btnCollapseAll");
+
+    btnExpandAll.addEventListener("click", () => {
+      const allCollapses = document.querySelectorAll(".accordion-collapse");
+      allCollapses.forEach((collapse) => {
+        if (!collapse.classList.contains("show")) {
+          // Using Bootstrap's collapse API
+          new bootstrap.Collapse(collapse, { show: true });
+        }
+      });
+    });
+
+    btnCollapseAll.addEventListener("click", () => {
+      const allCollapses = document.querySelectorAll(".accordion-collapse.show");
+      allCollapses.forEach((collapse) => {
+        if (collapse.classList.contains("show")) {
+          new bootstrap.Collapse(collapse, { hide: true });
+        }
+      });
+    });
+
+    // FAQ Search & Highlight Feature
     document.addEventListener("DOMContentLoaded", function () {
       const faqSearchInput = document.getElementById("faqSearchInput");
-      // Get all accordion items across all categories
       const allAccordions = document.querySelectorAll(".accordion .accordion-item");
 
       if (faqSearchInput) {
         faqSearchInput.addEventListener("input", () => {
           const query = faqSearchInput.value.toLowerCase();
+          // Clear any existing highlights before new search
+          clearHighlights();
+
           allAccordions.forEach((item) => {
             const btn = item.querySelector(".accordion-button");
-            // Combine the button text (plus the body text if desired)
-            const text = (btn.textContent || "").toLowerCase();
-            item.style.display = text.includes(query) ? "block" : "none";
+            const body = item.querySelector(".accordion-body");
+            const textContent = (btn.textContent + " " + body.textContent).toLowerCase();
+
+            // Show or hide the accordion item
+            if (textContent.includes(query)) {
+              item.style.display = "block";
+              // Highlight matches in the button text & body text
+              highlightText(btn, query);
+              highlightText(body, query);
+            } else {
+              item.style.display = "none";
+            }
           });
+        });
+      }
+
+      // Simple highlight function
+      function highlightText(element, query) {
+        if (!query) return;
+        const innerHTML = element.innerHTML;
+        const regex = new RegExp(query, "gi");
+        element.innerHTML = innerHTML.replace(regex, (match) => {
+          return `<span class="highlight">${match}</span>`;
+        });
+      }
+
+      // Clears highlights
+      function clearHighlights() {
+        allAccordions.forEach((item) => {
+          const btn = item.querySelector(".accordion-button");
+          const body = item.querySelector(".accordion-body");
+
+          // revert to original text by removing highlight spans
+          if (btn) btn.innerHTML = btn.textContent;
+          if (body) body.innerHTML = body.textContent;
         });
       }
     });
