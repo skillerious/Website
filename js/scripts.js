@@ -302,7 +302,7 @@
   
     /* ―――――――― Draw ――――――― */
     function draw(ts){
-      ctx.fillStyle="#000"; ctx.fillRect(0,0,CW,CH);
+      ctx.fillStyle = "#000"; ctx.fillRect(0,0,CW,CH);
   
       /* starfield */
       ctx.fillStyle="#222";
@@ -393,8 +393,7 @@
     }
   
     function makeStarfield(){
-      starfield=[];
-      for(let i=0;i<60;i++){
+      starfield=[]; for(let i=0;i<60;i++){
         starfield.push({x:rnd(0,CW),y:rnd(0,CH),v:rnd(0.4,1.2)});
       }
     }
@@ -406,9 +405,7 @@
     function togglePause(){paused=!paused;updateHUD();}
     function gameOver(){ over=true; head.textContent=`GAME OVER – Score ${score}`; beep(120); }
     function quit(){
-      over=true;
-      cleanup();
-      onGameExit();
+      over=true; cleanup(); onGameExit();
     }
     function cleanup(){
       document.removeEventListener("keydown",kDown);
@@ -611,5 +608,9 @@
     }
   };
   
-  })();  /* END IIFE */
+  // expose navbar helper
+  window.highlightCurrentPageNav = highlightCurrentPageNav;
+  // expose the Konami overlay launcher globally
+  window.launchKonamiOverlay = openKonamiPortal;
   
+})();  /* END IIFE */
