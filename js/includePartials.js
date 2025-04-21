@@ -4,11 +4,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const navbarContainer = document.getElementById('navbarContainer');
   if (navbarContainer) {
     fetch('partials/navbar.html')
-      .then(resp => resp.text())
+      .then(resp => {
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        return resp.text();
+      })
       .then(html => {
         navbarContainer.innerHTML = html;
-        // Once navbar is loaded, highlight current page or anchor
-        highlightCurrentPageNav();
+        if (typeof window.highlightCurrentPageNav === 'function') {
+          window.highlightCurrentPageNav();
+        }
       })
       .catch(err => console.error('Error loading navbar:', err));
   }
@@ -17,13 +21,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const footerContainer = document.getElementById('footerContainer');
   if (footerContainer) {
     fetch('partials/footer.html')
-      .then(resp => resp.text())
+      .then(resp => {
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        return resp.text();
+      })
       .then(html => {
         footerContainer.innerHTML = html;
         const yearEl = footerContainer.querySelector('#footerYear');
-        if (yearEl) {
-          yearEl.textContent = new Date().getFullYear();
-        }
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
       })
       .catch(err => console.error('Error loading footer:', err));
   }
